@@ -1,0 +1,140 @@
+<game>
+  <id>812</id>
+  <hardware boolvalue="0">Game</hardware>
+  <index>221</index>
+  <title>1Xtreme (Greatest Hits)</title>
+  <series/>
+  <platform>
+    <displayname>PlayStation</displayname>
+    <templateimage>C:\Users\joe_c\Documents\Game Collector\Images\Listitemimages\ps1.png</templateimage>
+    <scaledimage>C:\Users\joe_c\Documents\Game Collector\Images\Listitemimages\ps1-16.png</scaledimage>
+    <sortname>PlayStation</sortname>
+    <clzplatformid>-1</clzplatformid>
+    <grouprank>999</grouprank>
+    <rank>999</rank>
+  </platform>
+  <format>
+    <displayname>CD-ROM</displayname>
+    <sortname>CD-ROM</sortname>
+  </format>
+  <language/>
+  <publishers>
+    <publisher>
+      <displayname>Sony Computer Entertainment America</displayname>
+      <sortname>Sony Computer Entertainment America</sortname>
+    </publisher>
+    <publisher>
+      <displayname>And Another One</displayname>
+      <sortname>And Another One</sortname>
+    </publisher>
+  </publishers>
+  <publisher>
+    <displayname>Sony Computer Entertainment America</displayname>
+    <sortname>Sony Computer Entertainment America</sortname>
+  </publisher>
+  <developers>
+    <developer>
+      <displayname>Sony Interactive Studios America</displayname>
+      <sortname>Sony Interactive Studios America</sortname>
+    </developer>
+  </developers>
+  <developer>
+    <displayname>Sony Interactive Studios America</displayname>
+    <sortname>Sony Interactive Studios America</sortname>
+  </developer>
+  <audiencerating/>
+  <reviewrating>0</reviewrating>
+  <genres>
+    <genre>
+      <displayname>Racing</displayname>
+      <sortname>Racing</sortname>
+    </genre>
+    <genre>
+      <displayname>Sports</displayname>
+      <sortname>Sports</sortname>
+    </genre>
+  </genres>
+  <coverfront>C:\Users\joe_c\Documents\Game Collector\Images\1XtremeGreatestHitsPlayS812_f.jpg</coverfront>
+  <backgroundbackdrop>CLZBACKDROP</backgroundbackdrop>
+  <devices/>
+  <releasedate>
+    <year>
+      <displayname>1998</displayname>
+    </year>
+    <month>1</month>
+    <day>1</day>
+    <date>1/1/1998</date>
+  </releasedate>
+  <gameshardware>
+    <displayname>Game</displayname>
+    <sortname>Game</sortname>
+  </gameshardware>
+  <region/>
+  <multiplayer/>
+  <credits/>
+  <original boolvalue="0">No</original>
+  <completiondate/>
+  <completed boolvalue="1">Yes</completed>
+  <nrdisks>1</nrdisks>
+  <collectionstatus listid="3">In Collection</collectionstatus>
+  <extras/>
+  <myrating>0</myrating>
+  <myrating>
+    <displayname>0</displayname>
+    <sortname>0</sortname>
+  </myrating>
+  <purchasedate/>
+  <store/>
+  <owner/>
+  <location/>
+  <links>
+    <link>
+      <description>1Xtreme at Core for Games</description>
+      <url>http://core.collectorz.com/games/ps1/1xtreme</url>
+      <urltype>URL</urltype>
+    </link>
+    <link>
+      <description>1Xtreme at PriceCharting.com</description>
+      <url>https://www.pricecharting.com/game/Playstation/1Xtreme</url>
+      <urltype>URL</urltype>
+    </link>
+  </links>
+  <condition/>
+  <quantity>1</quantity>
+  <currentvalue>5.00</currentvalue>
+  <pricechartingvalue>5.97</pricechartingvalue>
+  <pricechartingurl>https://www.pricecharting.com/game/Playstation/1Xtreme</pricechartingurl>
+  <pricechartingloose>5.97</pricechartingloose>
+  <pricechartingcib>6.67</pricechartingcib>
+  <pricechartingnew>23.88</pricechartingnew>
+  <completenessnum>Loose</completenessnum>
+  <completeness listid="0">Loose</completeness>
+  <lastmodified>
+    <date>1/19/2022 7:38:46 PM</date>
+  </lastmodified>
+  <dateadded>
+    <date>1/20/2019 1:43:16 PM</date>
+  </dateadded>
+  <thumbfilepath>C:\Users\joe_c\Documents\Game Collector\Thumbnails\24E895823CE3F98A2D29B6E3D634AB54.jpg</thumbfilepath>
+  <bpgameid>28697</bpgameid>
+  <bpmediaid>-99</bpmediaid>
+  <clzplatformid>35</clzplatformid>
+  <bpgamelastreceivedrevision>94</bpgamelastreceivedrevision>
+  <bpmedialastreceivedrevision>0</bpmedialastreceivedrevision>
+  <storagedevice/>
+  <submissiondate/>
+  <tags/>
+  <titlefirstletter>
+    <displayname>0-9</displayname>
+    <sortname>0-9</sortname>
+  </titlefirstletter>
+  <edition>
+    <displayname>Greatest Hits</displayname>
+    <sortname>Greatest Hits</sortname>
+  </edition>
+  <boxset/>
+  <hasbox boolvalue="0">No</hasbox>
+  <hasmanual boolvalue="1">No</hasmanual>
+  <shoulduploadfrontcover boolvalue="False">No</shoulduploadfrontcover>
+  <shoulduploadbackcover boolvalue="False">No</shoulduploadbackcover>
+</game>
