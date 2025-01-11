@@ -7,6 +7,10 @@ import (
 	"time"
 )
 
+type clzXMLList struct {
+	GameList []clzXML `xml:"gamelist>game"`
+}
+
 type clzXML struct {
 	XMLName                     xml.Name `xml:"game"`
 	PricechartingURL            string   `xml:"pricechartingurl"`
@@ -85,39 +89,45 @@ func extractLinks(links []Link) []domain.Link {
 	return domainLinks
 }
 
-func TranslateCLZ(input string) domain.Game {
-	var clzData clzXML
+func TranslateCLZ(input string) domain.GameCollection {
+	var clzData clzXMLList
 
 	err := xml.Unmarshal([]byte(input), &clzData)
 	if err != nil {
 		log.Fatalf("error unmarshalling xml: %v", err)
 	}
 
-	gameInstance := domain.Game{
-		Boxset: clzData.Boxset == "true",
-		Completeness: domain.Completeness{
-			HasBox:    clzData.HasBox == "true",
-			HasManual: clzData.HasManual == "true",
-			HasGame:   clzData.Quantity > 0,
-		},
-		Condition:          clzData.Condition,
-		DateAcquired:       clzData.DateAdded.Value,
-		Developers:         extractDisplayNames(clzData.Developers),
-		Edition:            clzData.Edition.DisplayName,
-		Format:             clzData.Format.DisplayName,
-		Genres:             extractDisplayNames(clzData.Genres),
-		HardwareType:       clzData.GameHardwareType.DisplayName,
-		Links:              extractLinks(clzData.Links),
-		Multiplayer:        clzData.Multiplayer == "true",
-		Platform:           domain.Platform(clzData.Platform.DisplayName),
-		PricechartingValue: 0.00,
-		Publishers:         extractDisplayNames(clzData.Publishers),
-		Quantity:           clzData.Quantity,
-		Region:             clzData.Region.DisplayName,
-		ReleaseDate:        clzData.ReleaseDate.Value,
-		Series:             "",
-		Title:              clzData.Title,
+	gameCollection := domain.GameCollection{
+		Games: []domain.Game{},
 	}
 
-	return gameInstance
+	for _, game := range clzData.GameList {
+		gameCollection.Games = append(gameCollection.Games, domain.Game{
+			Boxset: game.Boxset == "true",
+			Completeness: domain.Completeness{
+				HasBox:    game.HasBox == "true",
+				HasManual: game.HasManual == "true",
+				HasGame:   game.Quantity > 0,
+			},
+			Condition:          game.Condition,
+			DateAcquired:       game.DateAdded.Value,
+			Developers:         extractDisplayNames(game.Developers),
+			Edition:            game.Edition.DisplayName,
+			Format:             game.Format.DisplayName,
+			Genres:             extractDisplayNames(game.Genres),
+			HardwareType:       game.GameHardwareType.DisplayName,
+			Links:              extractLinks(game.Links),
+			Multiplayer:        game.Multiplayer == "true",
+			Platform:           domain.Platform(game.Platform.DisplayName),
+			PricechartingValue: 0.00,
+			Publishers:         extractDisplayNames(game.Publishers),
+			Quantity:           game.Quantity,
+			Region:             game.Region.DisplayName,
+			ReleaseDate:        game.ReleaseDate.Value,
+			Series:             "",
+			Title:              game.Title,
+		})
+	}
+
+	return gameCollection
 }

@@ -4,6 +4,10 @@ import (
 	"time"
 )
 
+type GameCollection struct {
+	Games []Game
+}
+
 type Game struct {
 	Boxset             bool
 	Completeness       Completeness
