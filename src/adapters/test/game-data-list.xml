@@ -1,0 +1,1173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gameinfo creationdate="1/27/2022 8:29:40 PM">
+<localizedtemplatetexts>
+  <field id="ttGameDetails" label="Game Details"/>
+  <field id="ttProductDetails" label="Product Details"/>
+  <field id="ttPersonalDetails" label="Personal Details"/>
+  <field id="ttImageLinkDetails" label="Images"/>
+  <field id="ttImageLinkScreenShots" label="Screenshots"/>
+  <field id="ttFirst" label="First"/>
+  <field id="ttPrev" label="Previous"/>
+  <field id="ttUp" label="Up"/>
+  <field id="ttNext" label="Next"/>
+  <field id="ttLast" label="Last"/>
+  <field id="ttBuyOnline" label="Buy this game online"/>
+  <field id="ttUserDefined" label="User Defined"/>
+</localizedtemplatetexts>
+<gamemetadata>
+  <field name="Address" id="dfLoanAddress" label="Address"/>
+  <field name="Audience Rating" id="dfAudienceRating" label="Audience Rating"/>
+  <field name="Back Cover" id="dfCoverBack" label="Back Cover"/>
+  <field name="Backdrop" id="dfBackDrop" label="Backdrop"/>
+  <field name="Barcode" id="dfUPC" label="Barcode"/>
+  <field name="Box" id="dfHasBox" label="Box"/>
+  <field name="Box set" id="dfBoxSet" label="Box set"/>
+  <field name="Clz Game ID" id="dfBPGameID" label="Clz Game ID"/>
+  <field name="Clz Online Game Last Received Revision" id="dfBPGameLastReceivedRevision" label="Clz Online Game Last Received Revision"/>
+  <field name="Clz Online Media Last Received Revision" id="dfBPMediaLastReceivedRevision" label="Clz Online Media Last Received Revision"/>
+  <field name="ClzOnline Media ID" id="dfBPMediaID" label="ClzOnline Media ID"/>
+  <field name="ClzOnline Platform ID" id="dfCLzPlatformID" label="ClzOnline Platform ID"/>
+  <field name="Collection Status" id="dfCollectionStatus" label="Collection Status"/>
+  <field name="Completed" id="dfCompleted" label="Completed"/>
+  <field name="Completeness" id="dfDynCompleteness" label="Completeness"/>
+  <field name="Completeness" id="dfCompleteness" label="Completeness"/>
+  <field name="Completion Date" id="dfCompletionDate" label="Completion Date"/>
+  <field name="Completion Year" id="dfCompletionYear" label="Completion Year"/>
+  <field name="Condition" id="dfCondition" label="Condition"/>
+  <field name="Current Value" id="dfCurrentValue" label="Current Value"/>
+  <field name="Custom Back Cover" id="dfShouldUploadbackCover" label="Custom Back Cover"/>
+  <field name="Custom Front Cover" id="dfShouldUploadFrontCover" label="Custom Front Cover"/>
+  <field name="Date Added" id="dfDateAdded" label="Date Added"/>
+  <field name="Description" id="dfDescription" label="Description"/>
+  <field name="Developer" id="dfDeveloper" label="Developer"/>
+  <field name="Devices" id="dfDevices" label="Devices"/>
+  <field name="dfSortFieldForTitle" id="dfSortFieldForTitle" label="dfSortFieldForTitle"/>
+  <field name="Due Date" id="dfDueDate" label="Due Date"/>
+  <field name="Edition" id="dfEdition" label="Edition"/>
+  <field name="Email" id="dfLoanEmail" label="Email"/>
+  <field name="Extras" id="dfExtras" label="Extras"/>
+  <field name="First letter" id="dfDynGenericFirstLetter" label="First letter"/>
+  <field name="Format" id="dfFormat" label="Format"/>
+  <field name="Front Cover" id="dfCoverFront" label="Front Cover"/>
+  <field name="Games/Hardware" id="dfDynHardware" label="Games/Hardware"/>
+  <field name="Genre" id="dfGenre" label="Genre"/>
+  <field name="Graphics Design" id="dfGraphics" label="Graphics Design"/>
+  <field name="Hardware Type" id="dfHardwareCategory" label="Hardware Type"/>
+  <field name="ID" id="dfID" label="ID"/>
+  <field name="In Collection (0/1)" id="dfInCollectionBit" label="In Collection (0/1)"/>
+  <field name="Index" id="dfIndex" label="Index"/>
+  <field name="Language" id="dfLanguage" label="Language"/>
+  <field name="Last Modified" id="dfLastModified" label="Last Modified"/>
+  <field name="Last Submission Date" id="dfSubmissionDate" label="Last Submission Date"/>
+  <field name="Links" id="dfLinks" label="Links"/>
+  <field name="Loan Date" id="dfLoanDate" label="Loan Date"/>
+  <field name="Loan Notes" id="dfLoanNotes" label="Loan Notes"/>
+  <field name="Loaned To" id="dfLoaner" label="Loaned To"/>
+  <field name="Location" id="dfLocation" label="Location"/>
+  <field name="Manual" id="dfHasManual" label="Manual"/>
+  <field name="Manufacturer ID" id="dfItemNr" label="Manufacturer ID"/>
+  <field name="Movie Files" id="dfMovieLinks" label="Movie Files"/>
+  <field name="Multiplayer Support" id="dfMultiplayer" label="Multiplayer Support"/>
+  <field name="My Rating" id="dfMyRating" label="My Rating"/>
+  <field name="No. of Disks" id="dfNrDisks" label="No. of Disks"/>
+  <field name="Notes" id="dfNotes" label="Notes"/>
+  <field name="Original" id="dfOriginal" label="Original"/>
+  <field name="Other Files" id="dfOtherLinks" label="Other Files"/>
+  <field name="Overdue" id="dfIsOverdue" label="Overdue"/>
+  <field name="Owner" id="dfOwner" label="Owner"/>
+  <field name="Platform" id="dfPlatform" label="Platform"/>
+  <field name="Producer" id="dfProducer" label="Producer"/>
+  <field name="Programmer" id="dfProgrammer" label="Programmer"/>
+  <field name="Publisher" id="dfPublisher" label="Publisher"/>
+  <field name="Purchase Date" id="dfPurchaseDate" label="Purchase Date"/>
+  <field name="Purchase Price" id="dfPurchasePrice" label="Purchase Price"/>
+  <field name="Purchase Year" id="dfPurchaseYear" label="Purchase Year"/>
+  <field name="Quantity" id="dfQuantity" label="Quantity"/>
+  <field name="Rating" id="dfDynRating" label="Rating"/>
+  <field name="Region" id="dfRegion" label="Region"/>
+  <field name="Release Date" id="dfReleaseDate" label="Release Date"/>
+  <field name="Release Year" id="dfReleaseYear" label="Release Year"/>
+  <field name="Return Date" id="dfReturnDate" label="Return Date"/>
+  <field name="Review Rating" id="dfReviewRating" label="Review Rating"/>
+  <field name="Screenshots" id="dfImageLinks" label="Screenshots"/>
+  <field name="Serial Number" id="dfSerialNumber" label="Serial Number"/>
+  <field name="Series" id="dfSeries" label="Series"/>
+  <field name="Slot" id="dfStorageSlot" label="Slot"/>
+  <field name="Sound/Music" id="dfSoundMusic" label="Sound/Music"/>
+  <field name="Storage Device" id="dfStorageDevice" label="Storage Device"/>
+  <field name="Store" id="dfStore" label="Store"/>
+  <field name="Sub Title" id="dfSubTitle" label="Sub Title"/>
+  <field name="System Requirements" id="dfSystemRequirements" label="System Requirements"/>
+  <field name="Tags" id="dfTag" label="Tags"/>
+  <field name="Thumbnail" id="dfThumbFilePath" label="Thumbnail"/>
+  <field name="Title" id="dfTitle" label="Title"/>
+  <field name="Title" id="dfLoanTitle" label="Title"/>
+  <field name="Title First Letter" id="dfDynTitleLetter" label="Title First Letter"/>
+  <field name="Title Sort" id="dfTitleSort" label="Title Sort"/>
+  <field name="Title The" id="dfTitleThe" label="Title The"/>
+  <field name="Trailer Files" id="dfTrailerFiles" label="Trailer Files"/>
+  <field name="Trailer URLs" id="dfLinkTrailers" label="Trailer URLs"/>
+  <field name="User Credit 1" id="dfUserCredit1" label="User Credit 1"/>
+  <field name="User Credit 2" id="dfUserCredit2" label="User Credit 2"/>
+  <field name="Value" id="dfPriceChartingValue" label="Value"/>
+  <field name="Value CIB" id="dfPriceChartingCIB" label="Value CIB"/>
+  <field name="Value Loose" id="dfPriceChartingLoose" label="Value Loose"/>
+  <field name="Value New" id="dfPriceChartingNew" label="Value New"/>
+</gamemetadata>
+<gamelist>
+<game>
+  <id>812</id>
+  <hardware boolvalue="0">Game</hardware>
+  <index>221</index>
+  <title>1Xtreme (Greatest Hits)</title>
+  <series/>
+  <platform>
+    <displayname>PlayStation</displayname>
+    <templateimage>C:\Users\joe_c\Documents\Game Collector\Images\Listitemimages\ps1.png</templateimage>
+    <scaledimage>C:\Users\joe_c\Documents\Game Collector\Images\Listitemimages\ps1-16.png</scaledimage>
+    <sortname>PlayStation</sortname>
+    <clzplatformid>-1</clzplatformid>
+    <grouprank>999</grouprank>
+    <rank>999</rank>
+  </platform>
+  <format>
+    <displayname>CD-ROM</displayname>
+    <sortname>CD-ROM</sortname>
+  </format>
+  <language/>
+  <publishers>
+    <publisher>
+      <displayname>Sony Computer Entertainment America</displayname>
+      <sortname>Sony Computer Entertainment America</sortname>
+    </publisher>
+    <publisher>
+      <displayname>And Another One</displayname>
+      <sortname>And Another One</sortname>
+    </publisher>
+  </publishers>
+  <publisher>
+    <displayname>Sony Computer Entertainment America</displayname>
+    <sortname>Sony Computer Entertainment America</sortname>
+  </publisher>
+  <developers>
+    <developer>
+      <displayname>Sony Interactive Studios America</displayname>
+      <sortname>Sony Interactive Studios America</sortname>
+    </developer>
+  </developers>
+  <developer>
+    <displayname>Sony Interactive Studios America</displayname>
+    <sortname>Sony Interactive Studios America</sortname>
+  </developer>
+  <audiencerating/>
+  <reviewrating>0</reviewrating>
+  <genres>
+    <genre>
+      <displayname>Racing</displayname>
+      <sortname>Racing</sortname>
+    </genre>
+    <genre>
+      <displayname>Sports</displayname>
+      <sortname>Sports</sortname>
+    </genre>
+  </genres>
+  <coverfront>C:\Users\joe_c\Documents\Game Collector\Images\1XtremeGreatestHitsPlayS812_f.jpg</coverfront>
+  <backgroundbackdrop>CLZBACKDROP</backgroundbackdrop>
+  <devices/>
+  <releasedate>
+    <year>
+      <displayname>1998</displayname>
+    </year>
+    <month>1</month>
+    <day>1</day>
+    <date>1/1/1998</date>
+  </releasedate>
+  <gameshardware>
+    <displayname>Game</displayname>
+    <sortname>Game</sortname>
+  </gameshardware>
+  <region/>
+  <multiplayer/>
+  <credits/>
+  <original boolvalue="0">No</original>
+  <completiondate/>
+  <completed boolvalue="1">Yes</completed>
+  <nrdisks>1</nrdisks>
+  <collectionstatus listid="3">In Collection</collectionstatus>
+  <extras/>
+  <myrating>0</myrating>
+  <myrating>
+    <displayname>0</displayname>
+    <sortname>0</sortname>
+  </myrating>
+  <purchasedate/>
+  <store/>
+  <owner/>
+  <location/>
+  <links>
+    <link>
+      <description>1Xtreme at Core for Games</description>
+      <url>http://core.collectorz.com/games/ps1/1xtreme</url>
+      <urltype>URL</urltype>
+    </link>
+    <link>
+      <description>1Xtreme at PriceCharting.com</description>
+      <url>https://www.pricecharting.com/game/Playstation/1Xtreme</url>
+      <urltype>URL</urltype>
+    </link>
+  </links>
+  <condition/>
+  <quantity>1</quantity>
+  <currentvalue>5.00</currentvalue>
+  <pricechartingvalue>5.97</pricechartingvalue>
+  <pricechartingurl>https://www.pricecharting.com/game/Playstation/1Xtreme</pricechartingurl>
+  <pricechartingloose>5.97</pricechartingloose>
+  <pricechartingcib>6.67</pricechartingcib>
+  <pricechartingnew>23.88</pricechartingnew>
+  <completenessnum>Loose</completenessnum>
+  <completeness listid="0">Loose</completeness>
+  <lastmodified>
+    <date>1/19/2022 7:38:46 PM</date>
+  </lastmodified>
+  <dateadded>
+    <date>1/20/2019 1:43:16 PM</date>
+  </dateadded>
+  <thumbfilepath>C:\Users\joe_c\Documents\Game Collector\Thumbnails\24E895823CE3F98A2D29B6E3D634AB54.jpg</thumbfilepath>
+  <bpgameid>28697</bpgameid>
+  <bpmediaid>-99</bpmediaid>
+  <clzplatformid>35</clzplatformid>
+  <bpgamelastreceivedrevision>94</bpgamelastreceivedrevision>
+  <bpmedialastreceivedrevision>0</bpmedialastreceivedrevision>
+  <storagedevice/>
+  <submissiondate/>
+  <tags/>
+  <titlefirstletter>
+    <displayname>0-9</displayname>
+    <sortname>0-9</sortname>
+  </titlefirstletter>
+  <edition>
+    <displayname>Greatest Hits</displayname>
+    <sortname>Greatest Hits</sortname>
+  </edition>
+  <boxset/>
+  <hasbox boolvalue="0">No</hasbox>
+  <hasmanual boolvalue="1">No</hasmanual>
+  <shoulduploadfrontcover boolvalue="False">No</shoulduploadfrontcover>
+  <shoulduploadbackcover boolvalue="False">No</shoulduploadbackcover>
+</game>
+<game>
+  <id>2474</id>
+  <hardware boolvalue="0">Game</hardware>
+  <index>486</index>
+  <title>8 Eyes</title>
+  <series/>
+  <platform>
+    <displayname>NES</displayname>
+    <templateimage>C:\Users\joe_c\Documents\Game Collector\Images\Listitemimages\nes.png</templateimage>
+    <scaledimage>C:\Users\joe_c\Documents\Game Collector\Images\Listitemimages\nes16.png</scaledimage>
+    <sortname>NES</sortname>
+    <clzplatformid>-1</clzplatformid>
+    <grouprank>999</grouprank>
+    <rank>999</rank>
+  </platform>
+  <format>
+    <displayname>Cartridge</displayname>
+    <sortname>Cartridge</sortname>
+  </format>
+  <language/>
+  <publishers>
+    <publisher>
+      <displayname>TAXAN USA Corporation</displayname>
+      <sortname>TAXAN USA Corporation</sortname>
+    </publisher>
+  </publishers>
+  <publisher>
+    <displayname>TAXAN USA Corporation</displayname>
+    <sortname>TAXAN USA Corporation</sortname>
+  </publisher>
+  <developers>
+    <developer>
+      <displayname>Zener Works</displayname>
+      <sortname>Zener Works</sortname>
+    </developer>
+  </developers>
+  <developer>
+    <displayname>Zener Works</displayname>
+    <sortname>Zener Works</sortname>
+  </developer>
+  <audiencerating/>
+  <reviewrating>0</reviewrating>
+  <genres>
+    <genre>
+      <displayname>Action</displayname>
+      <sortname>Action</sortname>
+    </genre>
+  </genres>
+  <coverfront>C:\Users\joe_c\Documents\Game Collector\Images\8EyesNES2474_f.jpg</coverfront>
+  <backdropurl>C:\Users\joe_c\Documents\Game Collector\Images\8EyesNES2474_d.jpg</backdropurl>
+  <backgroundbackdrop>CLZBACKDROP</backgroundbackdrop>
+  <devices>
+    <device>
+      <displayname>Gamepad</displayname>
+      <sortname>Gamepad</sortname>
+    </device>
+  </devices>
+  <releasedate>
+    <year>
+      <displayname>1990</displayname>
+    </year>
+    <month>1</month>
+    <date>January 1990</date>
+  </releasedate>
+  <gameshardware>
+    <displayname>Game</displayname>
+    <sortname>Game</sortname>
+  </gameshardware>
+  <region/>
+  <multiplayer>
+    <mode>
+      <displayname>Same Screen</displayname>
+      <sortname>Same Screen</sortname>
+    </mode>
+    <mode>
+      <displayname>Co-Op</displayname>
+      <sortname>Co-Op</sortname>
+    </mode>
+  </multiplayer>
+  <credits/>
+  <original boolvalue="0">No</original>
+  <completiondate/>
+  <completed boolvalue="0">No</completed>
+  <nrdisks>1</nrdisks>
+  <collectionstatus listid="3">In Collection</collectionstatus>
+  <extras/>
+  <myrating>0</myrating>
+  <myrating>
+    <displayname>0</displayname>
+    <sortname>0</sortname>
+  </myrating>
+  <purchasedate/>
+  <store/>
+  <owner/>
+  <location/>
+  <description>After hundreds of years of chaos, mankind has finally emerged from the ruins of nuclear war. This world of the distant future has once again flourished under the guidance of the Great King, who harnessed the power of the 8 Eyes to rebuild the planet.
+
+These strange jewels of power were formed at the eyes, or centers, of the eight nuclear explosions which nearly destroyed the Earth. In the wrong hands, the 8 Eyes could cause untold destruction ...And now, they have been seized by the Great King's eight Dukes, in a desperate bid to gain control of the world for themselves. They have banished the King to the nuclear wastelands, and already their squabbling threatens to plunge the world into war once again.
+
+The task of retrieving the 8 Eyes falls to you, Orin the Falconer, the bravest and mightiest of the King's Guardsmen. With your fighting falcon, Cutrus, you must penetrate each of the eight Dukes' castles. There you will face the Dukes' soldiers, and battle strange nuclear mutants such as living skeletons, giant wasps, and mud men. You must defeat the monstrous Boss of each castle to retrieve the jewel of Power he guards.
+
+Then, to complete your quest, return the 8 Eyes to the Altar of Peace to await the return of the Great King, so that he may finish the rebuilding of Earth. Your reward will be the the [sic] eternal gratitude of all mankind.</description>
+  <links>
+    <link>
+      <description>8 Eyes at PriceCharting.com</description>
+      <url>https://www.pricecharting.com/game/NES/8-Eyes</url>
+      <urltype>URL</urltype>
+    </link>
+    <link>
+      <description>Trailer</description>
+      <url>http://www.youtube.com/watch?v=Y-jxDeo5JPc</url>
+      <urltype>Trailer URL</urltype>
+    </link>
+  </links>
+  <condition/>
+  <quantity>1</quantity>
+  <currentvalue>14.84</currentvalue>
+  <pricechartingvalue>13.92</pricechartingvalue>
+  <pricechartingurl>https://www.pricecharting.com/game/NES/8-Eyes</pricechartingurl>
+  <pricechartingloose>13.92</pricechartingloose>
+  <pricechartingcib>47.46</pricechartingcib>
+  <pricechartingnew>249.49</pricechartingnew>
+  <completenessnum>Loose</completenessnum>
+  <completeness listid="0">Loose</completeness>
+  <lastmodified>
+    <date>1/19/2022 7:39:27 PM</date>
+  </lastmodified>
+  <dateadded>
+    <date>1/19/2022 7:39:23 PM</date>
+  </dateadded>
+  <thumbfilepath>C:\Users\joe_c\Documents\Game Collector\Thumbnails\31434E8AE1D00EFEED57BA15845B6964.jpg</thumbfilepath>
+  <bpgameid>26105</bpgameid>
+  <bpmediaid>-99</bpmediaid>
+  <clzplatformid>46</clzplatformid>
+  <bpgamelastreceivedrevision>127</bpgamelastreceivedrevision>
+  <bpmedialastreceivedrevision>0</bpmedialastreceivedrevision>
+  <storagedevice/>
+  <submissiondate/>
+  <tags/>
+  <titlefirstletter>
+    <displayname>0-9</displayname>
+    <sortname>0-9</sortname>
+  </titlefirstletter>
+  <edition/>
+  <boxset/>
+  <hasbox boolvalue="0">No</hasbox>
+  <hasmanual boolvalue="0">No</hasmanual>
+  <shoulduploadfrontcover boolvalue="False">No</shoulduploadfrontcover>
+  <shoulduploadbackcover boolvalue="False">No</shoulduploadbackcover>
+</game>
+<game>
+  <id>2569</id>
+  <hardware boolvalue="0">Game</hardware>
+  <index>543</index>
+  <title>Adventure</title>
+  <series/>
+  <platform>
+    <displayname>Atari 2600/VCS</displayname>
+    <templateimage>C:\Users\joe_c\Documents\Game Collector\Images\Listitemimages\atari.png</templateimage>
+    <scaledimage>C:\Users\joe_c\Documents\Game Collector\Images\Listitemimages\atari16.png</scaledimage>
+    <sortname>Atari 2600/VCS</sortname>
+    <clzplatformid>-1</clzplatformid>
+    <grouprank>999</grouprank>
+    <rank>999</rank>
+  </platform>
+  <format>
+    <displayname>Cartridge</displayname>
+    <sortname>Cartridge</sortname>
+  </format>
+  <language/>
+  <publishers>
+    <publisher>
+      <displayname>Atari</displayname>
+      <sortname>Atari</sortname>
+    </publisher>
+  </publishers>
+  <publisher>
+    <displayname>Atari</displayname>
+    <sortname>Atari</sortname>
+  </publisher>
+  <developers>
+    <developer>
+      <displayname>Atari, Inc.</displayname>
+      <sortname>Atari, Inc.</sortname>
+    </developer>
+  </developers>
+  <developer>
+    <displayname>Atari, Inc.</displayname>
+    <sortname>Atari, Inc.</sortname>
+  </developer>
+  <audiencerating/>
+  <reviewrating>0</reviewrating>
+  <genres>
+    <genre>
+      <displayname>Action</displayname>
+      <sortname>Action</sortname>
+    </genre>
+    <genre>
+      <displayname>Adventure</displayname>
+      <sortname>Adventure</sortname>
+    </genre>
+  </genres>
+  <coverfront>C:\Users\joe_c\Documents\Game Collector\Images\AdventureAtari2600VCS2569_f.jpg</coverfront>
+  <backdropurl>C:\Users\joe_c\Documents\Game Collector\Images\AdventureAtari2600VCS2569_d.png</backdropurl>
+  <backgroundbackdrop>CLZBACKDROP</backgroundbackdrop>
+  <devices/>
+  <releasedate>
+    <year>
+      <displayname>1980</displayname>
+    </year>
+    <date>1980</date>
+  </releasedate>
+  <gameshardware>
+    <displayname>Game</displayname>
+    <sortname>Game</sortname>
+  </gameshardware>
+  <region/>
+  <multiplayer/>
+  <credits/>
+  <original boolvalue="0">No</original>
+  <completiondate/>
+  <completed boolvalue="0">No</completed>
+  <nrdisks>1</nrdisks>
+  <collectionstatus listid="3">In Collection</collectionstatus>
+  <extras/>
+  <myrating>0</myrating>
+  <myrating>
+    <displayname>0</displayname>
+    <sortname>0</sortname>
+  </myrating>
+  <purchasedate/>
+  <store/>
+  <owner/>
+  <location/>
+  <links>
+    <link>
+      <description>Adventure at PriceCharting.com</description>
+      <url>https://www.pricecharting.com/game/Atari-2600/Adventure</url>
+      <urltype>URL</urltype>
+    </link>
+    <link>
+      <description>Trailer</description>
+      <url>http://www.youtube.com/watch?v=uSbCZjIvKqU</url>
+      <urltype>Trailer URL</urltype>
+    </link>
+  </links>
+  <condition/>
+  <quantity>1</quantity>
+  <currentvalue>10.27</currentvalue>
+  <pricechartingvalue>12.13</pricechartingvalue>
+  <pricechartingurl>https://www.pricecharting.com/game/Atari-2600/Adventure</pricechartingurl>
+  <pricechartingloose>12.13</pricechartingloose>
+  <pricechartingcib>85.00</pricechartingcib>
+  <pricechartingnew>128.00</pricechartingnew>
+  <completenessnum>Loose</completenessnum>
+  <completeness listid="0">Loose</completeness>
+  <lastmodified>
+    <date>1/19/2022 7:40:25 PM</date>
+  </lastmodified>
+  <dateadded>
+    <date>1/19/2022 7:40:14 PM</date>
+  </dateadded>
+  <thumbfilepath>C:\Users\joe_c\Documents\Game Collector\Thumbnails\693C0453FDA8506B6C8AD3798E3797DB.jpg</thumbfilepath>
+  <bpgameid>24189</bpgameid>
+  <bpmediaid>-99</bpmediaid>
+  <clzplatformid>57</clzplatformid>
+  <bpgamelastreceivedrevision>126</bpgamelastreceivedrevision>
+  <bpmedialastreceivedrevision>0</bpmedialastreceivedrevision>
+  <storagedevice/>
+  <submissiondate/>
+  <tags/>
+  <titlefirstletter>
+    <displayname>A</displayname>
+    <sortname>A</sortname>
+  </titlefirstletter>
+  <edition/>
+  <boxset/>
+  <hasbox boolvalue="0">No</hasbox>
+  <hasmanual boolvalue="0">No</hasmanual>
+  <shoulduploadfrontcover boolvalue="False">No</shoulduploadfrontcover>
+  <shoulduploadbackcover boolvalue="False">No</shoulduploadbackcover>
+</game>
+<game>
+  <id>1052</id>
+  <hardware boolvalue="0">Game</hardware>
+  <index>301</index>
+  <title>Albert Odyssey: Legend of Eldean</title>
+  <series>
+    <displayname>Albert Odyssey</displayname>
+    <sortname>Albert Odyssey</sortname>
+  </series>
+  <platform>
+    <displayname>Saturn</displayname>
+    <templateimage>C:\Users\joe_c\Documents\Game Collector\Images\Listitemimages\saturn.png</templateimage>
+    <scaledimage>C:\Users\joe_c\Documents\Game Collector\Images\Listitemimages\saturn16.png</scaledimage>
+    <sortname>Saturn</sortname>
+    <clzplatformid>-1</clzplatformid>
+    <grouprank>999</grouprank>
+    <rank>999</rank>
+  </platform>
+  <format>
+    <displayname>CD-ROM</displayname>
+    <sortname>CD-ROM</sortname>
+  </format>
+  <language>
+    <displayname>English</displayname>
+    <templateimage>C:\Users\joe_c\Documents\Game Collector\Images\Listitemimages\uk.jpg</templateimage>
+    <scaledimage>C:\Users\joe_c\Documents\Game Collector\Images\Listitemimages\uk16.jpg</scaledimage>
+    <sortname>English</sortname>
+  </language>
+  <publishers>
+    <publisher>
+      <displayname>Working Designs</displayname>
+      <sortname>Working Designs</sortname>
+    </publisher>
+  </publishers>
+  <publisher>
+    <displayname>Working Designs</displayname>
+    <sortname>Working Designs</sortname>
+  </publisher>
+  <developers>
+    <developer>
+      <displayname>Working Designs</displayname>
+      <sortname>Working Designs</sortname>
+    </developer>
+  </developers>
+  <developer>
+    <displayname>Working Designs</displayname>
+    <sortname>Working Designs</sortname>
+  </developer>
+  <audiencerating>
+    <displayname>Kids to Adults</displayname>
+    <sortname>Kids to Adults</sortname>
+  </audiencerating>
+  <reviewrating>0</reviewrating>
+  <genres>
+    <genre>
+      <displayname>RPG</displayname>
+      <sortname>RPG</sortname>
+    </genre>
+  </genres>
+  <coverfront>C:\Users\joe_c\Documents\Game Collector\Images\AlbertOdysseyLegendofElde1052_f.jpg</coverfront>
+  <backdropurl>C:\Users\joe_c\Documents\Game Collector\Images\AlbertOdysseyLegendofElde1052_d.jpg</backdropurl>
+  <backgroundbackdrop>CLZBACKDROP</backgroundbackdrop>
+  <devices/>
+  <releasedate>
+    <year>
+      <displayname>1997</displayname>
+    </year>
+    <month>7</month>
+    <day>24</day>
+    <date>7/24/1997</date>
+  </releasedate>
+  <gameshardware>
+    <displayname>Game</displayname>
+    <sortname>Game</sortname>
+  </gameshardware>
+  <region/>
+  <multiplayer/>
+  <credits/>
+  <original boolvalue="1">Yes</original>
+  <completiondate/>
+  <completed boolvalue="0">No</completed>
+  <nrdisks>1</nrdisks>
+  <collectionstatus listid="3">In Collection</collectionstatus>
+  <extras/>
+  <myrating>0</myrating>
+  <myrating>
+    <displayname>0</displayname>
+    <sortname>0</sortname>
+  </myrating>
+  <purchasedate/>
+  <store/>
+  <owner/>
+  <location/>
+  <links>
+    <link>
+      <description>Albert Odyssey: Legend of Eldean at Core for Games</description>
+      <url>http://core.collectorz.com/games/saturn/albert-odyssey-legend-of-eldean</url>
+      <urltype>URL</urltype>
+    </link>
+    <link>
+      <description>Albert Odyssey: Legend of Eldean at PriceCharting.com</description>
+      <url>https://www.pricecharting.com/game/Sega-Saturn/Albert-Odyssey</url>
+      <urltype>URL</urltype>
+    </link>
+  </links>
+  <condition/>
+  <quantity>1</quantity>
+  <currentvalue>179.65</currentvalue>
+  <pricechartingvalue>89.99</pricechartingvalue>
+  <pricechartingurl>https://www.pricecharting.com/game/Sega-Saturn/Albert-Odyssey</pricechartingurl>
+  <pricechartingloose>89.99</pricechartingloose>
+  <pricechartingcib>182.50</pricechartingcib>
+  <pricechartingnew>431.74</pricechartingnew>
+  <completenessnum>Loose</completenessnum>
+  <completeness listid="0">Loose</completeness>
+  <lastmodified>
+    <date>1/19/2022 7:38:54 PM</date>
+  </lastmodified>
+  <dateadded>
+    <date>1/28/2019 9:33:27 PM</date>
+  </dateadded>
+  <thumbfilepath>C:\Users\joe_c\Documents\Game Collector\Thumbnails\B3A0A553A4A74C6269FAC7B5A08DF3FE.jpg</thumbfilepath>
+  <bpgameid>23364</bpgameid>
+  <bpmediaid>-99</bpmediaid>
+  <clzplatformid>49</clzplatformid>
+  <bpgamelastreceivedrevision>102</bpgamelastreceivedrevision>
+  <bpmedialastreceivedrevision>0</bpmedialastreceivedrevision>
+  <storagedevice/>
+  <submissiondate/>
+  <tags/>
+  <titlefirstletter>
+    <displayname>A</displayname>
+    <sortname>A</sortname>
+  </titlefirstletter>
+  <edition/>
+  <boxset/>
+  <hasbox boolvalue="0">No</hasbox>
+  <hasmanual boolvalue="0">No</hasmanual>
+  <shoulduploadfrontcover boolvalue="False">No</shoulduploadfrontcover>
+  <shoulduploadbackcover boolvalue="False">No</shoulduploadbackcover>
+</game>
+<game>
+  <id>1801</id>
+  <hardware boolvalue="0">Game</hardware>
+  <index>302</index>
+  <title>Alisia Dragoon</title>
+  <series/>
+  <platform>
+    <displayname>Genesis / Mega Drive</displayname>
+    <templateimage>C:\Users\joe_c\Documents\Game Collector\Images\Listitemimages\segagenesis.png</templateimage>
+    <scaledimage>C:\Users\joe_c\Documents\Game Collector\Images\Listitemimages\segagenesis16.png</scaledimage>
+    <sortname>Genesis / Mega Drive</sortname>
+    <clzplatformid>-1</clzplatformid>
+    <grouprank>999</grouprank>
+    <rank>999</rank>
+  </platform>
+  <format>
+    <displayname>Cartridge</displayname>
+    <sortname>Cartridge</sortname>
+  </format>
+  <language>
+    <displayname>English</displayname>
+    <templateimage>C:\Users\joe_c\Documents\Game Collector\Images\Listitemimages\uk.jpg</templateimage>
+    <scaledimage>C:\Users\joe_c\Documents\Game Collector\Images\Listitemimages\uk16.jpg</scaledimage>
+    <sortname>English</sortname>
+  </language>
+  <publishers>
+    <publisher>
+      <displayname>Sega of America Inc.</displayname>
+      <sortname>Sega of America Inc.</sortname>
+    </publisher>
+  </publishers>
+  <publisher>
+    <displayname>Sega of America Inc.</displayname>
+    <sortname>Sega of America Inc.</sortname>
+  </publisher>
+  <developers>
+    <developer>
+      <displayname>Game Arts</displayname>
+      <sortname>Game Arts</sortname>
+    </developer>
+  </developers>
+  <developer>
+    <displayname>Game Arts</displayname>
+    <sortname>Game Arts</sortname>
+  </developer>
+  <audiencerating/>
+  <reviewrating>0</reviewrating>
+  <genres>
+    <genre>
+      <displayname>Platformer</displayname>
+      <sortname>Platformer</sortname>
+    </genre>
+  </genres>
+  <coverfront>C:\Users\joe_c\Documents\Game Collector\Images\AlisiaDragoonGenesisMega1801_f.jpg</coverfront>
+  <backgroundbackdrop>CLZBACKDROP</backgroundbackdrop>
+  <devices/>
+  <releasedate>
+    <year>
+      <displayname>1992</displayname>
+    </year>
+    <month>4</month>
+    <day>24</day>
+    <date>4/24/1992</date>
+  </releasedate>
+  <gameshardware>
+    <displayname>Game</displayname>
+    <sortname>Game</sortname>
+  </gameshardware>
+  <region/>
+  <multiplayer/>
+  <credits/>
+  <original boolvalue="1">Yes</original>
+  <completiondate/>
+  <completed boolvalue="0">No</completed>
+  <nrdisks>1</nrdisks>
+  <collectionstatus listid="3">In Collection</collectionstatus>
+  <extras/>
+  <myrating>0</myrating>
+  <myrating>
+    <displayname>0</displayname>
+    <sortname>0</sortname>
+  </myrating>
+  <purchasedate/>
+  <store/>
+  <owner/>
+  <location/>
+  <links>
+    <link>
+      <description>Alisia Dragoon at Core for Games</description>
+      <url>http://core.collectorz.com/games/genesis-megadrive/alisia-dragoon</url>
+      <urltype>URL</urltype>
+    </link>
+    <link>
+      <description>Alisia Dragoon at PriceCharting.com</description>
+      <url>https://www.pricecharting.com/game/PAL-Sega-Mega-Drive/Alisia-Dragoon</url>
+      <urltype>URL</urltype>
+    </link>
+  </links>
+  <condition/>
+  <quantity>1</quantity>
+  <currentvalue>75.00</currentvalue>
+  <pricechartingvalue>29.09</pricechartingvalue>
+  <pricechartingurl>https://www.pricecharting.com/game/PAL-Sega-Mega-Drive/Alisia-Dragoon</pricechartingurl>
+  <pricechartingloose>29.09</pricechartingloose>
+  <pricechartingcib>50.72</pricechartingcib>
+  <pricechartingnew>91.18</pricechartingnew>
+  <completenessnum>Loose</completenessnum>
+  <completeness listid="0">Loose</completeness>
+  <lastmodified>
+    <date>1/19/2022 7:38:50 PM</date>
+  </lastmodified>
+  <dateadded>
+    <date>1/31/2019 9:31:53 PM</date>
+  </dateadded>
+  <thumbfilepath>C:\Users\joe_c\Documents\Game Collector\Thumbnails\1DE2C6C1FA39F611779241AD94A025B9.jpg</thumbfilepath>
+  <bpgameid>26894</bpgameid>
+  <bpmediaid>-99</bpmediaid>
+  <clzplatformid>47</clzplatformid>
+  <bpgamelastreceivedrevision>84</bpgamelastreceivedrevision>
+  <bpmedialastreceivedrevision>0</bpmedialastreceivedrevision>
+  <storagedevice/>
+  <submissiondate/>
+  <tags/>
+  <titlefirstletter>
+    <displayname>A</displayname>
+    <sortname>A</sortname>
+  </titlefirstletter>
+  <edition/>
+  <boxset/>
+  <hasbox boolvalue="0">No</hasbox>
+  <hasmanual boolvalue="0">No</hasmanual>
+  <shoulduploadfrontcover boolvalue="False">No</shoulduploadfrontcover>
+  <shoulduploadbackcover boolvalue="False">No</shoulduploadbackcover>
+</game>
+<game>
+  <id>567</id>
+  <hardware boolvalue="0">Game</hardware>
+  <index>124</index>
+  <title>Arcade Classic No. 4: Defender / Joust</title>
+  <series>
+    <displayname>Arcade Classics</displayname>
+    <sortname>Arcade Classics</sortname>
+  </series>
+  <platform>
+    <displayname>Game Boy</displayname>
+    <templateimage>C:\Users\joe_c\Documents\Game Collector\Images\Listitemimages\gb.png</templateimage>
+    <scaledimage>C:\Users\joe_c\Documents\Game Collector\Images\Listitemimages\gameboy16.png</scaledimage>
+    <sortname>Game Boy</sortname>
+    <clzplatformid>-1</clzplatformid>
+    <grouprank>999</grouprank>
+    <rank>999</rank>
+  </platform>
+  <format>
+    <displayname>Cartridge</displayname>
+    <sortname>Cartridge</sortname>
+  </format>
+  <language/>
+  <publishers>
+    <publisher>
+      <displayname>Nintendo</displayname>
+      <sortname>Nintendo</sortname>
+    </publisher>
+  </publishers>
+  <publisher>
+    <displayname>Nintendo</displayname>
+    <sortname>Nintendo</sortname>
+  </publisher>
+  <developers>
+    <developer>
+      <displayname>Williams</displayname>
+      <sortname>Williams</sortname>
+    </developer>
+  </developers>
+  <developer>
+    <displayname>Williams</displayname>
+    <sortname>Williams</sortname>
+  </developer>
+  <audiencerating/>
+  <reviewrating>0</reviewrating>
+  <genres>
+    <genre>
+      <displayname>Action</displayname>
+      <sortname>Action</sortname>
+    </genre>
+  </genres>
+  <coverfront>C:\Users\joe_c\Documents\Game Collector\Images\ArcadeClassicNo4Defender567_f.jpg</coverfront>
+  <backgroundbackdrop>CLZBACKDROP</backgroundbackdrop>
+  <devices/>
+  <releasedate>
+    <year>
+      <displayname>1995</displayname>
+    </year>
+    <date>1995</date>
+  </releasedate>
+  <gameshardware>
+    <displayname>Game</displayname>
+    <sortname>Game</sortname>
+  </gameshardware>
+  <region/>
+  <multiplayer/>
+  <credits/>
+  <original boolvalue="0">No</original>
+  <completiondate/>
+  <completed boolvalue="0">No</completed>
+  <nrdisks>1</nrdisks>
+  <collectionstatus listid="3">In Collection</collectionstatus>
+  <extras/>
+  <myrating>0</myrating>
+  <myrating>
+    <displayname>0</displayname>
+    <sortname>0</sortname>
+  </myrating>
+  <purchasedate/>
+  <store/>
+  <owner/>
+  <location/>
+  <links>
+    <link>
+      <description>Arcade Classic No. 4: Defender / Joust at Core for Games</description>
+      <url>http://core.collectorz.com/games/game-boy/arcade-classic-no-4-defender-joust</url>
+      <urltype>URL</urltype>
+    </link>
+    <link>
+      <description>Arcade Classic No. 4: Defender / Joust at PriceCharting.com</description>
+      <url>https://www.pricecharting.com/game/GameBoy/Arcade-Classic-4:-Defender-and-Joust</url>
+      <urltype>URL</urltype>
+    </link>
+  </links>
+  <condition/>
+  <quantity>1</quantity>
+  <currentvalue>9.86</currentvalue>
+  <pricechartingvalue>5.36</pricechartingvalue>
+  <pricechartingurl>https://www.pricecharting.com/game/GameBoy/Arcade-Classic-4:-Defender-and-Joust</pricechartingurl>
+  <pricechartingloose>5.36</pricechartingloose>
+  <pricechartingcib>11.37</pricechartingcib>
+  <pricechartingnew>39.99</pricechartingnew>
+  <completenessnum>Loose</completenessnum>
+  <completeness listid="0">Loose</completeness>
+  <lastmodified>
+    <date>1/19/2022 7:38:33 PM</date>
+  </lastmodified>
+  <dateadded>
+    <date>1/19/2019 4:59:15 PM</date>
+  </dateadded>
+  <thumbfilepath>C:\Users\joe_c\Documents\Game Collector\Thumbnails\5997A2E5DCB5EC6A7E7982BF2ABB2933.jpg</thumbfilepath>
+  <bpgameid>24935</bpgameid>
+  <bpmediaid>-99</bpmediaid>
+  <clzplatformid>22</clzplatformid>
+  <bpgamelastreceivedrevision>81</bpgamelastreceivedrevision>
+  <bpmedialastreceivedrevision>0</bpmedialastreceivedrevision>
+  <storagedevice/>
+  <submissiondate/>
+  <tags/>
+  <titlefirstletter>
+    <displayname>A</displayname>
+    <sortname>A</sortname>
+  </titlefirstletter>
+  <edition/>
+  <boxset/>
+  <hasbox boolvalue="0">No</hasbox>
+  <hasmanual boolvalue="0">No</hasmanual>
+  <shoulduploadfrontcover boolvalue="False">No</shoulduploadfrontcover>
+  <shoulduploadbackcover boolvalue="False">No</shoulduploadbackcover>
+</game>
+<game>
+  <id>918</id>
+  <hardware boolvalue="0">Game</hardware>
+  <index>269</index>
+  <title>Armored Core 3</title>
+  <series>
+    <displayname>Armored Core</displayname>
+    <sortname>Armored Core</sortname>
+  </series>
+  <platform>
+    <displayname>PlayStation 2</displayname>
+    <templateimage>C:\Users\joe_c\Documents\Game Collector\Images\Listitemimages\ps2.png</templateimage>
+    <scaledimage>C:\Users\joe_c\Documents\Game Collector\Images\Listitemimages\ps2-v1-16.png</scaledimage>
+    <sortname>PlayStation 2</sortname>
+    <clzplatformid>-1</clzplatformid>
+    <grouprank>999</grouprank>
+    <rank>999</rank>
+  </platform>
+  <format>
+    <displayname>DVD</displayname>
+    <sortname>DVD</sortname>
+  </format>
+  <language/>
+  <publishers>
+    <publisher>
+      <displayname>Agetec</displayname>
+      <sortname>Agetec</sortname>
+    </publisher>
+  </publishers>
+  <publisher>
+    <displayname>Agetec</displayname>
+    <sortname>Agetec</sortname>
+  </publisher>
+  <developers>
+    <developer>
+      <displayname>From Software</displayname>
+      <sortname>From Software</sortname>
+    </developer>
+  </developers>
+  <developer>
+    <displayname>From Software</displayname>
+    <sortname>From Software</sortname>
+  </developer>
+  <audiencerating>
+    <displayname>Teen</displayname>
+    <sortname>13</sortname>
+    <lastname>13</lastname>
+  </audiencerating>
+  <reviewrating>0</reviewrating>
+  <genres>
+    <genre>
+      <displayname>Action</displayname>
+      <sortname>Action</sortname>
+    </genre>
+    <genre>
+      <displayname>Simulation</displayname>
+      <sortname>Simulation</sortname>
+    </genre>
+  </genres>
+  <coverfront>C:\Users\joe_c\Documents\Game Collector\Images\ArmoredCore3PlayStation2918_f.jpg</coverfront>
+  <backgroundbackdrop>CLZBACKDROP</backgroundbackdrop>
+  <devices/>
+  <releasedate>
+    <year>
+      <displayname>2002</displayname>
+    </year>
+    <month>9</month>
+    <day>9</day>
+    <date>9/9/2002</date>
+  </releasedate>
+  <gameshardware>
+    <displayname>Game</displayname>
+    <sortname>Game</sortname>
+  </gameshardware>
+  <region/>
+  <multiplayer/>
+  <credits/>
+  <original boolvalue="0">No</original>
+  <completiondate/>
+  <completed boolvalue="0">No</completed>
+  <nrdisks>1</nrdisks>
+  <collectionstatus listid="3">In Collection</collectionstatus>
+  <extras/>
+  <myrating>0</myrating>
+  <myrating>
+    <displayname>0</displayname>
+    <sortname>0</sortname>
+  </myrating>
+  <purchasedate/>
+  <store/>
+  <owner/>
+  <location/>
+  <description>It's been 20 years since the Earth Government and the Corporations battled for supremacy. The majority of humanity lives beneath the surface of the planet, relatively safe from the continuing struggle. A new and mysterious entity has entered the picutre, however, snapping up all the available Ravens for intense missions that only their custom-built Armored Core Units can handle. 
+As a Raven, you know there's always another mission waiting for you - does it really matter who, or what, hires you? For all the new parts and weapons out there for you to earn in battle - we didn't think so. But just the same, keep your back covered, Raven.&lt;p>
+
+&lt;/p>&lt;ul>&lt;li>All-New Engine! - The series has never been easier to get into now that every element of gameplay has been redesigned to get into the action as quick as possible! &lt;/li>
+&lt;li>50 All-New Solo Missions! - New "Wingman" Feature allows you to take an A.I. controlled partner on your solo missions! &lt;/li>
+&lt;li>All-New Weapons &amp; Upgrades! - Every part, piece, weapon, everything from the radar equipment down to the legs has been completely reinvented! &lt;/li>
+&lt;li>All-New Graphics &amp; Tighter Gameplay! - The series has never looked better - and the DUALSHOCK analog controller handles the AC's movements like never before!&lt;/li> 
+&lt;li>All-New 4-Player Mode! - Now you and three of your friends can pit your custom-designed AC's against each other or in 2-on2 battles in the Versus Mode!&lt;/li>
+&lt;li>All-New Drop Feature! - Weapon pod empty? Jettison it from your AC to move faster! You can even pick up and use weapons dropped by other players in the Arena!&lt;/li>
+&lt;/ul></description>
+  <links>
+    <link>
+      <description>Armored Core 3 at Core for Games</description>
+      <url>http://core.collectorz.com/games/ps2/armored-core-3</url>
+      <urltype>URL</urltype>
+    </link>
+    <link>
+      <description>Armored Core 3 at PriceCharting.com</description>
+      <url>https://www.pricecharting.com/game/Playstation-2/Armored-Core-3</url>
+      <urltype>URL</urltype>
+    </link>
+  </links>
+  <condition/>
+  <quantity>1</quantity>
+  <currentvalue>9.37</currentvalue>
+  <pricechartingvalue>7.98</pricechartingvalue>
+  <pricechartingurl>https://www.pricecharting.com/game/Playstation-2/Armored-Core-3</pricechartingurl>
+  <pricechartingloose>7.98</pricechartingloose>
+  <pricechartingcib>8.19</pricechartingcib>
+  <pricechartingnew>35.43</pricechartingnew>
+  <completenessnum>Loose</completenessnum>
+  <completeness listid="0">Loose</completeness>
+  <lastmodified>
+    <date>1/19/2022 7:38:45 PM</date>
+  </lastmodified>
+  <dateadded>
+    <date>1/20/2019 1:44:09 PM</date>
+  </dateadded>
+  <thumbfilepath>C:\Users\joe_c\Documents\Game Collector\Thumbnails\4D536685ADC5BED20FCC15D0459682AD.jpg</thumbfilepath>
+  <bpgameid>17024</bpgameid>
+  <bpmediaid>-99</bpmediaid>
+  <clzplatformid>36</clzplatformid>
+  <bpgamelastreceivedrevision>106</bpgamelastreceivedrevision>
+  <bpmedialastreceivedrevision>0</bpmedialastreceivedrevision>
+  <storagedevice/>
+  <submissiondate/>
+  <tags/>
+  <titlefirstletter>
+    <displayname>A</displayname>
+    <sortname>A</sortname>
+  </titlefirstletter>
+  <edition/>
+  <boxset/>
+  <hasbox boolvalue="0">No</hasbox>
+  <hasmanual boolvalue="0">No</hasmanual>
+  <shoulduploadfrontcover boolvalue="False">No</shoulduploadfrontcover>
+  <shoulduploadbackcover boolvalue="False">No</shoulduploadbackcover>
+</game>
+<game>
+  <id>2411</id>
+  <hardware boolvalue="1">Hardware</hardware>
+  <index>479</index>
+  <title>AVS</title>
+  <series/>
+  <platform>
+    <displayname>NES</displayname>
+    <templateimage>C:\Users\joe_c\Documents\Game Collector\Images\Listitemimages\nes.png</templateimage>
+    <scaledimage>C:\Users\joe_c\Documents\Game Collector\Images\Listitemimages\nes16.png</scaledimage>
+    <sortname>NES</sortname>
+    <clzplatformid>-1</clzplatformid>
+    <grouprank>999</grouprank>
+    <rank>999</rank>
+  </platform>
+  <format/>
+  <language/>
+  <publishers/>
+  <developers/>
+  <audiencerating/>
+  <reviewrating>0</reviewrating>
+  <genres/>
+  <coverfront>C:\Users\joe_c\Documents\Game Collector\Images\AVSNES2411_f.jpg</coverfront>
+  <coverback>C:\Users\joe_c\Documents\Game Collector\Images\AVSNES2411_b.jpg</coverback>
+  <backgroundbackdrop>CLZBACKDROP</backgroundbackdrop>
+  <devices/>
+  <releasedate/>
+  <gameshardware>
+    <displayname>Hardware</displayname>
+    <sortname>Hardware</sortname>
+  </gameshardware>
+  <hardwarecategory>
+    <displayname>Consoles</displayname>
+    <sortname>Consoles</sortname>
+  </hardwarecategory>
+  <collectionstatus listid="3">In Collection</collectionstatus>
+  <extras/>
+  <myrating>0</myrating>
+  <myrating>
+    <displayname>0</displayname>
+    <sortname>0</sortname>
+  </myrating>
+  <purchasedate/>
+  <store/>
+  <owner/>
+  <location/>
+  <links/>
+  <condition/>
+  <quantity>1</quantity>
+  <completenessnum>CIB</completenessnum>
+  <completeness listid="1">CIB</completeness>
+  <lastmodified>
+    <date>1/19/2022 7:38:16 PM</date>
+  </lastmodified>
+  <dateadded>
+    <date>1/19/2022 7:38:07 PM</date>
+  </dateadded>
+  <thumbfilepath>C:\Users\joe_c\Documents\Game Collector\Thumbnails\1F0B424B0A2A3F3295715DBC8D7703CC.jpg</thumbfilepath>
+  <bpgameid>0</bpgameid>
+  <bpmediaid>-99</bpmediaid>
+  <clzplatformid>0</clzplatformid>
+  <bpgamelastreceivedrevision>0</bpgamelastreceivedrevision>
+  <bpmedialastreceivedrevision>0</bpmedialastreceivedrevision>
+  <storagedevice/>
+  <submissiondate/>
+  <tags/>
+  <titlefirstletter>
+    <displayname>A</displayname>
+    <sortname>A</sortname>
+  </titlefirstletter>
+  <edition/>
+  <boxset/>
+  <hasbox boolvalue="1">Yes</hasbox>
+  <hasmanual boolvalue="1">Yes</hasmanual>
+  <shoulduploadfrontcover boolvalue="True">Yes</shoulduploadfrontcover>
+  <shoulduploadbackcover boolvalue="True">Yes</shoulduploadbackcover>
+</game>
+</gamelist>
+</gameinfo>

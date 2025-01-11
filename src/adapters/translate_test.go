@@ -10,7 +10,7 @@ import (
 
 func TestTranslateCLZ(t *testing.T) {
 	// Arrange
-	data, err := os.ReadFile("./test/game-data.xml")
+	data, err := os.ReadFile("./test/game-data-list.xml")
 	if err != nil {
 		t.Errorf("error reading test data: %v", err)
 	}
@@ -55,7 +55,11 @@ func TestTranslateCLZ(t *testing.T) {
 	actualOutput := TranslateCLZ(input)
 
 	// Assert
-	if !reflect.DeepEqual(actualOutput, expectedOutput) {
-		t.Errorf("\nexpected \n%#v,\ngot \n%#v", expectedOutput, actualOutput)
+	if len(actualOutput.Games) != 8 {
+		t.Errorf("expected 8 games, got %d", len(actualOutput.Games))
+	}
+
+	if !reflect.DeepEqual(actualOutput.Games[0], expectedOutput) {
+		t.Errorf("\nexpected \n%#v,\ngot \n%#v", expectedOutput, actualOutput.Games[0])
 	}
 }
