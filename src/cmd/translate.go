@@ -3,7 +3,7 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
-	"main/src/adapters"
+	adapters "main/src/adapters/clz-translation"
 	"os"
 
 	"github.com/spf13/cobra"

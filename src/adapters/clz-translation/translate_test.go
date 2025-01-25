@@ -10,7 +10,7 @@ import (
 
 func TestTranslateCLZ(t *testing.T) {
 	// Arrange
-	data, err := os.ReadFile("./test/game-data-list.xml")
+	data, err := os.ReadFile("../_test/game-data-list.xml")
 	if err != nil {
 		t.Errorf("error reading test data: %v", err)
 	}
@@ -51,10 +51,8 @@ func TestTranslateCLZ(t *testing.T) {
 		Title:              "1Xtreme (Greatest Hits)",
 	}
 
-	// Act
 	actualOutput := TranslateCLZ(input)
 
-	// Assert
 	if len(actualOutput.Games) != 8 {
 		t.Errorf("expected 8 games, got %d", len(actualOutput.Games))
 	}
