@@ -5,17 +5,8 @@ import (
 	"os"
 )
 
-type WriteFileInit struct {
-	data     []byte
-	filename string
-}
-
-func WriteFile(writeFileInit WriteFileInit) error {
-	err := os.WriteFile(
-		writeFileInit.filename,
-		writeFileInit.data,
-		os.FileMode(0644),
-	)
+func WriteFile(data []byte, filename string) error {
+	err := os.WriteFile(filename, data, os.FileMode(0644))
 
 	if err != nil {
 		fmt.Printf("error writing to file: %v", err)

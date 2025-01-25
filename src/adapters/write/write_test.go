@@ -6,21 +6,16 @@ import (
 )
 
 func TestWriteFile(t *testing.T) {
-	// Arrange
-	writeInit := WriteFileInit{
-		data:     []byte("test data"),
-		filename: "test-file.txt",
-	}
+	filename := "test-file.txt"
+	testdata := []byte("test data")
 
-	// Act
-	err := WriteFile(writeInit)
+	err := WriteFile(testdata, filename)
 
-	// Assert
 	if err != nil {
 		t.Errorf("expected no error, got %v", err)
 	}
 
-	writtenTestData, testErr := os.ReadFile(writeInit.filename)
+	writtenTestData, testErr := os.ReadFile(filename)
 	if testErr != nil {
 		t.Errorf("error reading test data: %v", testErr)
 	}
@@ -29,6 +24,5 @@ func TestWriteFile(t *testing.T) {
 		t.Errorf("expected 'test data', got %s", string(writtenTestData))
 	}
 
-	// Clean up
-	os.Remove(writeInit.filename)
+	os.Remove(filename)
 }
