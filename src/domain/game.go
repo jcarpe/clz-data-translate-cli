@@ -8,6 +8,7 @@ type GameCollection struct {
 	Games []Game
 }
 
+// Game is the domain model for a video game as defined for our purposes.
 type Game struct {
 	Boxset             bool
 	Completeness       Completeness
@@ -43,6 +44,8 @@ type Link struct {
 
 type Platform string
 
+// Platform represents a type for various gaming platforms.
+// The constants defined below act as an enumeration of different PlayStation platforms.
 const (
 	PlayStation  Platform = "PlayStation"
 	PlayStation2 Platform = "PlayStation 2"
