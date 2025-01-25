@@ -3,7 +3,8 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
-	adapters "main/src/adapters/clz-translation"
+	clz_translate "main/src/adapters/clz-translation"
+	"main/src/adapters/write"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -30,17 +31,17 @@ var (
 				return
 			}
 
-			translated := adapters.TranslateCLZ(string(data))
+			translated := clz_translate.TranslateCLZ(string(data))
 
 			if writeFileName != "" {
-				jsonData, err := json.Marshal(translated)
-				if err != nil {
+				jsonData, marshalErr := json.Marshal(translated)
+				if marshalErr != nil {
 					fmt.Printf("error marshalling translated data: %v", err)
 					return
 				}
 
-				err = os.WriteFile(writeFileName+".json", jsonData, os.FileMode(0644))
-				if err != nil {
+				writeErr := write.WriteFile(jsonData, writeFileName+".json")
+				if writeErr != nil {
 					fmt.Printf("error writing to file: %v", err)
 					return
 				}

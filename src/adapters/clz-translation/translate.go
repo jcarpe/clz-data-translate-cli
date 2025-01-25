@@ -1,4 +1,4 @@
-package adapters
+package clz_translate
 
 import (
 	"encoding/xml"
