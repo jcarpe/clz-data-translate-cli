@@ -30,5 +30,5 @@ func TestWriteFile(t *testing.T) {
 	}
 
 	// Clean up
-	// os.Remove(writeInit.filename)
+	os.Remove(writeInit.filename)
 }
