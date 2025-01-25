@@ -89,6 +89,18 @@ func extractLinks(links []linkDef) []domain.Link {
 	return domainLinks
 }
 
+// TranslateCLZ translates a CLZ XML input string into a domain.GameCollection.
+// It unmarshals the XML input into a clzXMLList structure and then iterates
+// through the list of games to populate a domain.GameCollection with the
+// relevant game data.
+//
+// Parameters:
+//   - input: A string containing the CLZ XML data.
+//
+// Returns:
+//   - domain.GameCollection: A collection of games translated from the CLZ XML data.
+//
+// The function will log a fatal error if the XML unmarshalling fails.
 func TranslateCLZ(input string) domain.GameCollection {
 	var clzData clzXMLList
 
