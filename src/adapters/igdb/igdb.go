@@ -1,22 +1,29 @@
 package igdb
 
-import "net/http"
+// import "net/http"
 
 type IGDBAdapter struct {
-	authToken   string
-	GetGameData func(int)
+	// authToken   string
+	GetGameData func(int) IGDBGameData
 }
 
-func retrieveAuthToken() string {
-	httpClient := &http.Client{}
-	httpClient.Post("https://api.igdb.com/v4/games", "application/json", nil)
+// func retrieveAuthToken() string {
+// 	httpClient := &http.Client{}
+// 	httpClient.Post("https://api.igdb.com/v4/games", "application/json", nil)
 
-	return "authToken"
+// 	return "authToken"
+// }
+
+func getGameData(gameID int) IGDBGameData {
+	// Retrieve game data from IGDB
+	return IGDBGameData{
+		Name: "1942",
+	}
 }
 
 func NewIGDBAdapter() *IGDBAdapter {
 
 	return &IGDBAdapter{
-		GetGameData: func(gameID int) {},
+		GetGameData: getGameData,
 	}
 }

@@ -1,3 +1,5 @@
 package igdb
 
-type igdbGameData struct{}
+type IGDBGameData struct {
+	Name string
+}
