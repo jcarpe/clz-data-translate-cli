@@ -8,7 +8,16 @@ import (
 )
 
 type IGDBAdapter struct {
-	AuthToken   string
+	// AuthToken is the access token used to authenticate with the IGDB API.
+	AuthToken string
+
+	// GetGameData takes a unique game ID value and returns the requested game details.
+	//
+	// Fields:
+	//   - gameID: The ID int value of the game.
+	//
+	// Returns:
+	//   - An IGDBGameData instance representing the requested game.
 	GetGameData func(int) IGDBGameData
 }
 
@@ -61,6 +70,18 @@ func getGameData(gameID int) IGDBGameData {
 	}
 }
 
+// NewIGDBAdapter initializes a new IGDBAdapter with the provided authentication details.
+// Authenticates with the IGDB API with an access token.
+//
+// Parameters:
+//   - init: IGDBAdapterInit struct containing the following fields:
+//   - AuthBaseUrl: The base URL for the authentication endpoint.
+//   - AuthUrlPath: The URL path for the authentication endpoint.
+//   - AuthClientId: The client ID for authentication.
+//   - AuthClientSecret: The client secret for authentication.
+//
+// Returns:
+//   - A pointer to an IGDBAdapter instance with the retrieved authentication token and a function to get game data.
 func NewIGDBAdapter(init IGDBAdapterInit) *IGDBAdapter {
 	retrievedToken := retrieveAuthToken(init.AuthBaseUrl, init.AuthUrlPath, init.AuthClientId, init.AuthClientSecret)
 
