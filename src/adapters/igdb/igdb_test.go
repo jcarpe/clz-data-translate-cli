@@ -7,8 +7,8 @@ import (
 	"testing"
 )
 
-func TestGetGameData(t *testing.T) {
-	testServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+func getTestIGDBServer() *httptest.Server {
+	return httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(map[string]interface{}{
@@ -17,6 +17,10 @@ func TestGetGameData(t *testing.T) {
 			"token_type":   "bearer",
 		})
 	}))
+}
+
+func TestGetGameData(t *testing.T) {
+	testServer := getTestIGDBServer()
 	defer testServer.Close()
 
 	igdbAdapter := NewIGDBAdapter(IGDBAdapterInit{
