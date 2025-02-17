@@ -5,12 +5,10 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+	"strings"
 )
 
 type IGDBAdapter struct {
-	// AuthToken is the access token used to authenticate with the IGDB API.
-	AuthToken string
-
 	// GetGameData takes a unique game ID value and returns the requested game details.
 	//
 	// Fields:
@@ -63,8 +61,13 @@ func retrieveAuthToken(baseUrl string, path string, id string, secret string) st
 	return authRes.AccessToken
 }
 
-func getGameData(gameID int) IGDBGameData {
-	// Retrieve game data from IGDB
+func getGameData(gameID int, authToken string, clientID string) IGDBGameData {
+	filter := strings.NewReader(fmt.Sprintf("where id = %d", gameID))
+
+	request, _ := http.NewRequest(http.MethodPost, "https://api.igdb.com/v4/games", filter)
+	request.Header.Add("Client-ID", clientID)
+	request.Header.Add("Authorization", "Bearer "+authToken)
+
 	return IGDBGameData{
 		Name: "1942",
 	}
@@ -84,9 +87,9 @@ func getGameData(gameID int) IGDBGameData {
 //   - A pointer to an IGDBAdapter instance with the retrieved authentication token and a function to get game data.
 func NewIGDBAdapter(init IGDBAdapterInit) *IGDBAdapter {
 	retrievedToken := retrieveAuthToken(init.AuthBaseUrl, init.AuthUrlPath, init.AuthClientId, init.AuthClientSecret)
+	clientID := init.AuthClientId
 
 	return &IGDBAdapter{
-		AuthToken:   retrievedToken,
-		GetGameData: getGameData,
+		GetGameData: func(i int) IGDBGameData { return getGameData(i, retrievedToken, clientID) },
 	}
 }
