@@ -13,6 +13,15 @@ type IGDBAdapter struct {
 	// Returns:
 	//   - An IGDBGameData instance representing the requested game.
 	GetGameData func(int) IGDBGameData
+
+	// SearchGameByTerm takes a search term and returns a list of games that match the search term by title.
+	//
+	// Fields:
+	//   - searchTerm: The search term string.
+	//
+	// Returns:
+	//   - A list of IGDBGameData instances representing the games that match the search term.
+	SearchGameByTerm func(string) []IGDBGameData
 }
 
 // IGDBAdapterInit contains the initialization parameters for the IGDBAdapter.

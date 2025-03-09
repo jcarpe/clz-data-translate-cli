@@ -68,6 +68,19 @@ func getGameData(gameID int, igdbBaseUrl string, authToken string, clientID stri
 	return gameData[0]
 }
 
+func searchByTerm(searchTerm string, igdbBaseUrl string, authToken string, clientID string) []IGDBGameData {
+	return []IGDBGameData{
+		{
+			ID:   1068,
+			Name: "Super Mario Bros. 3",
+		},
+		{
+			ID:   20663,
+			Name: "Tokobot Plus: Mysteries of the Karakuri",
+		},
+	}
+}
+
 // NewIGDBAdapter initializes a new IGDBAdapter with the provided authentication details.
 // Authenticates with the IGDB API with an access token.
 //
@@ -86,6 +99,7 @@ func NewIGDBAdapter(init IGDBAdapterInit) *IGDBAdapter {
 	igdbBaseUrl := init.IGDBBaseUrl
 
 	return &IGDBAdapter{
-		GetGameData: func(i int) IGDBGameData { return getGameData(i, igdbBaseUrl, retrievedToken, clientID) },
+		GetGameData:      func(i int) IGDBGameData { return getGameData(i, igdbBaseUrl, retrievedToken, clientID) },
+		SearchGameByTerm: func(s string) []IGDBGameData { return searchByTerm(s, igdbBaseUrl, retrievedToken, clientID) },
 	}
 }
