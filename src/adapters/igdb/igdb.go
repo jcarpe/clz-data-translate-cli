@@ -5,28 +5,8 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+	"strings"
 )
-
-type IGDBAdapter struct {
-	// AuthToken is the access token used to authenticate with the IGDB API.
-	AuthToken string
-
-	// GetGameData takes a unique game ID value and returns the requested game details.
-	//
-	// Fields:
-	//   - gameID: The ID int value of the game.
-	//
-	// Returns:
-	//   - An IGDBGameData instance representing the requested game.
-	GetGameData func(int) IGDBGameData
-}
-
-type IGDBAdapterInit struct {
-	AuthBaseUrl      string
-	AuthUrlPath      string
-	AuthClientId     string
-	AuthClientSecret string
-}
 
 type authResponse struct {
 	AccessToken string `json:"access_token"`
@@ -63,11 +43,29 @@ func retrieveAuthToken(baseUrl string, path string, id string, secret string) st
 	return authRes.AccessToken
 }
 
-func getGameData(gameID int) IGDBGameData {
-	// Retrieve game data from IGDB
-	return IGDBGameData{
-		Name: "1942",
+func getGameData(gameID int, igdbBaseUrl string, authToken string, clientID string) IGDBGameData {
+	filter := strings.NewReader(fmt.Sprintf("fields *; where id = %d;", gameID))
+
+	request, _ := http.NewRequest(http.MethodPost, igdbBaseUrl+"/v4/games", filter)
+	request.Header.Add("Client-ID", clientID)
+	request.Header.Add("Authorization", "Bearer "+authToken)
+
+	httpClient := &http.Client{}
+	response, err := httpClient.Do(request)
+
+	if err != nil || response == nil || response.StatusCode != http.StatusOK {
+		fmt.Printf("error getting game data: %v\n, %v", err, response)
+		return IGDBGameData{}
 	}
+	defer response.Body.Close()
+
+	var gameData []IGDBGameData
+	if err := json.NewDecoder(response.Body).Decode(&gameData); err != nil {
+		fmt.Printf("error decoding response body: %v\n", err)
+		return IGDBGameData{}
+	}
+
+	return gameData[0]
 }
 
 // NewIGDBAdapter initializes a new IGDBAdapter with the provided authentication details.
@@ -84,9 +82,10 @@ func getGameData(gameID int) IGDBGameData {
 //   - A pointer to an IGDBAdapter instance with the retrieved authentication token and a function to get game data.
 func NewIGDBAdapter(init IGDBAdapterInit) *IGDBAdapter {
 	retrievedToken := retrieveAuthToken(init.AuthBaseUrl, init.AuthUrlPath, init.AuthClientId, init.AuthClientSecret)
+	clientID := init.AuthClientId
+	igdbBaseUrl := init.IGDBBaseUrl
 
 	return &IGDBAdapter{
-		AuthToken:   retrievedToken,
-		GetGameData: getGameData,
+		GetGameData: func(i int) IGDBGameData { return getGameData(i, igdbBaseUrl, retrievedToken, clientID) },
 	}
 }
