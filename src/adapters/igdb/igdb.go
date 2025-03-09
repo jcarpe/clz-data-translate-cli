@@ -62,15 +62,28 @@ func retrieveAuthToken(baseUrl string, path string, id string, secret string) st
 }
 
 func getGameData(gameID int, authToken string, clientID string) IGDBGameData {
-	filter := strings.NewReader(fmt.Sprintf("where id = %d", gameID))
+	filter := strings.NewReader(fmt.Sprintf("fields *; where id = %d;", gameID))
 
 	request, _ := http.NewRequest(http.MethodPost, "https://api.igdb.com/v4/games", filter)
 	request.Header.Add("Client-ID", clientID)
 	request.Header.Add("Authorization", "Bearer "+authToken)
 
-	return IGDBGameData{
-		Name: "1942",
+	httpClient := &http.Client{}
+	response, err := httpClient.Do(request)
+
+	if err != nil || response == nil || response.StatusCode != http.StatusOK {
+		fmt.Printf("error getting game data: %v\n, %v", err, response)
+		return IGDBGameData{}
 	}
+	defer response.Body.Close()
+
+	var gameData []IGDBGameData
+	if err := json.NewDecoder(response.Body).Decode(&gameData); err != nil {
+		fmt.Printf("error decoding response body: %v\n", err)
+		return IGDBGameData{}
+	}
+
+	return gameData[0]
 }
 
 // NewIGDBAdapter initializes a new IGDBAdapter with the provided authentication details.
