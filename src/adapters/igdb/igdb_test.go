@@ -74,6 +74,8 @@ func TestSearchGameName(t *testing.T) {
 
 	// Execution
 	gamesData := igdbAdapter.SearchGameByTerm(searchTerm)
+
+	// Assertion
 	if gamesData == nil {
 		t.Errorf("Expected game data to be returned, but got nil")
 	}
