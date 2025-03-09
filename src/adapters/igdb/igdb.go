@@ -8,24 +8,6 @@ import (
 	"strings"
 )
 
-type IGDBAdapter struct {
-	// GetGameData takes a unique game ID value and returns the requested game details.
-	//
-	// Fields:
-	//   - gameID: The ID int value of the game.
-	//
-	// Returns:
-	//   - An IGDBGameData instance representing the requested game.
-	GetGameData func(int) IGDBGameData
-}
-
-type IGDBAdapterInit struct {
-	AuthBaseUrl      string
-	AuthUrlPath      string
-	AuthClientId     string
-	AuthClientSecret string
-}
-
 type authResponse struct {
 	AccessToken string `json:"access_token"`
 	ExpiresIn   int    `json:"expires_in"`
@@ -61,10 +43,10 @@ func retrieveAuthToken(baseUrl string, path string, id string, secret string) st
 	return authRes.AccessToken
 }
 
-func getGameData(gameID int, authToken string, clientID string) IGDBGameData {
+func getGameData(gameID int, igdbBaseUrl string, authToken string, clientID string) IGDBGameData {
 	filter := strings.NewReader(fmt.Sprintf("fields *; where id = %d;", gameID))
 
-	request, _ := http.NewRequest(http.MethodPost, "https://api.igdb.com/v4/games", filter)
+	request, _ := http.NewRequest(http.MethodPost, igdbBaseUrl+"/v4/games", filter)
 	request.Header.Add("Client-ID", clientID)
 	request.Header.Add("Authorization", "Bearer "+authToken)
 
@@ -101,8 +83,9 @@ func getGameData(gameID int, authToken string, clientID string) IGDBGameData {
 func NewIGDBAdapter(init IGDBAdapterInit) *IGDBAdapter {
 	retrievedToken := retrieveAuthToken(init.AuthBaseUrl, init.AuthUrlPath, init.AuthClientId, init.AuthClientSecret)
 	clientID := init.AuthClientId
+	igdbBaseUrl := init.IGDBBaseUrl
 
 	return &IGDBAdapter{
-		GetGameData: func(i int) IGDBGameData { return getGameData(i, retrievedToken, clientID) },
+		GetGameData: func(i int) IGDBGameData { return getGameData(i, igdbBaseUrl, retrievedToken, clientID) },
 	}
 }
