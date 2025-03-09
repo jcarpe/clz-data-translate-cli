@@ -11,6 +11,14 @@ type IGDBAdapter struct {
 	GetGameData func(int) IGDBGameData
 }
 
+// IGDBAdapterInit contains the initialization parameters for the IGDBAdapter.
+//
+// Fields:
+//   - AuthBaseUrl: The base URL for the authentication endpoint.
+//   - AuthUrlPath: The URL path for the authentication endpoint.
+//   - AuthClientId: The client ID for authentication.
+//   - AuthClientSecret: The client secret for authentication.
+//   - IGDBBaseUrl: The base URL for the IGDB API.
 type IGDBAdapterInit struct {
 	AuthBaseUrl      string
 	AuthUrlPath      string
@@ -19,6 +27,11 @@ type IGDBAdapterInit struct {
 	IGDBBaseUrl      string
 }
 
+// IGDBGameData represents the data structure for a game retrieved from the IGDB API.
+//
+// Fields:
+//   - ID: The unique ID value of the game.
+//   - Name: The name of the game.
 type IGDBGameData struct {
 	ID   int
 	Name string
