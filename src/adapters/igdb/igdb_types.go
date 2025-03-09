@@ -1,5 +1,9 @@
 package igdb
 
+// IGDBAdapter is an adapter for the IGDB API.
+//
+// Fields:
+//   - GetGameData: A function that retrieves game data from the IGDB API.
 type IGDBAdapter struct {
 	// GetGameData takes a unique game ID value and returns the requested game details.
 	//
