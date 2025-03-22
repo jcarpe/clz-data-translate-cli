@@ -46,7 +46,7 @@ func retrieveAuthToken(baseUrl string, path string, id string, secret string) st
 func getGameData(gameID int, igdbBaseUrl string, authToken string, clientID string) IGDBGameData {
 	filter := strings.NewReader(fmt.Sprintf("fields *; where id = %d;", gameID))
 
-	request, _ := http.NewRequest(http.MethodPost, igdbBaseUrl+"/v4/games", filter)
+	request, _ := http.NewRequest(http.MethodPost, igdbBaseUrl+"/games", filter)
 	request.Header.Add("Client-ID", clientID)
 	request.Header.Add("Authorization", "Bearer "+authToken)
 

@@ -46,6 +46,17 @@ type IGDBAdapterInit struct {
 //   - ID: The unique ID value of the game.
 //   - Name: The name of the game.
 type IGDBGameData struct {
-	ID   int
-	Name string
+	Artworks           []int
+	Cover              int
+	First_release_date int
+	Franchise          int
+	Game_status        int
+	Game_type          int
+	Genres             []int
+	ID                 int
+	Name               string
+	Platforms          []int
+	Storyline          string
+	Summary            string
+	Videos             []int
 }
