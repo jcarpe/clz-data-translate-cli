@@ -8,6 +8,12 @@ import (
 	"strings"
 )
 
+var (
+	igdbBaseUrl string
+	authToken   string
+	clientID    string
+)
+
 type authResponse struct {
 	AccessToken string `json:"access_token"`
 	ExpiresIn   int    `json:"expires_in"`
@@ -43,12 +49,16 @@ func retrieveAuthToken(baseUrl string, path string, id string, secret string) st
 	return authRes.AccessToken
 }
 
-func getGameData(gameID int, igdbBaseUrl string, authToken string, clientID string) IGDBGameData {
-	filter := strings.NewReader(fmt.Sprintf("fields *; where id = %d;", gameID))
-
+func initIGDBRequestObject(filter *strings.Reader) *http.Request {
 	request, _ := http.NewRequest(http.MethodPost, igdbBaseUrl+"/games", filter)
 	request.Header.Add("Client-ID", clientID)
 	request.Header.Add("Authorization", "Bearer "+authToken)
+
+	return request
+}
+
+func getGameData(gameID int) IGDBGameData {
+	request := initIGDBRequestObject(strings.NewReader(fmt.Sprintf("fields *; where id = %d;", gameID)))
 
 	httpClient := &http.Client{}
 	response, err := httpClient.Do(request)
@@ -94,12 +104,12 @@ func searchByTerm(searchTerm string, igdbBaseUrl string, authToken string, clien
 // Returns:
 //   - A pointer to an IGDBAdapter instance with the retrieved authentication token and a function to get game data.
 func NewIGDBAdapter(init IGDBAdapterInit) *IGDBAdapter {
-	retrievedToken := retrieveAuthToken(init.AuthBaseUrl, init.AuthUrlPath, init.AuthClientId, init.AuthClientSecret)
-	clientID := init.AuthClientId
-	igdbBaseUrl := init.IGDBBaseUrl
+	authToken = retrieveAuthToken(init.AuthBaseUrl, init.AuthUrlPath, init.AuthClientId, init.AuthClientSecret)
+	clientID = init.AuthClientId
+	igdbBaseUrl = init.IGDBBaseUrl
 
 	return &IGDBAdapter{
-		GetGameData:      func(i int) IGDBGameData { return getGameData(i, igdbBaseUrl, retrievedToken, clientID) },
-		SearchGameByTerm: func(s string) []IGDBGameData { return searchByTerm(s, igdbBaseUrl, retrievedToken, clientID) },
+		GetGameData:      func(gameID int) IGDBGameData { return getGameData(gameID) },
+		SearchGameByTerm: func(s string) []IGDBGameData { return searchByTerm(s, igdbBaseUrl, authToken, clientID) },
 	}
 }

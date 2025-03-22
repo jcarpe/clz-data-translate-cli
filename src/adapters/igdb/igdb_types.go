@@ -46,17 +46,17 @@ type IGDBAdapterInit struct {
 //   - ID: The unique ID value of the game.
 //   - Name: The name of the game.
 type IGDBGameData struct {
-	Artworks           []int
-	Cover              int
-	First_release_date int
-	Franchise          int
-	Game_status        int
-	Game_type          int
-	Genres             []int
-	ID                 int
-	Name               string
-	Platforms          []int
-	Storyline          string
-	Summary            string
-	Videos             []int
+	Artworks           []int  `json:"artworks"`
+	Cover              int    `json:"cover"`
+	First_release_date int    `json:"first_release_date"`
+	Franchise          int    `json:"franchise"`
+	Game_status        int    `json:"game_status"`
+	Game_type          int    `json:"game_type"`
+	Genres             []int  `json:"genres"`
+	ID                 int    `json:"id"`
+	Name               string `json:"name"`
+	Platforms          []int  `json:"platforms"`
+	Storyline          string `json:"storyline"`
+	Summary            string `json:"summary"`
+	Videos             []int  `json:"videos"`
 }
