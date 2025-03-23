@@ -78,17 +78,25 @@ func getGameData(gameID int) IGDBGameData {
 	return gameData[0]
 }
 
-func searchByTerm(searchTerm string, igdbBaseUrl string, authToken string, clientID string) []IGDBGameData {
-	return []IGDBGameData{
-		{
-			ID:   1068,
-			Name: "Super Mario Bros. 3",
-		},
-		{
-			ID:   20663,
-			Name: "Tokobot Plus: Mysteries of the Karakuri",
-		},
+func searchByTerm(searchTerm string) []IGDBGameData {
+	request := initIGDBRequestObject(strings.NewReader(fmt.Sprintf("search \"%s\"; fields *;", searchTerm)))
+
+	httpClient := &http.Client{}
+	response, err := httpClient.Do(request)
+
+	if err != nil || response == nil || response.StatusCode != http.StatusOK {
+		fmt.Printf("error getting game data: %v\n, %v", err, response)
+		return []IGDBGameData{}
 	}
+	defer response.Body.Close()
+
+	var searchResults []IGDBGameData
+	if err := json.NewDecoder(response.Body).Decode(&searchResults); err != nil {
+		fmt.Printf("error decoding response body: %v\n", err)
+		return []IGDBGameData{}
+	}
+
+	return searchResults
 }
 
 // NewIGDBAdapter initializes a new IGDBAdapter with the provided authentication details.
@@ -110,6 +118,6 @@ func NewIGDBAdapter(init IGDBAdapterInit) *IGDBAdapter {
 
 	return &IGDBAdapter{
 		GetGameData:      func(gameID int) IGDBGameData { return getGameData(gameID) },
-		SearchGameByTerm: func(s string) []IGDBGameData { return searchByTerm(s, igdbBaseUrl, authToken, clientID) },
+		SearchGameByTerm: func(searchTerm string) []IGDBGameData { return searchByTerm(searchTerm) },
 	}
 }
