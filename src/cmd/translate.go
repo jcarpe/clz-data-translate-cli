@@ -11,8 +11,9 @@ import (
 )
 
 var (
-	seedFile      string
-	writeFileName string
+	seedFile       string
+	writeFileName  string
+	igdbSupplement bool
 
 	translateCmd = &cobra.Command{
 		Use:   "translate",
@@ -31,7 +32,7 @@ var (
 				return
 			}
 
-			translated := clz_translate.TranslateCLZ(string(data))
+			translated := clz_translate.TranslateCLZ(string(data), igdbSupplement)
 
 			if writeFileName != "" {
 				jsonData, marshalErr := json.Marshal(translated)
@@ -56,5 +57,6 @@ var (
 func init() {
 	translateCmd.Flags().StringVarP(&seedFile, "seedFile", "s", "", "seed data file to translate")
 	translateCmd.Flags().StringVarP(&writeFileName, "writeFileName", "w", "", "filename to write JSON data to")
+	translateCmd.Flags().BoolP("igdbSupplement", "i", false, "whether to supplement data with (I)nternet (G)ames (D)ata(B)ase data")
 	rootCmd.AddCommand(translateCmd)
 }

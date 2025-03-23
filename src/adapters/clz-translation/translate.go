@@ -2,7 +2,9 @@ package clz_translate
 
 import (
 	"encoding/xml"
+	"fmt"
 	"log"
+	"main/src/adapters/igdb"
 	"main/src/domain"
 	"time"
 )
@@ -89,6 +91,10 @@ func extractLinks(links []linkDef) []domain.Link {
 	return domainLinks
 }
 
+func retrieveIGDBSupplement(gameName string) igdb.IGDBGameData {
+	return igdb.IGDBGameData{}
+}
+
 // TranslateCLZ translates a CLZ XML input string into a domain.GameCollection.
 // It unmarshals the XML input into a clzXMLList structure and then iterates
 // through the list of games to populate a domain.GameCollection with the
@@ -99,9 +105,10 @@ func extractLinks(links []linkDef) []domain.Link {
 //
 // Returns:
 //   - domain.GameCollection: A collection of games translated from the CLZ XML data.
+//   - igdbSupplement: A boolean indicating whether to supplement the data with IGDB data.
 //
 // The function will log a fatal error if the XML unmarshalling fails.
-func TranslateCLZ(input string) domain.GameCollection {
+func TranslateCLZ(input string, igdbSupplement bool) domain.GameCollection {
 	var clzData clzXMLList
 
 	err := xml.Unmarshal([]byte(input), &clzData)
@@ -114,7 +121,7 @@ func TranslateCLZ(input string) domain.GameCollection {
 	}
 
 	for _, game := range clzData.GameList {
-		gameCollection.Games = append(gameCollection.Games, domain.Game{
+		newGame := domain.Game{
 			Boxset: game.Boxset == "true",
 			Completeness: domain.Completeness{
 				HasBox:    game.HasBox == "true",
@@ -138,7 +145,13 @@ func TranslateCLZ(input string) domain.GameCollection {
 			ReleaseDate:        game.ReleaseDate.Value,
 			Series:             "",
 			Title:              game.Title,
-		})
+		}
+
+		if igdbSupplement {
+			fmt.Printf("-- supplementing %s with IGDB data... \n", game.Title)
+		}
+
+		gameCollection.Games = append(gameCollection.Games, newGame)
 	}
 
 	return gameCollection
