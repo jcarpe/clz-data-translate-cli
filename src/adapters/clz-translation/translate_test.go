@@ -51,7 +51,7 @@ func TestTranslateCLZ(t *testing.T) {
 		Title:              "1Xtreme (Greatest Hits)",
 	}
 
-	actualOutput := TranslateCLZ(input)
+	actualOutput := TranslateCLZ(input, false)
 
 	if len(actualOutput.Games) != 8 {
 		t.Errorf("expected 8 games, got %d", len(actualOutput.Games))
@@ -59,5 +59,11 @@ func TestTranslateCLZ(t *testing.T) {
 
 	if !reflect.DeepEqual(actualOutput.Games[0], expectedOutput) {
 		t.Errorf("\nexpected \n%#v,\ngot \n%#v", expectedOutput, actualOutput.Games[0])
+	}
+
+	actualOutputWithIGDBSupplement := TranslateCLZ(input, true)
+
+	if len(actualOutputWithIGDBSupplement.Games) != 8 {
+		t.Errorf("expected 8 games, got %d", len(actualOutputWithIGDBSupplement.Games))
 	}
 }
