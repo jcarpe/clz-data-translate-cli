@@ -149,6 +149,8 @@ func TranslateCLZ(input string, igdbSupplement bool) domain.GameCollection {
 
 		if igdbSupplement {
 			fmt.Printf("-- supplementing %s with IGDB data... \n", game.Title)
+			igdbData := retrieveIGDBSupplement(game.Title)
+			fmt.Println(igdbData)
 		}
 
 		gameCollection.Games = append(gameCollection.Games, newGame)
