@@ -19,5 +19,6 @@ func Execute() error {
 }
 
 func init() {
+	// domain.LoadEnv(".env.local")
 	rootCmd.AddCommand(translateCmd)
 }
