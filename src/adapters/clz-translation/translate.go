@@ -6,6 +6,7 @@ import (
 	"log"
 	"main/src/adapters/igdb"
 	"main/src/domain"
+	"os"
 	"time"
 )
 
@@ -117,8 +118,8 @@ func retrieveIGDBSupplement(gameName string, igdbAdapter *igdb.IGDBAdapter) igdb
 // The function will log a fatal error if the XML unmarshalling fails.
 func TranslateCLZ(input string, igdbSupplement bool) domain.GameCollection {
 	var (
-		clzData clzXMLList
-		// igdbAdapter *igdb.IGDBAdapter = nil
+		clzData     clzXMLList
+		igdbAdapter *igdb.IGDBAdapter = nil
 	)
 
 	err := xml.Unmarshal([]byte(input), &clzData)
@@ -130,16 +131,15 @@ func TranslateCLZ(input string, igdbSupplement bool) domain.GameCollection {
 		Games: []domain.Game{},
 	}
 
-	// WIP
-	// if igdbSupplement {
-	// 	igdbAdapter = igdb.NewIGDBAdapter(igdb.IGDBAdapterInit{
-	// 		AuthBaseUrl:      os.Getenv("IGDB_AUTH_BASE_URL"),
-	// 		AuthUrlPath:      os.Getenv("IGDB_AUTH_PATH"),
-	// 		AuthClientId:     os.Getenv("IGDB_CLIENT_ID"),
-	// 		AuthClientSecret: os.Getenv("IGDB_CLIENT_SECRET"),
-	// 		IGDBBaseUrl:      os.Getenv("IGDB_BASE_URL"),
-	// 	})
-	// }
+	if igdbSupplement {
+		igdbAdapter = igdb.NewIGDBAdapter(igdb.IGDBAdapterInit{
+			AuthBaseUrl:      os.Getenv("IGDB_AUTH_BASE_URL"),
+			AuthUrlPath:      os.Getenv("IGDB_AUTH_PATH"),
+			AuthClientId:     os.Getenv("IGDB_CLIENT_ID"),
+			AuthClientSecret: os.Getenv("IGDB_CLIENT_SECRET"),
+			IGDBBaseUrl:      os.Getenv("IGDB_BASE_URL"),
+		})
+	}
 
 	for _, game := range clzData.GameList {
 		newGame := domain.Game{
@@ -169,9 +169,9 @@ func TranslateCLZ(input string, igdbSupplement bool) domain.GameCollection {
 		}
 
 		if igdbSupplement && newGame.HardwareType == "Game" {
-			// fmt.Printf("-- supplementing %s with IGDB data... \n", game.Title)
-			// igdbData := retrieveIGDBSupplement(game.Title, igdbAdapter)
-			// fmt.Println(igdbData)
+			fmt.Printf("-- supplementing %s with IGDB data... \n", game.Title)
+			igdbData := retrieveIGDBSupplement(game.Title, igdbAdapter)
+			fmt.Println(igdbData)
 		}
 
 		gameCollection.Games = append(gameCollection.Games, newGame)

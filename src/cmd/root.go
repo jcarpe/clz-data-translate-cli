@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"main/src/domain"
 
 	"github.com/spf13/cobra"
 )
@@ -19,6 +20,6 @@ func Execute() error {
 }
 
 func init() {
-	// domain.LoadEnv(".env.local")
+	domain.LoadEnv(".env.local")
 	rootCmd.AddCommand(translateCmd)
 }
