@@ -111,7 +111,7 @@ func TestTranslateCLZ(t *testing.T) {
 	os.Setenv("IGDB_CLIENT_SECRET", "test_client_secret")
 	os.Setenv("IGDB_BASE_URL", testIGDBServer.URL)
 
-	data, err := os.ReadFile("../_test/game-data-list.xml")
+	data, err := os.ReadFile("../_test/data/game-data-list.xml")
 	if err != nil {
 		t.Errorf("error reading test data: %v", err)
 	}
