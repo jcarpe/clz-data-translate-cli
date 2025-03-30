@@ -6,6 +6,7 @@ import (
 	"log"
 	"main/src/adapters/igdb"
 	"main/src/domain"
+	"os"
 	"time"
 )
 
@@ -91,7 +92,13 @@ func extractLinks(links []linkDef) []domain.Link {
 	return domainLinks
 }
 
-func retrieveIGDBSupplement(gameName string) igdb.IGDBGameData {
+func retrieveIGDBSupplement(gameName string, igdbAdapter *igdb.IGDBAdapter) igdb.IGDBGameData {
+	// TODO:
+	// 1. Check the platform match on games (e.g. PS, SNES, etc.)
+	// 2. Perform a closest match string algo on the searched game to the list of titles
+	// igdbGameData := igdbAdapter.SearchGameByTerm(gameName)
+	// fmt.Println(len(igdbGameData))
+
 	return igdb.IGDBGameData{}
 }
 
@@ -109,7 +116,10 @@ func retrieveIGDBSupplement(gameName string) igdb.IGDBGameData {
 //
 // The function will log a fatal error if the XML unmarshalling fails.
 func TranslateCLZ(input string, igdbSupplement bool) domain.GameCollection {
-	var clzData clzXMLList
+	var (
+		clzData     clzXMLList
+		igdbAdapter *igdb.IGDBAdapter = nil
+	)
 
 	err := xml.Unmarshal([]byte(input), &clzData)
 	if err != nil {
@@ -118,6 +128,16 @@ func TranslateCLZ(input string, igdbSupplement bool) domain.GameCollection {
 
 	gameCollection := domain.GameCollection{
 		Games: []domain.Game{},
+	}
+
+	if igdbSupplement {
+		igdbAdapter = igdb.NewIGDBAdapter(igdb.IGDBAdapterInit{
+			AuthBaseUrl:      os.Getenv("IGDB_AUTH_BASE_URL"),
+			AuthUrlPath:      os.Getenv("IGDB_AUTH_PATH"),
+			AuthClientId:     os.Getenv("IGDB_CLIENT_ID"),
+			AuthClientSecret: os.Getenv("IGDB_CLIENT_SECRET"),
+			IGDBBaseUrl:      os.Getenv("IGDB_BASE_URL"),
+		})
 	}
 
 	for _, game := range clzData.GameList {
@@ -147,9 +167,8 @@ func TranslateCLZ(input string, igdbSupplement bool) domain.GameCollection {
 			Title:              game.Title,
 		}
 
-		if igdbSupplement {
-			fmt.Printf("-- supplementing %s with IGDB data... \n", game.Title)
-			igdbData := retrieveIGDBSupplement(game.Title)
+		if igdbSupplement && newGame.HardwareType == "Game" {
+			igdbData := retrieveIGDBSupplement(game.Title, igdbAdapter)
 			fmt.Println(igdbData)
 		}
 

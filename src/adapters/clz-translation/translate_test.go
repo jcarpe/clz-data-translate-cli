@@ -1,6 +1,7 @@
 package clz_translate
 
 import (
+	"main/src/adapters/_test/mocks"
 	"main/src/domain"
 	"os"
 	"reflect"
@@ -10,7 +11,20 @@ import (
 
 func TestTranslateCLZ(t *testing.T) {
 	// Arrange
-	data, err := os.ReadFile("../_test/game-data-list.xml")
+	testAuthServer := mocks.GetTestTwitchAuthServer()
+	defer testAuthServer.Close()
+
+	testIGDBServer := mocks.GetTestIGDBServer(t)
+	defer testIGDBServer.Close()
+
+	// Set environment variables for IGDB
+	os.Setenv("IGDB_AUTH_BASE_URL", testAuthServer.URL)
+	os.Setenv("IGDB_AUTH_PATH", "/oauth2/token")
+	os.Setenv("IGDB_CLIENT_ID", "test_client_id")
+	os.Setenv("IGDB_CLIENT_SECRET", "test_client_secret")
+	os.Setenv("IGDB_BASE_URL", testIGDBServer.URL)
+
+	data, err := os.ReadFile("../_test/data/game-data-list.xml")
 	if err != nil {
 		t.Errorf("error reading test data: %v", err)
 	}

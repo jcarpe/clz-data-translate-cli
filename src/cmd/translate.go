@@ -57,6 +57,6 @@ var (
 func init() {
 	translateCmd.Flags().StringVarP(&seedFile, "seedFile", "s", "", "seed data file to translate")
 	translateCmd.Flags().StringVarP(&writeFileName, "writeFileName", "w", "", "filename to write JSON data to")
-	translateCmd.Flags().BoolP("igdbSupplement", "i", false, "whether to supplement data with (I)nternet (G)ames (D)ata(B)ase data")
+	translateCmd.Flags().BoolVarP(&igdbSupplement, "igdbSupplement", "i", false, "whether to supplement data with IGDB data")
 	rootCmd.AddCommand(translateCmd)
 }
