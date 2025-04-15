@@ -10,6 +10,15 @@ import (
 )
 
 var (
+	testGetPlatformData = []map[string]interface{}{
+		{
+			"checksum":   "a1b2c3d4e5f6g7h8i9j0",
+			"created_at": 1234567890,
+			"name":       "Nintendo Entertainment System",
+			"updated_at": 1234567890,
+		},
+	}
+
 	testGetGameDataResponse = []map[string]interface{}{
 		{
 			"artworks":           []int{358989},
@@ -86,6 +95,8 @@ func GetTestIGDBServer(t *testing.T) *httptest.Server {
 
 		if strings.Contains(string(body), "search") {
 			json.NewEncoder(w).Encode(testSearchGameNameResponse)
+		} else if strings.Contains(string(body), "name, updated_at") {
+			json.NewEncoder(w).Encode(testGetPlatformData)
 		} else {
 			json.NewEncoder(w).Encode(testGetGameDataResponse)
 		}

@@ -49,16 +49,37 @@ func retrieveAuthToken(baseUrl string, path string, id string, secret string) st
 	return authRes.AccessToken
 }
 
-func initIGDBRequestObject(filter *strings.Reader) *http.Request {
-	request, _ := http.NewRequest(http.MethodPost, igdbBaseUrl+"/games", filter)
+func initIGDBRequestObject(path string, filter *strings.Reader) *http.Request {
+	request, _ := http.NewRequest(http.MethodPost, igdbBaseUrl+path, filter)
 	request.Header.Add("Client-ID", clientID)
 	request.Header.Add("Authorization", "Bearer "+authToken)
 
 	return request
 }
 
+func getPlatformData() []IGDBPlatformData {
+	request := initIGDBRequestObject("/platforms", strings.NewReader("fields name, updated_at;"))
+
+	httpClient := &http.Client{}
+	response, err := httpClient.Do(request)
+
+	if err != nil || response == nil || response.StatusCode != http.StatusOK {
+		fmt.Printf("error getting platform data: %v\n, %v", err, response)
+		return []IGDBPlatformData{}
+	}
+	defer response.Body.Close()
+
+	var platformData []IGDBPlatformData
+	if err := json.NewDecoder(response.Body).Decode(&platformData); err != nil {
+		fmt.Printf("error decoding platform response body: %v\n", err)
+		return []IGDBPlatformData{}
+	}
+
+	return platformData
+}
+
 func getGameData(gameID int) IGDBGameData {
-	request := initIGDBRequestObject(strings.NewReader(fmt.Sprintf("fields *; where id = %d;", gameID)))
+	request := initIGDBRequestObject("/games", strings.NewReader(fmt.Sprintf("fields *; where id = %d;", gameID)))
 
 	httpClient := &http.Client{}
 	response, err := httpClient.Do(request)
@@ -79,7 +100,7 @@ func getGameData(gameID int) IGDBGameData {
 }
 
 func searchByTerm(searchTerm string) []IGDBGameData {
-	request := initIGDBRequestObject(strings.NewReader(fmt.Sprintf("search \"%s\"; fields *;", searchTerm)))
+	request := initIGDBRequestObject("/games", strings.NewReader(fmt.Sprintf("search \"%s\"; fields *;", searchTerm)))
 
 	httpClient := &http.Client{}
 	response, err := httpClient.Do(request)
@@ -117,6 +138,7 @@ func NewIGDBAdapter(init IGDBAdapterInit) *IGDBAdapter {
 	igdbBaseUrl = init.IGDBBaseUrl
 
 	return &IGDBAdapter{
+		GetPlatformData:  func() []IGDBPlatformData { return getPlatformData() },
 		GetGameData:      func(gameID int) IGDBGameData { return getGameData(gameID) },
 		SearchGameByTerm: func(searchTerm string) []IGDBGameData { return searchByTerm(searchTerm) },
 	}
