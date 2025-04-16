@@ -92,12 +92,16 @@ func extractLinks(links []linkDef) []domain.Link {
 	return domainLinks
 }
 
-func retrieveIGDBSupplement(gameName string, igdbAdapter *igdb.IGDBAdapter) igdb.IGDBGameData {
+func retrieveIGDBSupplement(gameName string, gamePlatform string, igdbAdapter *igdb.IGDBAdapter) igdb.IGDBGameData {
+	igdbGameData := igdbAdapter.SearchGameByTerm(gameName)
+	// fmt.Println(len(igdbGameData))
+
 	// TODO:
 	// 1. Check the platform match on games (e.g. PS, SNES, etc.)
+
+	fmt.Printf("CLZ Platform: %s, IGDB Platform: %d\n", gamePlatform, igdbGameData[0].Platforms[0])
+
 	// 2. Perform a closest match string algo on the searched game to the list of titles
-	// igdbGameData := igdbAdapter.SearchGameByTerm(gameName)
-	// fmt.Println(len(igdbGameData))
 
 	return igdb.IGDBGameData{}
 }
@@ -168,7 +172,7 @@ func TranslateCLZ(input string, igdbSupplement bool) domain.GameCollection {
 		}
 
 		if igdbSupplement && newGame.HardwareType == "Game" {
-			igdbData := retrieveIGDBSupplement(game.Title, igdbAdapter)
+			igdbData := retrieveIGDBSupplement(game.Title, game.Platform.DisplayName, igdbAdapter)
 			fmt.Println(igdbData)
 		}
 

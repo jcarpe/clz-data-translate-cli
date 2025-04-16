@@ -5,6 +5,34 @@ import (
 	"testing"
 )
 
+func TestGetPlatformData(t *testing.T) {
+	testAuthServer := mocks.GetTestTwitchAuthServer()
+	defer testAuthServer.Close()
+
+	testIGDBServer := mocks.GetTestIGDBServer(t)
+	defer testIGDBServer.Close()
+
+	igdbAdapter := NewIGDBAdapter(IGDBAdapterInit{
+		AuthBaseUrl:      testAuthServer.URL,
+		AuthUrlPath:      "/oauth2/token",
+		AuthClientId:     "clientID123",
+		AuthClientSecret: "clientSecret123",
+		IGDBBaseUrl:      testIGDBServer.URL,
+	})
+
+	// Execution
+	platformData := igdbAdapter.GetPlatformData()
+
+	if len(platformData) == 0 {
+		t.Errorf("Expected platform data to be returned, but got nil")
+		t.FailNow()
+	}
+
+	if platformData[0].Name != "Nintendo Entertainment System" {
+		t.Errorf("Expected platform name to be Nintendo Entertainment System, but got %s", platformData[0].Name)
+	}
+}
+
 func TestGetGameData(t *testing.T) {
 	testAuthServer := mocks.GetTestTwitchAuthServer()
 	defer testAuthServer.Close()

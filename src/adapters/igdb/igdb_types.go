@@ -5,6 +5,12 @@ package igdb
 // Fields:
 //   - GetGameData: A function that retrieves game data from the IGDB API.
 type IGDBAdapter struct {
+	// GetPlatformData retrieves a list of platforms from the IGDB API.
+	//
+	// Returns:
+	//   - A list of IGDBPlatformData instances representing the platforms.
+	GetPlatformData func() []IGDBPlatformData
+
 	// GetGameData takes a unique game ID value and returns the requested game details.
 	//
 	// Fields:
@@ -38,6 +44,10 @@ type IGDBAdapterInit struct {
 	AuthClientId     string
 	AuthClientSecret string
 	IGDBBaseUrl      string
+}
+
+type IGDBPlatformData struct {
+	Name string `json:"name"`
 }
 
 // IGDBGameData represents the data structure for a game retrieved from the IGDB API.
