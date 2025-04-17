@@ -100,7 +100,7 @@ func getGameData(gameID int) IGDBGameData {
 }
 
 func searchByTerm(searchTerm string) []IGDBGameData {
-	request := initIGDBRequestObject("/games", strings.NewReader(fmt.Sprintf("search \"%s\"; fields *;", searchTerm)))
+	request := initIGDBRequestObject("/games", strings.NewReader(fmt.Sprintf("search \"%s\"; fields *, platforms.name;", searchTerm)))
 
 	httpClient := &http.Client{}
 	response, err := httpClient.Do(request)

@@ -1,6 +1,7 @@
 package clz_translate
 
 import (
+	"encoding/json"
 	"encoding/xml"
 	"fmt"
 	"log"
@@ -98,8 +99,19 @@ func retrieveIGDBSupplement(gameName string, gamePlatform string, igdbAdapter *i
 
 	// TODO:
 	// 1. Check the platform match on games (e.g. PS, SNES, etc.)
+	for _, game := range igdbGameData {
+		// Convert the game object to JSON for human-readable output
+		gameJSON, err := json.MarshalIndent(game, "", "  ")
+		if err != nil {
+			log.Printf("error marshalling game to JSON: %v", err)
+			return igdb.IGDBGameData{}
+		}
 
-	fmt.Printf("CLZ Platform: %s, IGDB Platform: %d\n", gamePlatform, igdbGameData[0].Platforms[0])
+		fmt.Println(string(gameJSON))
+		// fmt.Printf("IGDB Game: ID=%d, Name=%s, Platforms=%v\n", game.ID, game.Name, game.Platforms)
+	}
+
+	// fmt.Printf("-- CLZ Platform: %s, IGDB Platform: %d\n", gamePlatform, igdbGameData[0].Platforms[0])
 
 	// 2. Perform a closest match string algo on the searched game to the list of titles
 
@@ -173,7 +185,7 @@ func TranslateCLZ(input string, igdbSupplement bool) domain.GameCollection {
 
 		if igdbSupplement && newGame.HardwareType == "Game" {
 			igdbData := retrieveIGDBSupplement(game.Title, game.Platform.DisplayName, igdbAdapter)
-			fmt.Println(igdbData)
+			fmt.Printf("IGDB Data for: %d\n", igdbData.ID)
 		}
 
 		gameCollection.Games = append(gameCollection.Games, newGame)

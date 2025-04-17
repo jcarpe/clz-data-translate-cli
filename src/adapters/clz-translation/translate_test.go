@@ -18,11 +18,11 @@ func TestTranslateCLZ(t *testing.T) {
 	defer testIGDBServer.Close()
 
 	// Set environment variables for IGDB
-	os.Setenv("IGDB_AUTH_BASE_URL", testAuthServer.URL)
+	os.Setenv("IGDB_AUTH_BASE_URL", "https://id.twitch.tv")
 	os.Setenv("IGDB_AUTH_PATH", "/oauth2/token")
-	os.Setenv("IGDB_CLIENT_ID", "test_client_id")
-	os.Setenv("IGDB_CLIENT_SECRET", "test_client_secret")
-	os.Setenv("IGDB_BASE_URL", testIGDBServer.URL)
+	os.Setenv("IGDB_CLIENT_ID", "ob0sa1skmi4a5vvthwyob8qzm3w4fk")
+	os.Setenv("IGDB_CLIENT_SECRET", "lg210dshkx54t3m25l44039xlovvq0")
+	os.Setenv("IGDB_BASE_URL", "https://api.igdb.com/v4")
 
 	data, err := os.ReadFile("../_test/data/game-data-list.xml")
 	if err != nil {
