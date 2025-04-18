@@ -16,6 +16,7 @@ type Game struct {
 	DateAcquired       time.Time
 	Developers         []string
 	Edition            string
+	FirstReleaseDate   time.Time
 	Format             string
 	Genres             []string
 	HardwareType       string
@@ -28,6 +29,8 @@ type Game struct {
 	Region             string
 	ReleaseDate        time.Time
 	Series             string
+	Storyline          string
+	Summary            string
 	Title              string
 }
 

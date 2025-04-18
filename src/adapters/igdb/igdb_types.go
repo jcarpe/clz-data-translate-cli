@@ -46,6 +46,11 @@ type IGDBAdapterInit struct {
 	IGDBBaseUrl      string
 }
 
+// IGDBPlatformData represents the data structure for a platform retrieved from the IGDB API.
+//
+// Fields:
+//   - ID: The unique ID value of the platform.
+//   - Name: The name of the platform.
 type IGDBPlatformData struct {
 	ID   int    `json:"id"`
 	Name string `json:"name"`
