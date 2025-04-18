@@ -2,7 +2,6 @@ package clz_translate
 
 import (
 	"encoding/xml"
-	"fmt"
 	"log"
 	"main/src/adapters/igdb"
 	"main/src/domain"
@@ -20,6 +19,7 @@ type clzXML struct {
 	PricechartingLoose          float64     `xml:"pricechartingloose"`
 	PricechartingCIB            float64     `xml:"pricechartingcib"`
 	PricechartingNew            float64     `xml:"pricechartingnew"`
+	PricechartingValue          float64     `xml:"pricechartingvalue"`
 	Platform                    namingDef   `xml:"platform"`
 	CompletenessNum             string      `xml:"completenessnum"`
 	Completeness                string      `xml:"completeness"`
@@ -94,14 +94,15 @@ func extractLinks(links []linkDef) []domain.Link {
 
 func retrieveIGDBSupplement(gameName string, gamePlatform string, igdbAdapter *igdb.IGDBAdapter) igdb.IGDBGameData {
 	igdbGameData := igdbAdapter.SearchGameByTerm(gameName)
-	// fmt.Println(len(igdbGameData))
 
-	// TODO:
-	// 1. Check the platform match on games (e.g. PS, SNES, etc.)
-
-	fmt.Printf("CLZ Platform: %s, IGDB Platform: %d\n", gamePlatform, igdbGameData[0].Platforms[0])
-
-	// 2. Perform a closest match string algo on the searched game to the list of titles
+	for _, game := range igdbGameData {
+		platformMap := domain.CLZPlatformMap[gamePlatform]
+		for _, platform := range game.Platforms {
+			if platformMap == platform.Name {
+				return game
+			}
+		}
+	}
 
 	return igdb.IGDBGameData{}
 }
@@ -162,7 +163,7 @@ func TranslateCLZ(input string, igdbSupplement bool) domain.GameCollection {
 			Links:              extractLinks(game.Links),
 			Multiplayer:        game.Multiplayer == "true",
 			Platform:           domain.Platform(game.Platform.DisplayName),
-			PricechartingValue: 0.00,
+			PricechartingValue: game.PricechartingValue,
 			Publishers:         extractDisplayNames(game.Publishers),
 			Quantity:           game.Quantity,
 			Region:             game.Region.DisplayName,
@@ -173,7 +174,10 @@ func TranslateCLZ(input string, igdbSupplement bool) domain.GameCollection {
 
 		if igdbSupplement && newGame.HardwareType == "Game" {
 			igdbData := retrieveIGDBSupplement(game.Title, game.Platform.DisplayName, igdbAdapter)
-			fmt.Println(igdbData)
+
+			newGame.FirstReleaseDate = time.Unix(int64(igdbData.First_release_date), 0)
+			newGame.Storyline = igdbData.Storyline
+			newGame.Summary = igdbData.Summary
 		}
 
 		gameCollection.Games = append(gameCollection.Games, newGame)

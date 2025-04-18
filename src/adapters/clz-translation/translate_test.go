@@ -56,7 +56,7 @@ func TestTranslateCLZ(t *testing.T) {
 		},
 		Multiplayer:        false,
 		Platform:           domain.PlayStation,
-		PricechartingValue: 0.00,
+		PricechartingValue: 5.97,
 		Publishers:         []string{"Sony Computer Entertainment America", "And Another One"},
 		Quantity:           1,
 		Region:             "",
