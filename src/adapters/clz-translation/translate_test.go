@@ -90,4 +90,8 @@ func TestTranslateCLZ(t *testing.T) {
 	if len(actualOutputWithIGDBSupplement.Games) != 8 {
 		t.Errorf("expected 8 games, got %d", len(actualOutputWithIGDBSupplement.Games))
 	}
+
+	if actualOutputWithIGDBSupplement.Games[0].Cover.ID != 136520 {
+		t.Errorf("expected cover ID to be 136520, got %d", actualOutputWithIGDBSupplement.Games[0].Cover.ID)
+	}
 }

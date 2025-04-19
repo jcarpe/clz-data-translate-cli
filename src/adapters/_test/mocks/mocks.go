@@ -94,6 +94,30 @@ var (
 			"summary":   "Bolt is an apprentice Treasure Master working at Mr. Canewood's laboratory. With the help of mysterious Tokobots, he will explore many prehistoric ruins to find ancient relics that will put him one step further on his path to be a Treasure Master and find his father. However, he will also change his destiny in other ways.",
 			"videos":    nil,
 		},
+		{
+			"artworks": nil,
+			"cover": map[string]interface{}{
+				"id":    136520,
+				"width": 1000,
+				"url":   "//images.igdb.com/igdb/image/upload/t_cover_big/co1j8f.jpg",
+			},
+			"first_release_date": 1136419200,
+			"franchise":          0,
+			"game_status":        0,
+			"game_type":          0,
+			"genres":             []int{8},
+			"id":                 19692,
+			"name":               "1Xtreme (Greatest Hits)",
+			"platforms": []map[string]interface{}{
+				{
+					"id":   6,
+					"name": "PlayStation",
+				},
+			},
+			"storyline": "Gear up for some incredible Xtreme racing",
+			"summary":   "Extreme racing.",
+			"videos":    nil,
+		},
 	}
 )
 

@@ -11,5 +11,6 @@ var CLZPlatformMap = map[string]string{
 	"Saturn":               "Sega Saturn",
 	"Genesis / Mega Drive": "Sega Mega Drive/Genesis",
 	"Game Boy":             "Game Boy",
+	"PlayStation":          "PlayStation",
 	"PlayStation 2":        "PlayStation 2",
 }
