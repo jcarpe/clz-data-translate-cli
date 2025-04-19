@@ -94,4 +94,12 @@ func TestTranslateCLZ(t *testing.T) {
 	if actualOutputWithIGDBSupplement.Games[0].Cover.ID != 136520 {
 		t.Errorf("expected cover ID to be 136520, got %d", actualOutputWithIGDBSupplement.Games[0].Cover.ID)
 	}
+
+	if actualOutputWithIGDBSupplement.Games[0].Storyline != "Gear up for some incredible Xtreme racing" {
+		t.Errorf("expected storyline to be 'Gear up for some incredible Xtreme racing', got '%s'", actualOutputWithIGDBSupplement.Games[0].Storyline)
+	}
+
+	if actualOutputWithIGDBSupplement.Games[0].Summary != "Extreme racing." {
+		t.Errorf("expected summary to be 'Extreme racing.', got '%s'", actualOutputWithIGDBSupplement.Games[0].Summary)
+	}
 }
