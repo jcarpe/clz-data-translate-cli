@@ -2,22 +2,41 @@ package igdb
 
 import (
 	"main/src/adapters/_test/mocks"
+	"os"
 	"testing"
 )
 
-func TestGetPlatformData(t *testing.T) {
+func TestMain(m *testing.M) {
+	// Setup code here (if needed)
 	testAuthServer := mocks.GetTestTwitchAuthServer()
 	defer testAuthServer.Close()
 
-	testIGDBServer := mocks.GetTestIGDBServer(t)
+	testIGDBServer := mocks.GetTestIGDBServer()
 	defer testIGDBServer.Close()
 
+	// Set environment variables for IGDB
+	os.Setenv("IGDB_AUTH_BASE_URL", testAuthServer.URL)
+	os.Setenv("IGDB_AUTH_PATH", "/oauth2/token")
+	os.Setenv("IGDB_CLIENT_ID", "test_client_id")
+	os.Setenv("IGDB_CLIENT_SECRET", "test_client_secret")
+	os.Setenv("IGDB_BASE_URL", testIGDBServer.URL)
+
+	// Run the tests
+	exitCode := m.Run()
+
+	// Teardown code here (if needed)
+
+	// Exit with the appropriate code
+	os.Exit(exitCode)
+}
+
+func TestGetPlatformData(t *testing.T) {
 	igdbAdapter := NewIGDBAdapter(IGDBAdapterInit{
-		AuthBaseUrl:      testAuthServer.URL,
-		AuthUrlPath:      "/oauth2/token",
-		AuthClientId:     "clientID123",
-		AuthClientSecret: "clientSecret123",
-		IGDBBaseUrl:      testIGDBServer.URL,
+		AuthBaseUrl:      os.Getenv("IGDB_AUTH_BASE_URL"),
+		AuthUrlPath:      os.Getenv("IGDB_AUTH_PATH"),
+		AuthClientId:     os.Getenv("IGDB_CLIENT_ID"),
+		AuthClientSecret: os.Getenv("IGDB_CLIENT_SECRET"),
+		IGDBBaseUrl:      os.Getenv("IGDB_BASE_URL"),
 	})
 
 	// Execution
@@ -34,18 +53,12 @@ func TestGetPlatformData(t *testing.T) {
 }
 
 func TestGetGameData(t *testing.T) {
-	testAuthServer := mocks.GetTestTwitchAuthServer()
-	defer testAuthServer.Close()
-
-	testIGDBServer := mocks.GetTestIGDBServer(t)
-	defer testIGDBServer.Close()
-
 	igdbAdapter := NewIGDBAdapter(IGDBAdapterInit{
-		AuthBaseUrl:      testAuthServer.URL,
-		AuthUrlPath:      "/oauth2/token",
-		AuthClientId:     "clientID123",
-		AuthClientSecret: "clientSecret123",
-		IGDBBaseUrl:      testIGDBServer.URL,
+		AuthBaseUrl:      os.Getenv("IGDB_AUTH_BASE_URL"),
+		AuthUrlPath:      os.Getenv("IGDB_AUTH_PATH"),
+		AuthClientId:     os.Getenv("IGDB_CLIENT_ID"),
+		AuthClientSecret: os.Getenv("IGDB_CLIENT_SECRET"),
+		IGDBBaseUrl:      os.Getenv("IGDB_BASE_URL"),
 	})
 	gameID := 1068 // <-- Super Mario Bros 3 ID value in IGDB
 
@@ -58,18 +71,12 @@ func TestGetGameData(t *testing.T) {
 }
 
 func TestSearchGameName(t *testing.T) {
-	testAuthServer := mocks.GetTestTwitchAuthServer()
-	defer testAuthServer.Close()
-
-	testIGDBServer := mocks.GetTestIGDBServer(t)
-	defer testIGDBServer.Close()
-
 	igdbAdapter := NewIGDBAdapter(IGDBAdapterInit{
-		AuthBaseUrl:      testAuthServer.URL,
-		AuthUrlPath:      "/oauth2/token",
-		AuthClientId:     "clientID123",
-		AuthClientSecret: "clientSecret123",
-		IGDBBaseUrl:      testIGDBServer.URL,
+		AuthBaseUrl:      os.Getenv("IGDB_AUTH_BASE_URL"),
+		AuthUrlPath:      os.Getenv("IGDB_AUTH_PATH"),
+		AuthClientId:     os.Getenv("IGDB_CLIENT_ID"),
+		AuthClientSecret: os.Getenv("IGDB_CLIENT_SECRET"),
+		IGDBBaseUrl:      os.Getenv("IGDB_BASE_URL"),
 	})
 	searchTerm := "tokobot"
 
