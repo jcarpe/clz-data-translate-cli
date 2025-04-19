@@ -79,7 +79,7 @@ func getPlatformData() []IGDBPlatformData {
 }
 
 func getGameData(gameID int) IGDBGameData {
-	request := initIGDBRequestObject("/games", strings.NewReader(fmt.Sprintf("fields *; where id = %d;", gameID)))
+	request := initIGDBRequestObject("/games", strings.NewReader(fmt.Sprintf("fields *, platforms.name, cover.url, cover.width; where id = %d;", gameID)))
 
 	httpClient := &http.Client{}
 	response, err := httpClient.Do(request)
@@ -100,7 +100,7 @@ func getGameData(gameID int) IGDBGameData {
 }
 
 func searchByTerm(searchTerm string) []IGDBGameData {
-	request := initIGDBRequestObject("/games", strings.NewReader(fmt.Sprintf("search \"%s\"; fields *, platforms.name;", searchTerm)))
+	request := initIGDBRequestObject("/games", strings.NewReader(fmt.Sprintf("search \"%s\"; fields *, platforms.name, cover.url, cover.width;", searchTerm)))
 
 	httpClient := &http.Client{}
 	response, err := httpClient.Do(request)
@@ -112,6 +112,7 @@ func searchByTerm(searchTerm string) []IGDBGameData {
 	defer response.Body.Close()
 
 	var searchResults []IGDBGameData
+
 	if err := json.NewDecoder(response.Body).Decode(&searchResults); err != nil {
 		fmt.Printf("error decoding response body: %v\n", err)
 		return []IGDBGameData{}

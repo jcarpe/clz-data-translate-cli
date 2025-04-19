@@ -56,6 +56,12 @@ type IGDBPlatformData struct {
 	Name string `json:"name"`
 }
 
+type IGDBCover struct {
+	ID    int    `json:"id"`
+	URL   string `json:"url"`
+	Width int    `json:"width"`
+}
+
 // IGDBGameData represents the data structure for a game retrieved from the IGDB API.
 //
 // Fields:
@@ -63,7 +69,7 @@ type IGDBPlatformData struct {
 //   - Name: The name of the game.
 type IGDBGameData struct {
 	Artworks           []int              `json:"artworks"`
-	Cover              int                `json:"cover"`
+	Cover              IGDBCover          `json:"cover"`
 	First_release_date int                `json:"first_release_date"`
 	Franchise          int                `json:"franchise"`
 	Game_status        int                `json:"game_status"`
