@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"strings"
-	"testing"
 )
 
 var (
@@ -110,12 +109,13 @@ func GetTestTwitchAuthServer() *httptest.Server {
 	}))
 }
 
-func GetTestIGDBServer(t *testing.T) *httptest.Server {
+func GetTestIGDBServer() *httptest.Server {
 	return httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		body, err := io.ReadAll(r.Body)
-		if err != nil {
-			t.Errorf("Failed to read request body: %v", err)
-		}
+		body, _ := io.ReadAll(r.Body)
+		// if err != nil {
+		// 	// fmt.Errorf("failed to read request body: %v", err)
+		// 	t.Fail()
+		// }
 
 		w.WriteHeader(http.StatusOK)
 		w.Header().Set("Content-Type", "application/json")

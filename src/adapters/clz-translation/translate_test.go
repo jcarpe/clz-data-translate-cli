@@ -9,12 +9,12 @@ import (
 	"time"
 )
 
-func TestTranslateCLZ(t *testing.T) {
-	// Arrange
+func TestMain(m *testing.M) {
+	// Setup code here (if needed)
 	testAuthServer := mocks.GetTestTwitchAuthServer()
 	defer testAuthServer.Close()
 
-	testIGDBServer := mocks.GetTestIGDBServer(t)
+	testIGDBServer := mocks.GetTestIGDBServer()
 	defer testIGDBServer.Close()
 
 	// Set environment variables for IGDB
@@ -24,6 +24,16 @@ func TestTranslateCLZ(t *testing.T) {
 	os.Setenv("IGDB_CLIENT_SECRET", "test_client_secret")
 	os.Setenv("IGDB_BASE_URL", testIGDBServer.URL)
 
+	// Run the tests
+	exitCode := m.Run()
+
+	// Teardown code here (if needed)
+
+	// Exit with the appropriate code
+	os.Exit(exitCode)
+}
+
+func TestTranslateCLZ(t *testing.T) {
 	data, err := os.ReadFile("../_test/data/game-data-list.xml")
 	if err != nil {
 		t.Errorf("error reading test data: %v", err)
