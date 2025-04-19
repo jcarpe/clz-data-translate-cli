@@ -21,8 +21,12 @@ var (
 
 	testGetGameDataResponse = []map[string]interface{}{
 		{
-			"artworks":           []int{358989},
-			"cover":              358989,
+			"artworks": []int{358989},
+			"cover": map[string]interface{}{
+				"id":    136520,
+				"width": 1000,
+				"url":   "//images.igdb.com/igdb/image/upload/t_cover_big/co1j8f.jpg",
+			},
 			"first_release_date": 593568000,
 			"franchise":          24,
 			"game_status":        0,
@@ -44,8 +48,12 @@ var (
 
 	testSearchGameNameResponse = []map[string]interface{}{
 		{
-			"artworks":           nil,
-			"cover":              90786,
+			"artworks": nil,
+			"cover": map[string]interface{}{
+				"id":    136520,
+				"width": 1000,
+				"url":   "//images.igdb.com/igdb/image/upload/t_cover_big/co1j8f.jpg",
+			},
 			"first_release_date": 1136419200,
 			"franchise":          0,
 			"game_status":        0,
@@ -64,8 +72,12 @@ var (
 			"videos":    nil,
 		},
 		{
-			"artworks":           nil,
-			"cover":              136520,
+			"artworks": nil,
+			"cover": map[string]interface{}{
+				"id":    136520,
+				"width": 1000,
+				"url":   "//images.igdb.com/igdb/image/upload/t_cover_big/co1j8f.jpg",
+			},
 			"first_release_date": 1163721600,
 			"franchise":          0,
 			"game_status":        0,
