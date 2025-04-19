@@ -13,6 +13,7 @@ type Game struct {
 	Boxset             bool
 	Completeness       Completeness
 	Condition          string
+	Cover              Cover
 	DateAcquired       time.Time
 	Developers         []string
 	Edition            string
@@ -32,6 +33,12 @@ type Game struct {
 	Storyline          string
 	Summary            string
 	Title              string
+}
+
+type Cover struct {
+	ID    int
+	Width int
+	URL   string
 }
 
 type Completeness struct {

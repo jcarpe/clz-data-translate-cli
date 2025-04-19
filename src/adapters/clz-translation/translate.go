@@ -99,11 +99,13 @@ func retrieveIGDBSupplement(gameName string, gamePlatform string, igdbAdapter *i
 		platformMap := domain.CLZPlatformMap[gamePlatform]
 		for _, platform := range game.Platforms {
 			if platformMap == platform.Name {
+				// fmt.Println("Found matching game in IGDB for CLZ game:", gameName)
 				return game
 			}
 		}
 	}
 
+	// fmt.Println("No matching game found in IGDB for CLZ game:", gameName)
 	return igdb.IGDBGameData{}
 }
 
@@ -178,6 +180,11 @@ func TranslateCLZ(input string, igdbSupplement bool) domain.GameCollection {
 			newGame.FirstReleaseDate = time.Unix(int64(igdbData.First_release_date), 0)
 			newGame.Storyline = igdbData.Storyline
 			newGame.Summary = igdbData.Summary
+			newGame.Cover = domain.Cover{
+				ID:    igdbData.Cover.ID,
+				Width: igdbData.Cover.Width,
+				URL:   igdbData.Cover.URL,
+			}
 		}
 
 		gameCollection.Games = append(gameCollection.Games, newGame)

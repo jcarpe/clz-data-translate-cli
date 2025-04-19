@@ -88,8 +88,8 @@ func TestSearchGameName(t *testing.T) {
 		t.Errorf("Expected game data to be returned, but got nil")
 	}
 
-	if len(gamesData) != 2 {
-		t.Errorf("Expected 2 games to be returned, but got %d", len(gamesData))
+	if len(gamesData) != 3 {
+		t.Errorf("Expected 3 games to be returned, but got %d", len(gamesData))
 	}
 
 	if gamesData[1].Name != "Tokobot Plus: Mysteries of the Karakuri" {
