@@ -100,6 +100,14 @@ func searchByTerm(searchTerm string) []IGDBGameData {
 	return searchResults
 }
 
+func GameTitleNormalization(title string) string {
+	// Normalize the game title by removing special characters and converting to lowercase
+	normalizedTitle := strings.ToLower(title)
+	normalizedTitle = strings.ReplaceAll(normalizedTitle, "(greatest hits)", "")
+	normalizedTitle = strings.TrimSpace(normalizedTitle)
+	return normalizedTitle
+}
+
 // NewIGDBAdapter initializes a new IGDBAdapter with the provided authentication details.
 // Authenticates with the IGDB API with an access token.
 //

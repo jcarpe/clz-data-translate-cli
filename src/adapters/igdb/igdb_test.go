@@ -78,3 +78,21 @@ func TestSearchGameName(t *testing.T) {
 		t.Errorf("Expected game name to be Tokobot, but got %s", gamesData[0].Name)
 	}
 }
+
+func TestGameTitleNormalization(t *testing.T) {
+	// Test cases
+	tests := []struct {
+		input    string
+		expected string
+	}{
+		{"Super Mario Bros. 3", "super mario bros. 3"},
+		{"ESPN Extreme Games (Greatest Hits)", "espn extreme games"},
+	}
+
+	for _, test := range tests {
+		result := GameTitleNormalization(test.input)
+		if result != test.expected {
+			t.Errorf("Expected %s, but got %s", test.expected, result)
+		}
+	}
+}
