@@ -57,27 +57,6 @@ func initIGDBRequestObject(path string, filter *strings.Reader) *http.Request {
 	return request
 }
 
-func getPlatformData() []IGDBPlatformData {
-	request := initIGDBRequestObject("/platforms", strings.NewReader("fields name, updated_at;"))
-
-	httpClient := &http.Client{}
-	response, err := httpClient.Do(request)
-
-	if err != nil || response == nil || response.StatusCode != http.StatusOK {
-		fmt.Printf("error getting platform data: %v\n, %v", err, response)
-		return []IGDBPlatformData{}
-	}
-	defer response.Body.Close()
-
-	var platformData []IGDBPlatformData
-	if err := json.NewDecoder(response.Body).Decode(&platformData); err != nil {
-		fmt.Printf("error decoding platform response body: %v\n", err)
-		return []IGDBPlatformData{}
-	}
-
-	return platformData
-}
-
 func getGameData(gameID int) IGDBGameData {
 	request := initIGDBRequestObject("/games", strings.NewReader(fmt.Sprintf("fields *, platforms.name, cover.url, cover.width; where id = %d;", gameID)))
 
@@ -139,7 +118,6 @@ func NewIGDBAdapter(init IGDBAdapterInit) *IGDBAdapter {
 	igdbBaseUrl = init.IGDBBaseUrl
 
 	return &IGDBAdapter{
-		GetPlatformData:  func() []IGDBPlatformData { return getPlatformData() },
 		GetGameData:      func(gameID int) IGDBGameData { return getGameData(gameID) },
 		SearchGameByTerm: func(searchTerm string) []IGDBGameData { return searchByTerm(searchTerm) },
 	}

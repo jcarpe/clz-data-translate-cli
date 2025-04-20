@@ -13,4 +13,7 @@ var CLZPlatformMap = map[string]string{
 	"Game Boy":             "Game Boy",
 	"PlayStation":          "PlayStation",
 	"PlayStation 2":        "PlayStation 2",
+	"PlayStation 3":        "PlayStation 3",
+	"PlayStation 4":        "PlayStation 4",
+	"PlayStation 5":        "PlayStation 5",
 }

@@ -1,7 +1,7 @@
 package clz_translate
 
 import (
-	"main/src/adapters/_test/mocks"
+	"main/src/_test/mocks"
 	"main/src/domain"
 	"os"
 	"reflect"
@@ -10,7 +10,7 @@ import (
 )
 
 func TestMain(m *testing.M) {
-	// Setup code here (if needed)
+	// Setup code here if needed
 	testAuthServer := mocks.GetTestTwitchAuthServer()
 	defer testAuthServer.Close()
 
@@ -34,7 +34,7 @@ func TestMain(m *testing.M) {
 }
 
 func TestTranslateCLZ(t *testing.T) {
-	data, err := os.ReadFile("../_test/data/game-data-list.xml")
+	data, err := os.ReadFile("../../_test/data/game-data-list.xml")
 	if err != nil {
 		t.Errorf("error reading test data: %v", err)
 	}

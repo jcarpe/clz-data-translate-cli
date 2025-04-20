@@ -4,13 +4,8 @@ package igdb
 //
 // Fields:
 //   - GetGameData: A function that retrieves game data from the IGDB API.
+//   - SearchGameByTerm: A function that searches for games by a search term.
 type IGDBAdapter struct {
-	// GetPlatformData retrieves a list of platforms from the IGDB API.
-	//
-	// Returns:
-	//   - A list of IGDBPlatformData instances representing the platforms.
-	GetPlatformData func() []IGDBPlatformData
-
 	// GetGameData takes a unique game ID value and returns the requested game details.
 	//
 	// Fields:
