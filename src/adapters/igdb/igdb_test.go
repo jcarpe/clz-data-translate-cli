@@ -1,7 +1,7 @@
 package igdb
 
 import (
-	"main/src/adapters/_test/mocks"
+	"main/src/_test/mocks"
 	"os"
 	"testing"
 )
