@@ -10,7 +10,7 @@ import (
 )
 
 func TestMain(m *testing.M) {
-	// Setup code here (if needed)
+	// Setup code here if needed
 	testAuthServer := mocks.GetTestTwitchAuthServer()
 	defer testAuthServer.Close()
 
@@ -103,3 +103,42 @@ func TestTranslateCLZ(t *testing.T) {
 		t.Errorf("expected summary to be 'Extreme racing.', got '%s'", actualOutputWithIGDBSupplement.Games[0].Summary)
 	}
 }
+
+// func TestTranslateCLZWithIGDBSupplement(t *testing.T) {
+// 	data, err := os.ReadFile("../_test/data/game-data-list.xml")
+// 	if err != nil {
+// 		t.Errorf("error reading test data: %v", err)
+// 	}
+
+// 	input := string(data)
+
+// 	expectedOutput := domain.Game{
+// 		Boxset: false,
+// 		Completeness: domain.Completeness{
+// 			HasBox:    false,
+// 			HasManual: false,
+// 			HasGame:   true,
+// 		},
+// 		Condition:    "",
+// 		DateAcquired: time.Time{},
+// 		Developers:   []string{"Sony Interactive Studios America"},
+// 		Edition:      "Greatest Hits",
+// 		Format:       "CD-ROM",
+// 		Genres:       []string{"Racing", "Sports"},
+// 		HardwareType: "Game",
+// 		Links: []domain.Link{
+// 			{
+// 				Description: "1Xtreme at Core for Games",
+// 				URL:         "http://core.collectorz.com/games/ps1/1xtreme",
+// 			},
+// 			{
+// 				Description: "1Xtreme at PriceCharting.com",
+// 				URL:         "https://www.pricecharting.com/game/Playstation/1Xtreme",
+// 			},
+// 		},
+// 		Multiplayer:        false,
+// 		Platform:           domain.PlayStation,
+// 		PricechartingValue: 5.97,
+// 		Publishers:         []string{"Sony Computer Entertainment America", "And Another One"},
+// 		Quantity:           1,
+// }

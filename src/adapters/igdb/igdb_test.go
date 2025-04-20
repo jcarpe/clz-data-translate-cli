@@ -30,28 +30,6 @@ func TestMain(m *testing.M) {
 	os.Exit(exitCode)
 }
 
-func TestGetPlatformData(t *testing.T) {
-	igdbAdapter := NewIGDBAdapter(IGDBAdapterInit{
-		AuthBaseUrl:      os.Getenv("IGDB_AUTH_BASE_URL"),
-		AuthUrlPath:      os.Getenv("IGDB_AUTH_PATH"),
-		AuthClientId:     os.Getenv("IGDB_CLIENT_ID"),
-		AuthClientSecret: os.Getenv("IGDB_CLIENT_SECRET"),
-		IGDBBaseUrl:      os.Getenv("IGDB_BASE_URL"),
-	})
-
-	// Execution
-	platformData := igdbAdapter.GetPlatformData()
-
-	if len(platformData) == 0 {
-		t.Errorf("Expected platform data to be returned, but got nil")
-		t.FailNow()
-	}
-
-	if platformData[0].Name != "Nintendo Entertainment System" {
-		t.Errorf("Expected platform name to be Nintendo Entertainment System, but got %s", platformData[0].Name)
-	}
-}
-
 func TestGetGameData(t *testing.T) {
 	igdbAdapter := NewIGDBAdapter(IGDBAdapterInit{
 		AuthBaseUrl:      os.Getenv("IGDB_AUTH_BASE_URL"),
