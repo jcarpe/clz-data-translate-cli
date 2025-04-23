@@ -21,6 +21,12 @@ type authResponse struct {
 	TokenType   string `json:"token_type"`
 }
 
+type igdbFuzzySearchGameData struct {
+	ID        int    `json:"id"`
+	Name      string `json:"name"`
+	Platforms []int  `json:"platforms"`
+}
+
 func retrieveAuthToken(baseUrl string, path string, id string, secret string) string {
 	request, _ := http.NewRequest(http.MethodPost, baseUrl+path, nil)
 	request.Header.Add("Content-Type", "application/json")
@@ -79,60 +85,7 @@ func getGameData(gameID int) IGDBGameData {
 	return gameData[0]
 }
 
-func searchByTerm(searchTerm string) []IGDBGameData {
-	request := initIGDBRequestObject("/games", strings.NewReader(fmt.Sprintf("search \"%s\"; fields *, platforms.name, cover.url, cover.width;", searchTerm)))
-
-	httpClient := &http.Client{}
-	response, err := httpClient.Do(request)
-
-	if err != nil || response == nil || response.StatusCode != http.StatusOK {
-		fmt.Printf("error getting game data: %v\n, %v", err, response)
-		return []IGDBGameData{}
-	}
-	defer response.Body.Close()
-
-	var searchResults []IGDBGameData
-
-	if err := json.NewDecoder(response.Body).Decode(&searchResults); err != nil {
-		fmt.Printf("error decoding response body: %v\n", err)
-		return []IGDBGameData{}
-	}
-
-	return searchResults
-}
-
-// ###
-// Playing with fuzzy find for game matching
-// ###
-type IGDBFuzzySearchGameData struct {
-	ID        int    `json:"id"`
-	Name      string `json:"name"`
-	Platforms []int  `json:"platforms"`
-}
-
-func fuzzySearchByTerm(searchTerm string) []IGDBFuzzySearchGameData {
-	request := initIGDBRequestObject("/games", strings.NewReader(fmt.Sprintf("search \"%s\"; fields id, name, platforms;", searchTerm)))
-
-	httpClient := &http.Client{}
-	response, err := httpClient.Do(request)
-
-	if err != nil || response == nil || response.StatusCode != http.StatusOK {
-		fmt.Printf("error getting game data: %v\n, %v", err, response)
-		return []IGDBFuzzySearchGameData{}
-	}
-	defer response.Body.Close()
-
-	var searchResults []IGDBFuzzySearchGameData
-
-	if err := json.NewDecoder(response.Body).Decode(&searchResults); err != nil {
-		fmt.Printf("error decoding response body: %v\n", err)
-		return []IGDBFuzzySearchGameData{}
-	}
-
-	return searchResults
-}
-
-func FuzzyFindIGDBGameByTitle(title string, clzPlatformName string) int {
+func fuzzyFindIGDBGameByTitle(title string, clzPlatformName string) int {
 	// Normalize the game title
 	normalizedTitle := GameTitleNormalization(title)
 
@@ -158,6 +111,35 @@ func FuzzyFindIGDBGameByTitle(title string, clzPlatformName string) int {
 	return gamesData[0].ID
 }
 
+func fuzzySearchByTerm(searchTerm string) []igdbFuzzySearchGameData {
+	request := initIGDBRequestObject("/games", strings.NewReader(fmt.Sprintf("search \"%s\"; fields id, name, platforms;", searchTerm)))
+
+	httpClient := &http.Client{}
+	response, err := httpClient.Do(request)
+
+	if err != nil || response == nil || response.StatusCode != http.StatusOK {
+		fmt.Printf("error getting game data: %v\n, %v", err, response)
+		return []igdbFuzzySearchGameData{}
+	}
+	defer response.Body.Close()
+
+	var searchResults []igdbFuzzySearchGameData
+
+	if err := json.NewDecoder(response.Body).Decode(&searchResults); err != nil {
+		fmt.Printf("error decoding response body: %v\n", err)
+		return []igdbFuzzySearchGameData{}
+	}
+
+	return searchResults
+}
+
+// GameTitleNormalization normalizes the game title by removing special characters and converting to lowercase.
+//
+// Parameters:
+//   - title: The game title string.
+//
+// Returns:
+//   - The normalized game title string.
 func GameTitleNormalization(title string) string {
 	// Normalize the game title by removing special characters and converting to lowercase
 	normalizedTitle := strings.ToLower(title)
@@ -185,7 +167,6 @@ func NewIGDBAdapter(init IGDBAdapterInit) *IGDBAdapter {
 
 	return &IGDBAdapter{
 		GetGameData:          func(gameID int) IGDBGameData { return getGameData(gameID) },
-		FuzzyFindGameByTitle: func(title string, clzPlatform string) int { return FuzzyFindIGDBGameByTitle(title, clzPlatform) },
-		SearchGameByTerm:     func(searchTerm string) []IGDBGameData { return searchByTerm(searchTerm) },
+		FuzzyFindGameByTitle: func(title string, clzPlatform string) int { return fuzzyFindIGDBGameByTitle(title, clzPlatform) },
 	}
 }

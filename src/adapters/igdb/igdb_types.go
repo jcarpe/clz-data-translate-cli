@@ -4,7 +4,7 @@ package igdb
 //
 // Fields:
 //   - GetGameData: A function that retrieves game data from the IGDB API.
-//   - SearchGameByTerm: A function that searches for games by a search term.
+//   - FuzzyFindGameByTitle: A function that searches for a game by title and platform.
 type IGDBAdapter struct {
 	// GetGameData takes a unique game ID value and returns the requested game details.
 	//
@@ -24,15 +24,6 @@ type IGDBAdapter struct {
 	// Returns:
 	//   - The ID int value of the game that matches the title and platform.
 	FuzzyFindGameByTitle func(string, string) int
-
-	// SearchGameByTerm takes a search term and returns a list of games that match the search term by title.
-	//
-	// Fields:
-	//   - searchTerm: The search term string.
-	//
-	// Returns:
-	//   - A list of IGDBGameData instances representing the games that match the search term.
-	SearchGameByTerm func(string) []IGDBGameData
 }
 
 // IGDBAdapterInit contains the initialization parameters for the IGDBAdapter.
