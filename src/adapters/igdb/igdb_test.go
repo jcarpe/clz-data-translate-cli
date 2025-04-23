@@ -96,3 +96,27 @@ func TestGameTitleNormalization(t *testing.T) {
 		}
 	}
 }
+
+func TestFuzzyFindIGDBGameByTitle(t *testing.T) {
+	igdbAdapter := NewIGDBAdapter(IGDBAdapterInit{
+		AuthBaseUrl:      os.Getenv("IGDB_AUTH_BASE_URL"),
+		AuthUrlPath:      os.Getenv("IGDB_AUTH_PATH"),
+		AuthClientId:     os.Getenv("IGDB_CLIENT_ID"),
+		AuthClientSecret: os.Getenv("IGDB_CLIENT_SECRET"),
+		IGDBBaseUrl:      os.Getenv("IGDB_BASE_URL"),
+	})
+	title := "Super Mario Bros. 3"
+	clzPlatform := "NES"
+
+	// Execution
+	gameID := igdbAdapter.FuzzyFindGameByTitle(title, clzPlatform)
+
+	// Assertion
+	if gameID == 0 {
+		t.Errorf("Expected game ID to be found, but got 0")
+	}
+
+	if gameID != 3 {
+		t.Errorf("Expected game ID to be 3, but got %d", gameID)
+	}
+}

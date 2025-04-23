@@ -3,6 +3,7 @@ package igdb
 import (
 	"encoding/json"
 	"fmt"
+	"main/src/domain"
 	"net/http"
 	"net/url"
 	"strings"
@@ -100,6 +101,63 @@ func searchByTerm(searchTerm string) []IGDBGameData {
 	return searchResults
 }
 
+// ###
+// Playing with fuzzy find for game matching
+// ###
+type IGDBFuzzySearchGameData struct {
+	ID        int    `json:"id"`
+	Name      string `json:"name"`
+	Platforms []int  `json:"platforms"`
+}
+
+func fuzzySearchByTerm(searchTerm string) []IGDBFuzzySearchGameData {
+	request := initIGDBRequestObject("/games", strings.NewReader(fmt.Sprintf("search \"%s\"; fields id, name, platforms;", searchTerm)))
+
+	httpClient := &http.Client{}
+	response, err := httpClient.Do(request)
+
+	if err != nil || response == nil || response.StatusCode != http.StatusOK {
+		fmt.Printf("error getting game data: %v\n, %v", err, response)
+		return []IGDBFuzzySearchGameData{}
+	}
+	defer response.Body.Close()
+
+	var searchResults []IGDBFuzzySearchGameData
+
+	if err := json.NewDecoder(response.Body).Decode(&searchResults); err != nil {
+		fmt.Printf("error decoding response body: %v\n", err)
+		return []IGDBFuzzySearchGameData{}
+	}
+
+	return searchResults
+}
+
+func FuzzyFindIGDBGameByTitle(title string, clzPlatformName string) int {
+	// Normalize the game title
+	normalizedTitle := GameTitleNormalization(title)
+
+	// Search for the game by normalized title
+	gamesData := fuzzySearchByTerm(normalizedTitle)
+	if len(gamesData) == 0 {
+		fmt.Printf("No games found in FuzzyFind for title: %s\n", title)
+		return 0
+	}
+
+	// if multiple games returned, find the entry with a matching platform
+	if len(gamesData) > 1 {
+		for _, game := range gamesData {
+			for _, platform := range game.Platforms {
+				if platform == domain.PlatformMap.CLZToIGDB[clzPlatformName] {
+					return game.ID
+				}
+			}
+		}
+	}
+
+	// Return the first game found
+	return gamesData[0].ID
+}
+
 func GameTitleNormalization(title string) string {
 	// Normalize the game title by removing special characters and converting to lowercase
 	normalizedTitle := strings.ToLower(title)
@@ -126,7 +184,8 @@ func NewIGDBAdapter(init IGDBAdapterInit) *IGDBAdapter {
 	igdbBaseUrl = init.IGDBBaseUrl
 
 	return &IGDBAdapter{
-		GetGameData:      func(gameID int) IGDBGameData { return getGameData(gameID) },
-		SearchGameByTerm: func(searchTerm string) []IGDBGameData { return searchByTerm(searchTerm) },
+		GetGameData:          func(gameID int) IGDBGameData { return getGameData(gameID) },
+		FuzzyFindGameByTitle: func(title string, clzPlatform string) int { return FuzzyFindIGDBGameByTitle(title, clzPlatform) },
+		SearchGameByTerm:     func(searchTerm string) []IGDBGameData { return searchByTerm(searchTerm) },
 	}
 }
