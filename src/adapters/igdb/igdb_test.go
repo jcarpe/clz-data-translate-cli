@@ -1,6 +1,7 @@
 package igdb
 
 import (
+	"fmt"
 	"main/src/_test/mocks"
 	"os"
 	"testing"
@@ -95,4 +96,24 @@ func TestGameTitleNormalization(t *testing.T) {
 			t.Errorf("Expected %s, but got %s", test.expected, result)
 		}
 	}
+}
+
+func TestFuzzyFindIGDBGameByTitle(t *testing.T) {
+	NewIGDBAdapter(IGDBAdapterInit{
+		AuthBaseUrl:      os.Getenv("IGDB_AUTH_BASE_URL"),
+		AuthUrlPath:      os.Getenv("IGDB_AUTH_PATH"),
+		AuthClientId:     os.Getenv("IGDB_CLIENT_ID"),
+		AuthClientSecret: os.Getenv("IGDB_CLIENT_SECRET"),
+		IGDBBaseUrl:      os.Getenv("IGDB_BASE_URL"),
+	})
+	title := "Super Mario Bros. 3"
+
+	// Execution
+	gameID := FuzzyFindIGDBGameByTitle(title)
+
+	fmt.Printf("Game ID: %d\n", gameID)
+
+	// if gameData.Name != "Super Mario Bros. 3" {
+	// 	t.Errorf("Expected game name to be Super Mario Bros. 3, but got %s", gameData.Name)
+	// }
 }

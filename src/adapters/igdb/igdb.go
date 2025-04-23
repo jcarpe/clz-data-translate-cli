@@ -100,6 +100,26 @@ func searchByTerm(searchTerm string) []IGDBGameData {
 	return searchResults
 }
 
+// ###
+// Playing with fuzzy find for game matching
+// ###
+func FuzzyFindIGDBGameByTitle(title string) int {
+	// Normalize the game title
+	normalizedTitle := GameTitleNormalization(title)
+
+	// Search for the game by normalized title
+	gamesData := searchByTerm(normalizedTitle)
+	if len(gamesData) == 0 {
+		fmt.Printf("No games found in FuzzyFind for title: %s\n", title)
+		return 0
+	}
+
+	// TODO: if multiple games returned, find the entry with a matching platform
+
+	// Return the first game found
+	return gamesData[0].ID
+}
+
 func GameTitleNormalization(title string) string {
 	// Normalize the game title by removing special characters and converting to lowercase
 	normalizedTitle := strings.ToLower(title)
