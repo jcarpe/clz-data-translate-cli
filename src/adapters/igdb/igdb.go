@@ -143,15 +143,11 @@ func FuzzyFindIGDBGameByTitle(title string, clzPlatformName string) int {
 		return 0
 	}
 
-	// TODO: if multiple games returned, find the entry with a matching platform
+	// if multiple games returned, find the entry with a matching platform
 	if len(gamesData) > 1 {
-		fmt.Printf("Multiple games found in FuzzyFind for title: %s\nSearching for matching platform: %s\n", title, clzPlatformName)
 		for _, game := range gamesData {
 			for _, platform := range game.Platforms {
 				if platform == domain.PlatformMap.CLZToIGDB[clzPlatformName] {
-					fmt.Println("- Found matching platform: ", domain.PlatformMap.IGDBToCLZ[platform])
-					fmt.Println("- Game ID: ", game.ID)
-					fmt.Println("- Game Name: ", game.Name)
 					return game.ID
 				}
 			}
