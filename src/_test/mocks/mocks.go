@@ -30,84 +30,9 @@ var (
 					"name": "NES",
 				},
 			},
-			"storyline": "The Mushroom Kingdom has been a peaceful place.",
-			"summary":   "Super Mario Bros. 3, the third entry in the Super Mario Bros. series.",
+			"storyline": "A storyline supplement from mocked IGDB data for test.",
+			"summary":   "A summary supplement from mocked IGDB data for test.",
 			"videos":    []int{35343, 20256},
-		},
-	}
-
-	testSearchGameNameResponse = []map[string]interface{}{
-		{
-			"artworks": nil,
-			"cover": map[string]interface{}{
-				"id":    136520,
-				"width": 1000,
-				"url":   "//images.igdb.com/igdb/image/upload/t_cover_big/co1j8f.jpg",
-			},
-			"first_release_date": 1136419200,
-			"franchise":          0,
-			"game_status":        0,
-			"game_type":          0,
-			"genres":             []int{8},
-			"id":                 19692,
-			"name":               "Tokobot",
-			"platforms": []map[string]interface{}{
-				{
-					"id":   6,
-					"name": "NES",
-				},
-			},
-			"storyline": "",
-			"summary":   "Players take on the role of the young hero Bolt, a quick thinking agent who has discovered some friendly, highly advanced robots called \"Tokobots\" during his explorations of ancient ruins. With the help of the loyal Tokobots, Bolt will reveal mysteries and save the world from a horrible plot, as the Tokobots faithfully follow him on his journey, helping him to avoid obstacles, traps and enemies, by working together to create \"team combos\". During these actions, the Tokobots team up to take on different combinations in order to simulate everything from a ladder that Bolt climbs to wings that allow him to fly over large obstacles. The player will have to use strategy and skill to create these team combos in order to complete each level and succeed in the game.",
-			"videos":    nil,
-		},
-		{
-			"artworks": nil,
-			"cover": map[string]interface{}{
-				"id":    136520,
-				"width": 1000,
-				"url":   "//images.igdb.com/igdb/image/upload/t_cover_big/co1j8f.jpg",
-			},
-			"first_release_date": 1163721600,
-			"franchise":          0,
-			"game_status":        0,
-			"game_type":          10,
-			"genres":             []int{8},
-			"id":                 20663,
-			"name":               "Tokobot Plus: Mysteries of the Karakuri",
-			"platforms": []map[string]interface{}{
-				{
-					"id":   6,
-					"name": "NES",
-				},
-			},
-			"storyline": "",
-			"summary":   "Bolt is an apprentice Treasure Master working at Mr. Canewood's laboratory. With the help of mysterious Tokobots, he will explore many prehistoric ruins to find ancient relics that will put him one step further on his path to be a Treasure Master and find his father. However, he will also change his destiny in other ways.",
-			"videos":    nil,
-		},
-		{
-			"artworks": nil,
-			"cover": map[string]interface{}{
-				"id":    136520,
-				"width": 1000,
-				"url":   "//images.igdb.com/igdb/image/upload/t_cover_big/co1j8f.jpg",
-			},
-			"first_release_date": 1136419200,
-			"franchise":          0,
-			"game_status":        0,
-			"game_type":          0,
-			"genres":             []int{8},
-			"id":                 19692,
-			"name":               "1Xtreme (Greatest Hits)",
-			"platforms": []map[string]interface{}{
-				{
-					"id":   6,
-					"name": "PlayStation",
-				},
-			},
-			"storyline": "Gear up for some incredible Xtreme racing",
-			"summary":   "Extreme racing.",
-			"videos":    nil,
 		},
 	}
 
@@ -153,9 +78,7 @@ func GetTestIGDBServer() *httptest.Server {
 		w.WriteHeader(http.StatusOK)
 		w.Header().Set("Content-Type", "application/json")
 
-		if strings.Contains(string(body), "; fields *, platforms.name, cover.url, cover.width;") {
-			json.NewEncoder(w).Encode(testSearchGameNameResponse)
-		} else if strings.Contains(string(body), "fields id, name, platforms") {
+		if strings.Contains(string(body), "fields id, name, platforms") {
 			json.NewEncoder(w).Encode(testFuzzyFindGameDataResponse)
 		} else {
 			json.NewEncoder(w).Encode(testGetGameDataResponse)

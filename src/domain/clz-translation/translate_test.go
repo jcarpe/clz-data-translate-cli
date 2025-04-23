@@ -95,11 +95,11 @@ func TestTranslateCLZ(t *testing.T) {
 		t.Errorf("expected cover ID to be 136520, got %d", actualOutputWithIGDBSupplement.Games[0].Cover.ID)
 	}
 
-	if actualOutputWithIGDBSupplement.Games[0].Storyline != "The Mushroom Kingdom has been a peaceful place." {
-		t.Errorf("expected storyline to be 'The Mushroom Kingdom has been a peaceful place.', got '%s'", actualOutputWithIGDBSupplement.Games[0].Storyline)
+	if actualOutputWithIGDBSupplement.Games[0].Storyline != "A storyline supplement from mocked IGDB data for test." {
+		t.Errorf("expected storyline to be 'A storyline supplement from mocked IGDB data for test.', got '%s'", actualOutputWithIGDBSupplement.Games[0].Storyline)
 	}
 
-	if actualOutputWithIGDBSupplement.Games[0].Summary != "Super Mario Bros. 3, the third entry in the Super Mario Bros. series." {
-		t.Errorf("expected summary to be 'Super Mario Bros. 3, the third entry in the Super Mario Bros. series.', got '%s'", actualOutputWithIGDBSupplement.Games[0].Summary)
+	if actualOutputWithIGDBSupplement.Games[0].Summary != "A summary supplement from mocked IGDB data for test." {
+		t.Errorf("expected summary to be 'A summary supplement from mocked IGDB data for test.', got '%s'", actualOutputWithIGDBSupplement.Games[0].Summary)
 	}
 }
