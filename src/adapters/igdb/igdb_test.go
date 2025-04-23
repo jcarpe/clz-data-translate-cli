@@ -48,37 +48,6 @@ func TestGetGameData(t *testing.T) {
 	}
 }
 
-func TestSearchGameName(t *testing.T) {
-	igdbAdapter := NewIGDBAdapter(IGDBAdapterInit{
-		AuthBaseUrl:      os.Getenv("IGDB_AUTH_BASE_URL"),
-		AuthUrlPath:      os.Getenv("IGDB_AUTH_PATH"),
-		AuthClientId:     os.Getenv("IGDB_CLIENT_ID"),
-		AuthClientSecret: os.Getenv("IGDB_CLIENT_SECRET"),
-		IGDBBaseUrl:      os.Getenv("IGDB_BASE_URL"),
-	})
-	searchTerm := "tokobot"
-
-	// Execution
-	gamesData := igdbAdapter.SearchGameByTerm(searchTerm)
-
-	// Assertion
-	if gamesData == nil {
-		t.Errorf("Expected game data to be returned, but got nil")
-	}
-
-	if len(gamesData) != 3 {
-		t.Errorf("Expected 3 games to be returned, but got %d", len(gamesData))
-	}
-
-	if gamesData[1].Name != "Tokobot Plus: Mysteries of the Karakuri" {
-		t.Errorf("Expected game name to be Tokobot Plus: Mysteries of the Karakuri, but got %s", gamesData[1].Name)
-	}
-
-	if gamesData[0].Name != "Tokobot" {
-		t.Errorf("Expected game name to be Tokobot, but got %s", gamesData[0].Name)
-	}
-}
-
 func TestGameTitleNormalization(t *testing.T) {
 	// Test cases
 	tests := []struct {

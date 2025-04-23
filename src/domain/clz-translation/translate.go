@@ -94,7 +94,6 @@ func extractLinks(links []linkDef) []domain.Link {
 }
 
 func retrieveIGDBSupplement(gameName string, gamePlatform string, igdbAdapter *igdb.IGDBAdapter) igdb.IGDBGameData {
-	// igdbGameData := igdbAdapter.SearchGameByTerm(gameName)
 	igdbGameID := igdbAdapter.FuzzyFindGameByTitle(gameName, gamePlatform)
 	if igdbGameID == 0 {
 		fmt.Println("No games found in IGDB for CLZ game:", gameName)
