@@ -17,7 +17,7 @@ var (
 
 	translateCmd = &cobra.Command{
 		Use:   "translate",
-		Short: "translate game collection data to another format",
+		Short: "Translate provided CLZ game collection data in XML format to JSON",
 		Run: func(cmd *cobra.Command, args []string) {
 			fmt.Println("attempt a games data translation...")
 
@@ -28,7 +28,7 @@ var (
 
 			data, err := os.ReadFile(seedFile)
 			if err != nil {
-				fmt.Printf("error reading test data: %v", err)
+				fmt.Printf("error reading CLZ data: %v", err)
 				return
 			}
 
@@ -37,7 +37,7 @@ var (
 			if writeFileName != "" {
 				jsonData, marshalErr := json.Marshal(translated)
 				if marshalErr != nil {
-					fmt.Printf("error marshalling translated data: %v", err)
+					fmt.Printf("error marshalling translated data JSON: %v", err)
 					return
 				}
 
@@ -46,6 +46,7 @@ var (
 					fmt.Printf("error writing to file: %v", err)
 					return
 				}
+				fmt.Printf("translated JSON data written to file: %s.json \n", writeFileName)
 			} else {
 				fmt.Println("no filename provided, skipping write to file...")
 				fmt.Printf("translated JSON data: %#v \n", translated)
@@ -55,7 +56,7 @@ var (
 )
 
 func init() {
-	translateCmd.Flags().StringVarP(&seedFile, "seedFile", "s", "", "seed data file to translate")
+	translateCmd.Flags().StringVarP(&seedFile, "seedFile", "s", "", "seed data file to translate (CLZ collection XML export)")
 	translateCmd.Flags().StringVarP(&writeFileName, "writeFileName", "w", "", "filename to write JSON data to")
 	translateCmd.Flags().BoolVarP(&igdbSupplement, "igdbSupplement", "i", false, "whether to supplement data with IGDB data")
 	rootCmd.AddCommand(translateCmd)

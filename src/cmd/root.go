@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"fmt"
 	"main/src/domain"
 
 	"github.com/spf13/cobra"
@@ -9,10 +8,8 @@ import (
 
 var rootCmd = &cobra.Command{
 	Use:   "CLZTranslate",
-	Short: "A simple data translation tool for vdeo game collection data from CLZ",
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Hello, World!")
-	},
+	Short: "A translation tool for CLZ game collection XML data to JSON",
+	Long:  "This tool translates CLZ game collection data in XML format to JSON format with optional IGDB supplement.",
 }
 
 func Execute() error {
@@ -21,5 +18,4 @@ func Execute() error {
 
 func init() {
 	domain.LoadEnv(".env.local")
-	rootCmd.AddCommand(translateCmd)
 }
