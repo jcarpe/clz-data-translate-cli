@@ -2,6 +2,7 @@ package clz_translate
 
 import (
 	"encoding/xml"
+	"fmt"
 	"log"
 	"main/src/adapters/igdb"
 	"main/src/domain"
@@ -93,20 +94,33 @@ func extractLinks(links []linkDef) []domain.Link {
 }
 
 func retrieveIGDBSupplement(gameName string, gamePlatform string, igdbAdapter *igdb.IGDBAdapter) igdb.IGDBGameData {
-	igdbGameData := igdbAdapter.SearchGameByTerm(gameName)
-
-	for _, game := range igdbGameData {
-		platformMap := domain.CLZPlatformMap[gamePlatform]
-		for _, platform := range game.Platforms {
-			if platformMap == platform.Name {
-				// fmt.Println("Found matching game in IGDB for CLZ game:", gameName)
-				return game
-			}
-		}
+	// igdbGameData := igdbAdapter.SearchGameByTerm(gameName)
+	igdbGameID := igdbAdapter.FuzzyFindGameByTitle(gameName, gamePlatform)
+	if igdbGameID == 0 {
+		fmt.Println("No games found in IGDB for CLZ game:", gameName)
+		return igdb.IGDBGameData{}
 	}
 
-	// fmt.Println("No matching game found in IGDB for CLZ game:", gameName)
-	return igdb.IGDBGameData{}
+	igdbGameData := igdbAdapter.GetGameData(igdbGameID)
+	if igdbGameData.ID == 0 {
+		fmt.Println("No game data found in IGDB for CLZ game:", gameName)
+		return igdb.IGDBGameData{}
+	}
+
+	return igdbGameData
+
+	// for _, game := range igdbGameData {
+	// 	platformMap := domain.CLZPlatformMap[gamePlatform]
+	// 	for _, platform := range game.Platforms {
+	// 		if platformMap == platform.Name {
+	// 			// fmt.Println("Found matching game in IGDB for CLZ game:", gameName)
+	// 			return game
+	// 		}
+	// 	}
+	// }
+
+	// // fmt.Println("No matching game found in IGDB for CLZ game:", gameName)
+	// return igdb.IGDBGameData{}
 }
 
 // TranslateCLZ translates a CLZ XML input string into a domain.GameCollection.
