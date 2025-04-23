@@ -2,6 +2,7 @@ package mocks
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 	"net/http/httptest"
@@ -110,6 +111,24 @@ var (
 			"videos":    nil,
 		},
 	}
+
+	testFuzzyFindGameDataResponse = []map[string]interface{}{
+		{
+			"id":        1,
+			"name":      "Super Mario Bros. 3+",
+			"platforms": []int{6},
+		},
+		{
+			"id":        2,
+			"name":      "Tokobot",
+			"platforms": []int{6},
+		},
+		{
+			"id":        3,
+			"name":      "Super Mario Bros. 3",
+			"platforms": []int{18},
+		},
+	}
 )
 
 func GetTestTwitchAuthServer() *httptest.Server {
@@ -135,8 +154,11 @@ func GetTestIGDBServer() *httptest.Server {
 		w.WriteHeader(http.StatusOK)
 		w.Header().Set("Content-Type", "application/json")
 
-		if strings.Contains(string(body), "search") {
+		if strings.Contains(string(body), "; fields *, platforms.name, cover.url, cover.width;") {
 			json.NewEncoder(w).Encode(testSearchGameNameResponse)
+		} else if strings.Contains(string(body), "fields id, name, platforms") {
+			fmt.Println("Request Body:", string(body))
+			json.NewEncoder(w).Encode(testFuzzyFindGameDataResponse)
 		} else {
 			json.NewEncoder(w).Encode(testGetGameDataResponse)
 		}

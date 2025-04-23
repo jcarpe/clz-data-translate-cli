@@ -15,6 +15,16 @@ type IGDBAdapter struct {
 	//   - An IGDBGameData instance representing the requested game.
 	GetGameData func(int) IGDBGameData
 
+	// FuzzyFindGameByTitle takes a game title and platform name, and returns the ID of the game that matches the title and platform.
+	//
+	// Fields:
+	//   - title: The game title string.
+	//   - clzPlatform: The platform name string.
+	//
+	// Returns:
+	//   - The ID int value of the game that matches the title and platform.
+	FuzzyFindGameByTitle func(string, string) int
+
 	// SearchGameByTerm takes a search term and returns a list of games that match the search term by title.
 	//
 	// Fields:

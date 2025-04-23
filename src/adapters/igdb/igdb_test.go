@@ -99,7 +99,7 @@ func TestGameTitleNormalization(t *testing.T) {
 }
 
 func TestFuzzyFindIGDBGameByTitle(t *testing.T) {
-	NewIGDBAdapter(IGDBAdapterInit{
+	igdbAdapter := NewIGDBAdapter(IGDBAdapterInit{
 		AuthBaseUrl:      os.Getenv("IGDB_AUTH_BASE_URL"),
 		AuthUrlPath:      os.Getenv("IGDB_AUTH_PATH"),
 		AuthClientId:     os.Getenv("IGDB_CLIENT_ID"),
@@ -107,9 +107,10 @@ func TestFuzzyFindIGDBGameByTitle(t *testing.T) {
 		IGDBBaseUrl:      os.Getenv("IGDB_BASE_URL"),
 	})
 	title := "Super Mario Bros. 3"
+	clzPlatform := "NES"
 
 	// Execution
-	gameID := FuzzyFindIGDBGameByTitle(title)
+	gameID := igdbAdapter.FuzzyFindGameByTitle(title, clzPlatform)
 
 	fmt.Printf("Game ID: %d\n", gameID)
 
