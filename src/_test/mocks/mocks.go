@@ -2,7 +2,6 @@ package mocks
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"net/http"
 	"net/http/httptest"
@@ -157,7 +156,6 @@ func GetTestIGDBServer() *httptest.Server {
 		if strings.Contains(string(body), "; fields *, platforms.name, cover.url, cover.width;") {
 			json.NewEncoder(w).Encode(testSearchGameNameResponse)
 		} else if strings.Contains(string(body), "fields id, name, platforms") {
-			fmt.Println("Request Body:", string(body))
 			json.NewEncoder(w).Encode(testFuzzyFindGameDataResponse)
 		} else {
 			json.NewEncoder(w).Encode(testGetGameDataResponse)

@@ -1,7 +1,6 @@
 package igdb
 
 import (
-	"fmt"
 	"main/src/_test/mocks"
 	"os"
 	"testing"
@@ -112,9 +111,12 @@ func TestFuzzyFindIGDBGameByTitle(t *testing.T) {
 	// Execution
 	gameID := igdbAdapter.FuzzyFindGameByTitle(title, clzPlatform)
 
-	fmt.Printf("Game ID: %d\n", gameID)
+	// Assertion
+	if gameID == 0 {
+		t.Errorf("Expected game ID to be found, but got 0")
+	}
 
-	// if gameData.Name != "Super Mario Bros. 3" {
-	// 	t.Errorf("Expected game name to be Super Mario Bros. 3, but got %s", gameData.Name)
-	// }
+	if gameID != 3 {
+		t.Errorf("Expected game ID to be 3, but got %d", gameID)
+	}
 }
