@@ -106,6 +106,8 @@ func retrieveIGDBSupplement(gameName string, gamePlatform string, igdbAdapter *i
 		return igdb.IGDBGameData{}
 	}
 
+	time.Sleep(2 * time.Second)
+
 	return igdbGameData
 }
 
