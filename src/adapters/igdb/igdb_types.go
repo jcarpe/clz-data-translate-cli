@@ -1,5 +1,9 @@
 package igdb
 
+import (
+	"main/src/domain"
+)
+
 // IGDBAdapter is an adapter for the IGDB API.
 //
 // Fields:
@@ -24,6 +28,15 @@ type IGDBAdapter struct {
 	// Returns:
 	//   - The ID int value of the game that matches the title and platform.
 	FuzzyFindGameByTitle func(string, string) int
+
+	// FuzzyFindGamesList takes a game title and returns a list of games that match the title.
+	//
+	// Fields:
+	//   - gamesList: The game collection list
+	//
+	// Returns:
+	//   - The games list with entires updated with IGDB ID values.
+	FuzzyFindGamesList func([]domain.Game) []domain.Game
 }
 
 // IGDBAdapterInit contains the initialization parameters for the IGDBAdapter.

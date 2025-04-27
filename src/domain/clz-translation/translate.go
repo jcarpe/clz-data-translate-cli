@@ -7,6 +7,7 @@ import (
 	"main/src/adapters/igdb"
 	"main/src/domain"
 	"os"
+	"strconv"
 	"time"
 )
 
@@ -106,47 +107,30 @@ func retrieveIGDBSupplement(gameName string, gamePlatform string, igdbAdapter *i
 		return igdb.IGDBGameData{}
 	}
 
-	time.Sleep(2 * time.Second)
+	rateLimitStr := os.Getenv("IGDB_API_RATE_LIMIT")
+	rateLimit, err := strconv.Atoi(rateLimitStr)
+	if err != nil {
+		fmt.Printf("Invalid IGDB_API_RATE_LIMIT value: %v\n", err)
+		rateLimit = 0 // Default to 0 second if parsing fails
+	}
+	sleepTime := time.Duration(rateLimit) * time.Second
+	time.Sleep(sleepTime)
 
 	return igdbGameData
 }
 
-// TranslateCLZ translates a CLZ XML input string into a domain.GameCollection.
-// It unmarshals the XML input into a clzXMLList structure and then iterates
-// through the list of games to populate a domain.GameCollection with the
-// relevant game data.
-//
-// Parameters:
-//   - input: A string containing the CLZ XML data.
-//
-// Returns:
-//   - domain.GameCollection: A collection of games translated from the CLZ XML data.
-//   - igdbSupplement: A boolean indicating whether to supplement the data with IGDB data.
-//
-// The function will log a fatal error if the XML unmarshalling fails.
-func TranslateCLZ(input string, igdbSupplement bool) domain.GameCollection {
+func translateGamesDataToDomain(clzXMLData string) []domain.Game {
 	var (
-		clzData     clzXMLList
-		igdbAdapter *igdb.IGDBAdapter = nil
+		clzData clzXMLList
 	)
 
-	err := xml.Unmarshal([]byte(input), &clzData)
+	err := xml.Unmarshal([]byte(clzXMLData), &clzData)
 	if err != nil {
 		log.Fatalf("error unmarshalling xml: %v", err)
 	}
 
 	gameCollection := domain.GameCollection{
 		Games: []domain.Game{},
-	}
-
-	if igdbSupplement {
-		igdbAdapter = igdb.NewIGDBAdapter(igdb.IGDBAdapterInit{
-			AuthBaseUrl:      os.Getenv("IGDB_AUTH_BASE_URL"),
-			AuthUrlPath:      os.Getenv("IGDB_AUTH_PATH"),
-			AuthClientId:     os.Getenv("IGDB_CLIENT_ID"),
-			AuthClientSecret: os.Getenv("IGDB_CLIENT_SECRET"),
-			IGDBBaseUrl:      os.Getenv("IGDB_BASE_URL"),
-		})
 	}
 
 	for _, game := range clzData.GameList {
@@ -176,21 +160,58 @@ func TranslateCLZ(input string, igdbSupplement bool) domain.GameCollection {
 			Title:              game.Title,
 		}
 
-		if igdbSupplement && newGame.HardwareType == "Game" {
-			igdbData := retrieveIGDBSupplement(game.Title, game.Platform.DisplayName, igdbAdapter)
-
-			newGame.FirstReleaseDate = time.Unix(int64(igdbData.First_release_date), 0)
-			newGame.Storyline = igdbData.Storyline
-			newGame.Summary = igdbData.Summary
-			newGame.Cover = domain.Cover{
-				ID:    igdbData.Cover.ID,
-				Width: igdbData.Cover.Width,
-				URL:   igdbData.Cover.URL,
-			}
-		}
-
 		gameCollection.Games = append(gameCollection.Games, newGame)
 	}
 
-	return gameCollection
+	return gameCollection.Games
+}
+
+// TranslateCLZ translates a CLZ XML input string into a domain.GameCollection.
+// It unmarshals the XML input into a clzXMLList structure and then iterates
+// through the list of games to populate a domain.GameCollection with the
+// relevant game data.
+//
+// Parameters:
+//   - input: A string containing the CLZ XML data.
+//
+// Returns:
+//   - domain.GameCollection: A collection of games translated from the CLZ XML data.
+//   - igdbSupplement: A boolean indicating whether to supplement the data with IGDB data.
+//
+// The function will log a fatal error if the XML unmarshalling fails.
+func TranslateCLZ(input string, igdbSupplement bool) domain.GameCollection {
+	var (
+		igdbAdapter *igdb.IGDBAdapter = nil
+	)
+
+	gameCollection := translateGamesDataToDomain(input)
+
+	if igdbSupplement {
+		igdbAdapter = igdb.NewIGDBAdapter(igdb.IGDBAdapterInit{
+			AuthBaseUrl:      os.Getenv("IGDB_AUTH_BASE_URL"),
+			AuthUrlPath:      os.Getenv("IGDB_AUTH_PATH"),
+			AuthClientId:     os.Getenv("IGDB_CLIENT_ID"),
+			AuthClientSecret: os.Getenv("IGDB_CLIENT_SECRET"),
+			IGDBBaseUrl:      os.Getenv("IGDB_BASE_URL"),
+		})
+
+		for i, game := range gameCollection {
+			if game.HardwareType == "Game" {
+				igdbData := retrieveIGDBSupplement(game.Title, string(game.Platform), igdbAdapter)
+
+				gameCollection[i].FirstReleaseDate = time.Unix(int64(igdbData.First_release_date), 0)
+				gameCollection[i].Storyline = igdbData.Storyline
+				gameCollection[i].Summary = igdbData.Summary
+				gameCollection[i].Cover = domain.Cover{
+					ID:    igdbData.Cover.ID,
+					Width: igdbData.Cover.Width,
+					URL:   igdbData.Cover.URL,
+				}
+			}
+		}
+	}
+
+	return domain.GameCollection{
+		Games: gameCollection,
+	}
 }

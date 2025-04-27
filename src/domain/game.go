@@ -21,6 +21,7 @@ type Game struct {
 	Format             string
 	Genres             []string
 	HardwareType       string
+	IGDB_ID            int
 	Links              []Link
 	Multiplayer        bool
 	Platform           Platform

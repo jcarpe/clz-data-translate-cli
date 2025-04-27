@@ -133,6 +133,26 @@ func fuzzySearchByTerm(searchTerm string) []igdbFuzzySearchGameData {
 	return searchResults
 }
 
+func fuzzyFindGamesList(gameList []domain.Game) []domain.Game {
+
+	for i, game := range gameList {
+		// Normalize the game title
+		normalizedTitle := GameTitleNormalization(game.Title)
+
+		// Search for the game by normalized title
+		gameIgdbId := fuzzyFindIGDBGameByTitle(normalizedTitle, string(game.Platform))
+		if gameIgdbId == 0 {
+			fmt.Printf("No games found in FuzzyFind for title: %s\n", game.Title)
+			continue
+		}
+
+		// Update the game ID in the game list
+		gameList[i].IGDB_ID = gameIgdbId
+	}
+
+	return gameList
+}
+
 // GameTitleNormalization normalizes the game title by removing special characters and converting to lowercase.
 //
 // Parameters:
@@ -168,5 +188,6 @@ func NewIGDBAdapter(init IGDBAdapterInit) *IGDBAdapter {
 	return &IGDBAdapter{
 		GetGameData:          func(gameID int) IGDBGameData { return getGameData(gameID) },
 		FuzzyFindGameByTitle: func(title string, clzPlatform string) int { return fuzzyFindIGDBGameByTitle(title, clzPlatform) },
+		FuzzyFindGamesList:   func(gameList []domain.Game) []domain.Game { return fuzzyFindGamesList(gameList) },
 	}
 }
