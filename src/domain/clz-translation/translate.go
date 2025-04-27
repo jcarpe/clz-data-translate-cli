@@ -94,16 +94,11 @@ func extractLinks(links []linkDef) []domain.Link {
 	return domainLinks
 }
 
-func retrieveIGDBSupplement(gameName string, gamePlatform string, igdbAdapter *igdb.IGDBAdapter) igdb.IGDBGameData {
-	igdbGameID := igdbAdapter.FuzzyFindGameByTitle(gameName, gamePlatform)
-	if igdbGameID == 0 {
-		fmt.Println("No games found in IGDB for CLZ game:", gameName)
-		return igdb.IGDBGameData{}
-	}
+func retrieveIGDBSupplement(game domain.Game, igdbAdapter *igdb.IGDBAdapter) igdb.IGDBGameData {
 
-	igdbGameData := igdbAdapter.GetGameData(igdbGameID)
+	igdbGameData := igdbAdapter.GetGameData(game.IGDB_ID)
 	if igdbGameData.ID == 0 {
-		fmt.Println("No game data found in IGDB for CLZ game:", gameName)
+		fmt.Println("No game data found in IGDB for CLZ game:", game.Title)
 		return igdb.IGDBGameData{}
 	}
 
@@ -197,7 +192,7 @@ func TranslateCLZ(input string, igdbSupplement bool) domain.GameCollection {
 
 		for i, game := range gameCollection {
 			if game.HardwareType == "Game" {
-				igdbData := retrieveIGDBSupplement(game.Title, string(game.Platform), igdbAdapter)
+				igdbData := retrieveIGDBSupplement(game, igdbAdapter)
 
 				gameCollection[i].FirstReleaseDate = time.Unix(int64(igdbData.First_release_date), 0)
 				gameCollection[i].Storyline = igdbData.Storyline
