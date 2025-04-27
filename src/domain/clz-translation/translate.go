@@ -190,7 +190,10 @@ func TranslateCLZ(input string, igdbSupplement bool) domain.GameCollection {
 			IGDBBaseUrl:      os.Getenv("IGDB_BASE_URL"),
 		})
 
-		for i, game := range gameCollection {
+		// perform fuzzy find for all games in order to get IGDB_ID
+		gameCollectionWithIgdbIds := igdbAdapter.FuzzyFindGamesList(gameCollection)
+
+		for i, game := range gameCollectionWithIgdbIds {
 			if game.HardwareType == "Game" {
 				igdbData := retrieveIGDBSupplement(game, igdbAdapter)
 
@@ -204,6 +207,8 @@ func TranslateCLZ(input string, igdbSupplement bool) domain.GameCollection {
 				}
 			}
 		}
+
+		gameCollection = gameCollectionWithIgdbIds
 	}
 
 	return domain.GameCollection{
