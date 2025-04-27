@@ -2,6 +2,7 @@ package igdb
 
 import (
 	"main/src/_test/mocks"
+	"main/src/domain"
 	"os"
 	"testing"
 )
@@ -87,5 +88,42 @@ func TestFuzzyFindIGDBGameByTitle(t *testing.T) {
 
 	if gameID != 3 {
 		t.Errorf("Expected game ID to be 3, but got %d", gameID)
+	}
+}
+
+func TestFuzzySearchList(t *testing.T) {
+	igdbAdapter := NewIGDBAdapter(IGDBAdapterInit{
+		AuthBaseUrl:      os.Getenv("IGDB_AUTH_BASE_URL"),
+		AuthUrlPath:      os.Getenv("IGDB_AUTH_PATH"),
+		AuthClientId:     os.Getenv("IGDB_CLIENT_ID"),
+		AuthClientSecret: os.Getenv("IGDB_CLIENT_SECRET"),
+		IGDBBaseUrl:      os.Getenv("IGDB_BASE_URL"),
+	})
+
+	mockGamesList := []domain.Game{
+		{
+			Title:    "Super Mario Bros. 3",
+			Platform: "NES",
+		},
+		{
+			Title:    "The Legend of Zelda",
+			Platform: "NES",
+		},
+		{
+			Title:    "Final Fantasy",
+			Platform: "NES",
+		},
+	}
+
+	// Execution
+	fuzzySearchedGames := igdbAdapter.FuzzyFindGamesList(mockGamesList)
+
+	// Assertion
+	if len(fuzzySearchedGames) == 0 {
+		t.Errorf("Expected game list to be found, but got 0")
+	}
+
+	if fuzzySearchedGames[0].IGDB_ID != 3 {
+		t.Errorf("Expected game IGDB_ID to be 3, but got %d", fuzzySearchedGames[0].IGDB_ID)
 	}
 }
