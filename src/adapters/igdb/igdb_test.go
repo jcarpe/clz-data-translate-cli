@@ -21,6 +21,7 @@ func TestMain(m *testing.M) {
 	os.Setenv("IGDB_CLIENT_ID", "test_client_id")
 	os.Setenv("IGDB_CLIENT_SECRET", "test_client_secret")
 	os.Setenv("IGDB_BASE_URL", testIGDBServer.URL)
+	os.Setenv("IGDB_API_RATE_LIMIT", "0")
 
 	// Run the tests
 	exitCode := m.Run()

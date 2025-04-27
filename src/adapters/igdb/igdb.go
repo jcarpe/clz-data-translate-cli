@@ -6,7 +6,10 @@ import (
 	"main/src/domain"
 	"net/http"
 	"net/url"
+	"os"
+	"strconv"
 	"strings"
+	"time"
 )
 
 var (
@@ -134,8 +137,21 @@ func fuzzySearchByTerm(searchTerm string) []igdbFuzzySearchGameData {
 }
 
 func fuzzyFindGamesList(gameList []domain.Game) []domain.Game {
+	// Rate limit duration for IGDB API
+	rateLimitStr := os.Getenv("IGDB_API_RATE_LIMIT")
+	rateLimit, err := strconv.Atoi(rateLimitStr)
+	if err != nil {
+		fmt.Printf("Invalid IGDB_API_RATE_LIMIT value: %v -- setting to 0\n", err)
+		rateLimit = 0 // Default to 0 second if parsing fails
+	}
+	sleepTime := time.Duration(rateLimit) * time.Second
 
 	for i, game := range gameList {
+		if i != 0 {
+			// Sleep for a short duration to avoid hitting the rate limit
+			time.Sleep(sleepTime)
+		}
+
 		// Normalize the game title
 		normalizedTitle := GameTitleNormalization(game.Title)
 
