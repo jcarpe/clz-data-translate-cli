@@ -67,25 +67,27 @@ func initIGDBRequestObject(path string, filter *strings.Reader) *http.Request {
 	return request
 }
 
-func getGameData(gameID int) IGDBGameData {
-	request := initIGDBRequestObject("/games", strings.NewReader(fmt.Sprintf("fields *, platforms.name, cover.url, cover.width; where id = %d;", gameID)))
+func getGameData(gameIDs []int) []IGDBGameData {
+	ids := strings.Join(strings.Fields(strings.Trim(fmt.Sprint(gameIDs), "[]")), ",")
+	query := fmt.Sprintf("fields *, platforms.name, cover.url, cover.width; where id = (%s);", ids)
+	request := initIGDBRequestObject("/games", strings.NewReader(query))
 
 	httpClient := &http.Client{}
 	response, err := httpClient.Do(request)
 
 	if err != nil || response == nil || response.StatusCode != http.StatusOK {
 		fmt.Printf("error getting game data: %v\n, %v", err, response)
-		return IGDBGameData{}
+		return []IGDBGameData{}
 	}
 	defer response.Body.Close()
 
 	var gameData []IGDBGameData
 	if err := json.NewDecoder(response.Body).Decode(&gameData); err != nil {
 		fmt.Printf("error decoding response body: %v\n", err)
-		return IGDBGameData{}
+		return []IGDBGameData{}
 	}
 
-	return gameData[0]
+	return gameData
 }
 
 func fuzzyFindIGDBGameByTitle(title string, clzPlatformName string) int {
@@ -202,7 +204,7 @@ func NewIGDBAdapter(init IGDBAdapterInit) *IGDBAdapter {
 	igdbBaseUrl = init.IGDBBaseUrl
 
 	return &IGDBAdapter{
-		GetGameData:          func(gameID int) IGDBGameData { return getGameData(gameID) },
+		GetGameData:          func(gameIDs []int) []IGDBGameData { return getGameData(gameIDs) },
 		FuzzyFindGameByTitle: func(title string, clzPlatform string) int { return fuzzyFindIGDBGameByTitle(title, clzPlatform) },
 		FuzzyFindGamesList:   func(gameList []domain.Game) []domain.Game { return fuzzyFindGamesList(gameList) },
 	}
