@@ -95,9 +95,8 @@ func extractLinks(links []linkDef) []domain.Link {
 }
 
 func retrieveIGDBSupplement(game domain.Game, igdbAdapter *igdb.IGDBAdapter) igdb.IGDBGameData {
-
-	igdbGameData := igdbAdapter.GetGameData(game.IGDB_ID)
-	if igdbGameData.ID == 0 {
+	igdbGameData := igdbAdapter.GetGameData([]int{game.IGDB_ID})
+	if igdbGameData[0].ID == 0 {
 		fmt.Println("No game data found in IGDB for CLZ game:", game.Title)
 		return igdb.IGDBGameData{}
 	}
@@ -111,7 +110,7 @@ func retrieveIGDBSupplement(game domain.Game, igdbAdapter *igdb.IGDBAdapter) igd
 	sleepTime := time.Duration(rateLimit) * time.Second
 	time.Sleep(sleepTime)
 
-	return igdbGameData
+	return igdbGameData[0]
 }
 
 func translateGamesDataToDomain(clzXMLData string) []domain.Game {
@@ -161,6 +160,28 @@ func translateGamesDataToDomain(clzXMLData string) []domain.Game {
 	return gameCollection.Games
 }
 
+func generateBatchQueries(gameCollection []domain.Game) [][]int {
+	batchedQueries := [][]int{}
+	batchSize := 3
+
+	for i := 0; i < len(gameCollection); i += batchSize {
+		end := i + batchSize
+
+		if end > len(gameCollection) {
+			end = len(gameCollection)
+		}
+
+		batch := []int{}
+		for _, game := range gameCollection[i:end] {
+			batch = append(batch, game.IGDB_ID)
+		}
+
+		batchedQueries = append(batchedQueries, batch)
+	}
+
+	return batchedQueries
+}
+
 // TranslateCLZ translates a CLZ XML input string into a domain.GameCollection.
 // It unmarshals the XML input into a clzXMLList structure and then iterates
 // through the list of games to populate a domain.GameCollection with the
@@ -193,17 +214,22 @@ func TranslateCLZ(input string, igdbSupplement bool) domain.GameCollection {
 		// perform fuzzy find for all games in order to get IGDB_ID
 		gameCollectionWithIgdbIds := igdbAdapter.FuzzyFindGamesList(gameCollection)
 
-		for i, game := range gameCollectionWithIgdbIds {
-			if game.HardwareType == "Game" {
-				igdbData := retrieveIGDBSupplement(game, igdbAdapter)
+		// TODO: batch and rate limit game data retrieval
 
-				gameCollection[i].FirstReleaseDate = time.Unix(int64(igdbData.First_release_date), 0)
-				gameCollection[i].Storyline = igdbData.Storyline
-				gameCollection[i].Summary = igdbData.Summary
+		batchQueries := generateBatchQueries(gameCollectionWithIgdbIds)
+
+		for _, batchQuery := range batchQueries {
+			// retrieve IGDB data for each batch
+			igdbData := igdbAdapter.GetGameData(batchQuery)
+
+			for i, data := range igdbData {
+				gameCollection[i].FirstReleaseDate = time.Unix(int64(data.First_release_date), 0)
+				gameCollection[i].Storyline = data.Storyline
+				gameCollection[i].Summary = data.Summary
 				gameCollection[i].Cover = domain.Cover{
-					ID:    igdbData.Cover.ID,
-					Width: igdbData.Cover.Width,
-					URL:   igdbData.Cover.URL,
+					ID:    data.Cover.ID,
+					Width: data.Cover.Width,
+					URL:   data.Cover.URL,
 				}
 			}
 		}
