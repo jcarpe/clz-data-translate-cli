@@ -40,13 +40,19 @@ func TestGetGameData(t *testing.T) {
 		AuthClientSecret: os.Getenv("IGDB_CLIENT_SECRET"),
 		IGDBBaseUrl:      os.Getenv("IGDB_BASE_URL"),
 	})
-	gameID := 1068 // <-- Super Mario Bros 3 ID value in IGDB
+	gameID := []int{1068} // <-- Super Mario Bros 3 ID value in IGDB
 
 	// Execution
 	gameData := igdbAdapter.GetGameData(gameID)
 
-	if gameData.Name != "Super Mario Bros. 3" {
-		t.Errorf("Expected game name to be Super Mario Bros. 3, but got %s", gameData.Name)
+	if gameData[0].Name != "Super Mario Bros. 3" {
+		t.Errorf("Expected game name to be Super Mario Bros. 3, but got %s", gameData[0].Name)
+	}
+
+	multipleGameData := igdbAdapter.GetGameData([]int{1068, 1069})
+
+	for _, game := range multipleGameData {
+		t.Logf("Game ID: %d, Name: %s", game.ID, game.Name)
 	}
 }
 
