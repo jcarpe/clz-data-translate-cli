@@ -146,7 +146,7 @@ func fuzzyFindGamesList(gameList []domain.Game) []domain.Game {
 		fmt.Printf("Invalid IGDB_API_RATE_LIMIT value: %v -- setting to 0\n", err)
 		rateLimit = 0 // Default to 0 second if parsing fails
 	}
-	sleepTime := time.Duration(rateLimit) * time.Second
+	sleepTime := time.Duration(rateLimit)
 
 	for i, game := range gameList {
 		if i != 0 {
