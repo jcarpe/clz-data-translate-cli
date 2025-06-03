@@ -1,4 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<gameinfo creationdate="1/27/2022 8:29:40 PM">
+<localizedtemplatetexts>
+  <field id="ttGameDetails" label="Game Details"/>
+  <field id="ttProductDetails" label="Product Details"/>
+  <field id="ttPersonalDetails" label="Personal Details"/>
+  <field id="ttImageLinkDetails" label="Images"/>
+  <field id="ttImageLinkScreenShots" label="Screenshots"/>
+  <field id="ttFirst" label="First"/>
+  <field id="ttPrev" label="Previous"/>
+  <field id="ttUp" label="Up"/>
+  <field id="ttNext" label="Next"/>
+  <field id="ttLast" label="Last"/>
+  <field id="ttBuyOnline" label="Buy this game online"/>
+  <field id="ttUserDefined" label="User Defined"/>
+</localizedtemplatetexts>
+<gamemetadata>
+  <field name="Address" id="dfLoanAddress" label="Address"/>
+  <field name="Audience Rating" id="dfAudienceRating" label="Audience Rating"/>
+  <field name="Back Cover" id="dfCoverBack" label="Back Cover"/>
+  <field name="Backdrop" id="dfBackDrop" label="Backdrop"/>
+  <field name="Barcode" id="dfUPC" label="Barcode"/>
+  <field name="Box" id="dfHasBox" label="Box"/>
+  <field name="Box set" id="dfBoxSet" label="Box set"/>
+  <field name="Clz Game ID" id="dfBPGameID" label="Clz Game ID"/>
+  <field name="Clz Online Game Last Received Revision" id="dfBPGameLastReceivedRevision" label="Clz Online Game Last Received Revision"/>
+  <field name="Clz Online Media Last Received Revision" id="dfBPMediaLastReceivedRevision" label="Clz Online Media Last Received Revision"/>
+  <field name="ClzOnline Media ID" id="dfBPMediaID" label="ClzOnline Media ID"/>
+  <field name="ClzOnline Platform ID" id="dfCLzPlatformID" label="ClzOnline Platform ID"/>
+  <field name="Collection Status" id="dfCollectionStatus" label="Collection Status"/>
+  <field name="Completed" id="dfCompleted" label="Completed"/>
+  <field name="Completeness" id="dfDynCompleteness" label="Completeness"/>
+  <field name="Completeness" id="dfCompleteness" label="Completeness"/>
+  <field name="Completion Date" id="dfCompletionDate" label="Completion Date"/>
+  <field name="Completion Year" id="dfCompletionYear" label="Completion Year"/>
+  <field name="Condition" id="dfCondition" label="Condition"/>
+  <field name="Current Value" id="dfCurrentValue" label="Current Value"/>
+  <field name="Custom Back Cover" id="dfShouldUploadbackCover" label="Custom Back Cover"/>
+  <field name="Custom Front Cover" id="dfShouldUploadFrontCover" label="Custom Front Cover"/>
+  <field name="Date Added" id="dfDateAdded" label="Date Added"/>
+  <field name="Description" id="dfDescription" label="Description"/>
+  <field name="Developer" id="dfDeveloper" label="Developer"/>
+  <field name="Devices" id="dfDevices" label="Devices"/>
+  <field name="dfSortFieldForTitle" id="dfSortFieldForTitle" label="dfSortFieldForTitle"/>
+  <field name="Due Date" id="dfDueDate" label="Due Date"/>
+  <field name="Edition" id="dfEdition" label="Edition"/>
+  <field name="Email" id="dfLoanEmail" label="Email"/>
+  <field name="Extras" id="dfExtras" label="Extras"/>
+  <field name="First letter" id="dfDynGenericFirstLetter" label="First letter"/>
+  <field name="Format" id="dfFormat" label="Format"/>
+  <field name="Front Cover" id="dfCoverFront" label="Front Cover"/>
+  <field name="Games/Hardware" id="dfDynHardware" label="Games/Hardware"/>
+  <field name="Genre" id="dfGenre" label="Genre"/>
+  <field name="Graphics Design" id="dfGraphics" label="Graphics Design"/>
+  <field name="Hardware Type" id="dfHardwareCategory" label="Hardware Type"/>
+  <field name="ID" id="dfID" label="ID"/>
+  <field name="In Collection (0/1)" id="dfInCollectionBit" label="In Collection (0/1)"/>
+  <field name="Index" id="dfIndex" label="Index"/>
+  <field name="Language" id="dfLanguage" label="Language"/>
+  <field name="Last Modified" id="dfLastModified" label="Last Modified"/>
+  <field name="Last Submission Date" id="dfSubmissionDate" label="Last Submission Date"/>
+  <field name="Links" id="dfLinks" label="Links"/>
+  <field name="Loan Date" id="dfLoanDate" label="Loan Date"/>
+  <field name="Loan Notes" id="dfLoanNotes" label="Loan Notes"/>
+  <field name="Loaned To" id="dfLoaner" label="Loaned To"/>
+  <field name="Location" id="dfLocation" label="Location"/>
+  <field name="Manual" id="dfHasManual" label="Manual"/>
+  <field name="Manufacturer ID" id="dfItemNr" label="Manufacturer ID"/>
+  <field name="Movie Files" id="dfMovieLinks" label="Movie Files"/>
+  <field name="Multiplayer Support" id="dfMultiplayer" label="Multiplayer Support"/>
+  <field name="My Rating" id="dfMyRating" label="My Rating"/>
+  <field name="No. of Disks" id="dfNrDisks" label="No. of Disks"/>
+  <field name="Notes" id="dfNotes" label="Notes"/>
+  <field name="Original" id="dfOriginal" label="Original"/>
+  <field name="Other Files" id="dfOtherLinks" label="Other Files"/>
+  <field name="Overdue" id="dfIsOverdue" label="Overdue"/>
+  <field name="Owner" id="dfOwner" label="Owner"/>
+  <field name="Platform" id="dfPlatform" label="Platform"/>
+  <field name="Producer" id="dfProducer" label="Producer"/>
+  <field name="Programmer" id="dfProgrammer" label="Programmer"/>
+  <field name="Publisher" id="dfPublisher" label="Publisher"/>
+  <field name="Purchase Date" id="dfPurchaseDate" label="Purchase Date"/>
+  <field name="Purchase Price" id="dfPurchasePrice" label="Purchase Price"/>
+  <field name="Purchase Year" id="dfPurchaseYear" label="Purchase Year"/>
+  <field name="Quantity" id="dfQuantity" label="Quantity"/>
+  <field name="Rating" id="dfDynRating" label="Rating"/>
+  <field name="Region" id="dfRegion" label="Region"/>
+  <field name="Release Date" id="dfReleaseDate" label="Release Date"/>
+  <field name="Release Year" id="dfReleaseYear" label="Release Year"/>
+  <field name="Return Date" id="dfReturnDate" label="Return Date"/>
+  <field name="Review Rating" id="dfReviewRating" label="Review Rating"/>
+  <field name="Screenshots" id="dfImageLinks" label="Screenshots"/>
+  <field name="Serial Number" id="dfSerialNumber" label="Serial Number"/>
+  <field name="Series" id="dfSeries" label="Series"/>
+  <field name="Slot" id="dfStorageSlot" label="Slot"/>
+  <field name="Sound/Music" id="dfSoundMusic" label="Sound/Music"/>
+  <field name="Storage Device" id="dfStorageDevice" label="Storage Device"/>
+  <field name="Store" id="dfStore" label="Store"/>
+  <field name="Sub Title" id="dfSubTitle" label="Sub Title"/>
+  <field name="System Requirements" id="dfSystemRequirements" label="System Requirements"/>
+  <field name="Tags" id="dfTag" label="Tags"/>
+  <field name="Thumbnail" id="dfThumbFilePath" label="Thumbnail"/>
+  <field name="Title" id="dfTitle" label="Title"/>
+  <field name="Title" id="dfLoanTitle" label="Title"/>
+  <field name="Title First Letter" id="dfDynTitleLetter" label="Title First Letter"/>
+  <field name="Title Sort" id="dfTitleSort" label="Title Sort"/>
+  <field name="Title The" id="dfTitleThe" label="Title The"/>
+  <field name="Trailer Files" id="dfTrailerFiles" label="Trailer Files"/>
+  <field name="Trailer URLs" id="dfLinkTrailers" label="Trailer URLs"/>
+  <field name="User Credit 1" id="dfUserCredit1" label="User Credit 1"/>
+  <field name="User Credit 2" id="dfUserCredit2" label="User Credit 2"/>
+  <field name="Value" id="dfPriceChartingValue" label="Value"/>
+  <field name="Value CIB" id="dfPriceChartingCIB" label="Value CIB"/>
+  <field name="Value Loose" id="dfPriceChartingLoose" label="Value Loose"/>
+  <field name="Value New" id="dfPriceChartingNew" label="Value New"/>
+</gamemetadata>
 <gamelist>
   <game>
     <id>255</id>

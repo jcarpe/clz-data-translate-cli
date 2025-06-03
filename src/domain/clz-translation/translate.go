@@ -215,8 +215,15 @@ func TranslateCLZ(input string, igdbSupplement bool) domain.GameCollection {
 		gameCollectionWithIgdbIds := igdbAdapter.FuzzyFindGamesList(gameCollection)
 
 		// TODO: batch and rate limit game data retrieval
-
 		batchQueries := generateBatchQueries(gameCollectionWithIgdbIds)
+
+		rateLimitStr := os.Getenv("IGDB_API_RATE_LIMIT")
+		rateLimit, err := strconv.Atoi(rateLimitStr)
+		if err != nil {
+			fmt.Printf("Invalid IGDB_API_RATE_LIMIT value: %v\n", err)
+			rateLimit = 2000 // Default to 2000 second if parsing fails
+		}
+		sleepTime := time.Duration(rateLimit)
 
 		for _, batchQuery := range batchQueries {
 			// retrieve IGDB data for each batch
@@ -232,6 +239,8 @@ func TranslateCLZ(input string, igdbSupplement bool) domain.GameCollection {
 					URL:   data.Cover.URL,
 				}
 			}
+
+			time.Sleep(sleepTime)
 		}
 
 		gameCollection = gameCollectionWithIgdbIds
