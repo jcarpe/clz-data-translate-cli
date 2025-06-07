@@ -221,9 +221,9 @@ func TranslateCLZ(input string, igdbSupplement bool) domain.GameCollection {
 		rateLimit, err := strconv.Atoi(rateLimitStr)
 		if err != nil {
 			fmt.Printf("Invalid IGDB_API_RATE_LIMIT value: %v\n", err)
-			rateLimit = 2000 // Default to 2000 second if parsing fails
+			rateLimit = 500 // default to 500 milliseconds if parsing fails
 		}
-		sleepTime := time.Duration(rateLimit)
+		sleepTime := time.Duration(rateLimit) * time.Millisecond
 
 		for _, batchQuery := range batchQueries {
 			// retrieve IGDB data for each batch

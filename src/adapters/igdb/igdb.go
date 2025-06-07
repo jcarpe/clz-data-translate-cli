@@ -97,7 +97,7 @@ func fuzzyFindIGDBGameByTitle(title string, clzPlatformName string) int {
 	// Search for the game by normalized title
 	gamesData := fuzzySearchByTerm(normalizedTitle)
 	if len(gamesData) == 0 {
-		fmt.Printf("No games found in FuzzyFind for title: %s\n", title)
+		fmt.Printf("FuzzyFind failed for title: %s\n", normalizedTitle)
 		return 0
 	}
 
@@ -146,10 +146,12 @@ func fuzzyFindGamesList(gameList []domain.Game) []domain.Game {
 		fmt.Printf("Invalid IGDB_API_RATE_LIMIT value: %v -- setting to 0\n", err)
 		rateLimit = 0 // Default to 0 second if parsing fails
 	}
-	sleepTime := time.Duration(rateLimit)
+
+	sleepTime := time.Duration(rateLimit) * time.Millisecond
 
 	for i, game := range gameList {
 		if i != 0 {
+			fmt.Printf("%d Sleeping for rate limit...\n", i)
 			// Sleep for a short duration to avoid hitting the rate limit
 			time.Sleep(sleepTime)
 		}
