@@ -267,8 +267,6 @@ func TranslateCLZ(input string, igdbSupplement bool) domain.GameCollection {
 					Width: data.Cover.Width,
 					URL:   data.Cover.URL,
 				}
-
-				// collectionIndex += 1
 			}
 
 			time.Sleep(sleepTime)
