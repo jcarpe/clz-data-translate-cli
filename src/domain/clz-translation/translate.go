@@ -214,7 +214,6 @@ func TranslateCLZ(input string, igdbSupplement bool) domain.GameCollection {
 		// perform fuzzy find for all games in order to get IGDB_ID
 		gameCollectionWithIgdbIds := igdbAdapter.FuzzyFindGamesList(gameCollection)
 
-		// TODO: batch and rate limit game data retrieval
 		batchQueries := generateBatchQueries(gameCollectionWithIgdbIds)
 
 		rateLimitStr := os.Getenv("IGDB_API_RATE_LIMIT")
@@ -225,15 +224,38 @@ func TranslateCLZ(input string, igdbSupplement bool) domain.GameCollection {
 		}
 		sleepTime := time.Duration(rateLimit) * time.Millisecond
 
-		for _, batchQuery := range batchQueries {
+		collectionIndex := 0
+
+		for i, batchQuery := range batchQueries {
+			fmt.Printf("Processing batch %d/%d with %d games...\n", i+1, len(batchQueries), len(batchQuery))
+
 			// retrieve IGDB data for each batch
 			igdbData := igdbAdapter.GetGameData(batchQuery)
 
-			for i, data := range igdbData {
-				gameCollection[i].FirstReleaseDate = time.Unix(int64(data.First_release_date), 0)
-				gameCollection[i].Storyline = data.Storyline
-				gameCollection[i].Summary = data.Summary
-				gameCollection[i].Cover = domain.Cover{
+			for _, data := range igdbData {
+
+				var matchIdx = -1
+				for idx, game := range gameCollectionWithIgdbIds {
+					if game.IGDB_ID == data.ID {
+						matchIdx = idx
+						break
+					}
+				}
+				if matchIdx == -1 {
+					fmt.Printf("No matching game found for IGDB_ID %d\n", data.ID)
+					continue
+				}
+				collectionIndex = matchIdx
+
+				if collectionIndex >= len(gameCollectionWithIgdbIds) {
+					fmt.Printf("Skipping index %d as it exceeds gameCollectionWithIgdbIds length %d\n", collectionIndex, len(gameCollectionWithIgdbIds))
+					continue
+				}
+
+				gameCollectionWithIgdbIds[collectionIndex].FirstReleaseDate = time.Unix(int64(data.First_release_date), 0)
+				gameCollectionWithIgdbIds[collectionIndex].Storyline = data.Storyline
+				gameCollectionWithIgdbIds[collectionIndex].Summary = data.Summary
+				gameCollectionWithIgdbIds[collectionIndex].Cover = domain.Cover{
 					ID:    data.Cover.ID,
 					Width: data.Cover.Width,
 					URL:   data.Cover.URL,

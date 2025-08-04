@@ -94,6 +94,8 @@ func fuzzyFindIGDBGameByTitle(title string, clzPlatformName string) int {
 	// Normalize the game title
 	normalizedTitle := GameTitleNormalization(title)
 
+	fmt.Printf("FuzzyFind for title: %s\n", normalizedTitle)
+
 	// Search for the game by normalized title
 	gamesData := fuzzySearchByTerm(normalizedTitle)
 	if len(gamesData) == 0 {
@@ -104,7 +106,9 @@ func fuzzyFindIGDBGameByTitle(title string, clzPlatformName string) int {
 	// if multiple games returned, find the entry with a matching platform
 	if len(gamesData) > 1 {
 		for _, game := range gamesData {
+			fmt.Printf("FuzzyFind found game: %s\n", game.Name)
 			for _, platform := range game.Platforms {
+				fmt.Printf("Platform: %s\n", domain.PlatformMap.IGDBToCLZ[platform])
 				if platform == domain.PlatformMap.CLZToIGDB[clzPlatformName] {
 					return game.ID
 				}

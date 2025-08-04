@@ -1,6 +1,7 @@
 package igdb
 
 import (
+	"fmt"
 	"main/src/_test/mocks"
 	"main/src/domain"
 	"os"
@@ -44,6 +45,9 @@ func TestGetGameData(t *testing.T) {
 
 	// Execution
 	gameData := igdbAdapter.GetGameData(gameID)
+
+	fmt.Println("Game Data count:", len(gameData))
+	fmt.Printf("Game Data: %+v\n", gameData[0].Cover)
 
 	if gameData[0].Name != "Super Mario Bros. 3" {
 		t.Errorf("Expected game name to be Super Mario Bros. 3, but got %s", gameData[0].Name)
