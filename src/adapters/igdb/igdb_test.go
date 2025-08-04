@@ -1,6 +1,7 @@
 package igdb
 
 import (
+	"fmt"
 	"main/src/_test/mocks"
 	"main/src/domain"
 	"os"
@@ -16,12 +17,12 @@ func TestMain(m *testing.M) {
 	defer testIGDBServer.Close()
 
 	// Set environment variables for IGDB
-	os.Setenv("IGDB_AUTH_BASE_URL", testAuthServer.URL)
+	os.Setenv("IGDB_AUTH_BASE_URL", "https://id.twitch.tv")
 	os.Setenv("IGDB_AUTH_PATH", "/oauth2/token")
-	os.Setenv("IGDB_CLIENT_ID", "test_client_id")
-	os.Setenv("IGDB_CLIENT_SECRET", "test_client_secret")
-	os.Setenv("IGDB_BASE_URL", testIGDBServer.URL)
-	os.Setenv("IGDB_API_RATE_LIMIT", "0")
+	os.Setenv("IGDB_CLIENT_ID", "ob0sa1skmi4a5vvthwyob8qzm3w4fk")
+	os.Setenv("IGDB_CLIENT_SECRET", "lg210dshkx54t3m25l44039xlovvq0")
+	os.Setenv("IGDB_BASE_URL", "https://api.igdb.com/v4")
+	os.Setenv("IGDB_API_RATE_LIMIT", "500")
 
 	// Run the tests
 	exitCode := m.Run()
@@ -40,10 +41,14 @@ func TestGetGameData(t *testing.T) {
 		AuthClientSecret: os.Getenv("IGDB_CLIENT_SECRET"),
 		IGDBBaseUrl:      os.Getenv("IGDB_BASE_URL"),
 	})
-	gameID := []int{1068} // <-- Super Mario Bros 3 ID value in IGDB
+	// gameID := []int{1068} // <-- Super Mario Bros 3 ID value in IGDB
+	gameID := []int{21838}
 
 	// Execution
 	gameData := igdbAdapter.GetGameData(gameID)
+
+	fmt.Println("Game Data count:", len(gameData))
+	fmt.Printf("Game Data: %+v\n", gameData[0].Cover)
 
 	if gameData[0].Name != "Super Mario Bros. 3" {
 		t.Errorf("Expected game name to be Super Mario Bros. 3, but got %s", gameData[0].Name)
@@ -71,6 +76,30 @@ func TestGameTitleNormalization(t *testing.T) {
 		if result != test.expected {
 			t.Errorf("Expected %s, but got %s", test.expected, result)
 		}
+	}
+}
+
+func TestFuzzyFindIGDBGameByTitleEXAMPLE(t *testing.T) {
+	igdbAdapter := NewIGDBAdapter(IGDBAdapterInit{
+		AuthBaseUrl:      os.Getenv("IGDB_AUTH_BASE_URL"),
+		AuthUrlPath:      os.Getenv("IGDB_AUTH_PATH"),
+		AuthClientId:     os.Getenv("IGDB_CLIENT_ID"),
+		AuthClientSecret: os.Getenv("IGDB_CLIENT_SECRET"),
+		IGDBBaseUrl:      os.Getenv("IGDB_BASE_URL"),
+	})
+	title := "Guardian Heroes"
+	clzPlatform := "Saturn"
+
+	// Execution
+	gameID := igdbAdapter.FuzzyFindGameByTitle(title, clzPlatform)
+
+	// Assertion
+	if gameID == 0 {
+		t.Errorf("Expected game ID to be found, but got 0")
+	}
+
+	if gameID != 3 {
+		t.Errorf("Expected game ID to be 3, but got %d", gameID)
 	}
 }
 
