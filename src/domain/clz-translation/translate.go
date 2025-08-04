@@ -226,14 +226,11 @@ func TranslateCLZ(input string, igdbSupplement bool) domain.GameCollection {
 
 		collectionIndex := 0
 
-		// TODO: we need to assign the data to the correct key/item in the original game data list
 		for i, batchQuery := range batchQueries {
 			fmt.Printf("Processing batch %d/%d with %d games...\n", i+1, len(batchQueries), len(batchQuery))
 
 			// retrieve IGDB data for each batch
 			igdbData := igdbAdapter.GetGameData(batchQuery)
-
-			fmt.Printf("Retrieved %d IGDB game data entries for batch %d\n", len(igdbData), i+1)
 
 			for _, data := range igdbData {
 
@@ -250,10 +247,6 @@ func TranslateCLZ(input string, igdbSupplement bool) domain.GameCollection {
 				}
 				collectionIndex = matchIdx
 
-				fmt.Printf("Pairing game %s with %s\n",
-					gameCollectionWithIgdbIds[collectionIndex].Title,
-					data.Name,
-				)
 				if collectionIndex >= len(gameCollectionWithIgdbIds) {
 					fmt.Printf("Skipping index %d as it exceeds gameCollectionWithIgdbIds length %d\n", collectionIndex, len(gameCollectionWithIgdbIds))
 					continue
