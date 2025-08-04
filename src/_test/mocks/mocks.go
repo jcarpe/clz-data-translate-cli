@@ -82,6 +82,30 @@ var (
 			"summary":   "A summary supplement from mocked IGDB data for test for 8 Eyes.",
 			"videos":    []int{35343, 20256},
 		},
+		{
+			"artworks": []int{358989},
+			"cover": map[string]interface{}{
+				"id":    136520,
+				"width": 1000,
+				"url":   "//images.igdb.com/igdb/image/upload/t_cover_big/co1j8f.jpg",
+			},
+			"first_release_date": 593568000,
+			"franchise":          24,
+			"game_status":        0,
+			"game_type":          0,
+			"genres":             []int{8},
+			"id":                 8008,
+			"name":               "1Xtreme (Greatest Hits)",
+			"platforms": []map[string]interface{}{
+				{
+					"id":   7,
+					"name": "Playstation",
+				},
+			},
+			"storyline": "A storyline supplement from mocked IGDB data for test for 1Xtreme (Greatest Hits).",
+			"summary":   "A summary supplement from mocked IGDB data for test for 1Xtreme (Greatest Hits).",
+			"videos":    []int{35343, 20256},
+		},
 	}
 
 	testFuzzyFindGameDataResponse = []map[string]interface{}{
@@ -104,6 +128,11 @@ var (
 			"id":        1337,
 			"name":      "8 Eyes",
 			"platforms": []int{6},
+		},
+		{
+			"id":        8008,
+			"name":      "1Xtreme (Greatest Hits)",
+			"platforms": []int{7},
 		},
 	}
 )
