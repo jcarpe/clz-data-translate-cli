@@ -224,8 +224,6 @@ func TranslateCLZ(input string, igdbSupplement bool) domain.GameCollection {
 		}
 		sleepTime := time.Duration(rateLimit) * time.Millisecond
 
-		collectionIndex := 0
-
 		for i, batchQuery := range batchQueries {
 			fmt.Printf("Processing batch %d/%d with %d games...\n", i+1, len(batchQueries), len(batchQuery))
 
@@ -245,17 +243,11 @@ func TranslateCLZ(input string, igdbSupplement bool) domain.GameCollection {
 					fmt.Printf("No matching game found for IGDB_ID %d\n", data.ID)
 					continue
 				}
-				collectionIndex = matchIdx
 
-				if collectionIndex >= len(gameCollectionWithIgdbIds) {
-					fmt.Printf("Skipping index %d as it exceeds gameCollectionWithIgdbIds length %d\n", collectionIndex, len(gameCollectionWithIgdbIds))
-					continue
-				}
-
-				gameCollectionWithIgdbIds[collectionIndex].FirstReleaseDate = time.Unix(int64(data.First_release_date), 0)
-				gameCollectionWithIgdbIds[collectionIndex].Storyline = data.Storyline
-				gameCollectionWithIgdbIds[collectionIndex].Summary = data.Summary
-				gameCollectionWithIgdbIds[collectionIndex].Cover = domain.Cover{
+				gameCollectionWithIgdbIds[matchIdx].FirstReleaseDate = time.Unix(int64(data.First_release_date), 0)
+				gameCollectionWithIgdbIds[matchIdx].Storyline = data.Storyline
+				gameCollectionWithIgdbIds[matchIdx].Summary = data.Summary
+				gameCollectionWithIgdbIds[matchIdx].Cover = domain.Cover{
 					ID:    data.Cover.ID,
 					Width: data.Cover.Width,
 					URL:   data.Cover.URL,
